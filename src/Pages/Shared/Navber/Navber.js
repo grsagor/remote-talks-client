@@ -31,16 +31,16 @@ const Navbar = () => {
 
           <div className='flex-1'>
             <div className='flex items-end'>
-            <img className='w-14' src={logo} alt="" />
+            <img className='w-12 md:w-14 hidden md:block' src={logo} alt="" />
             <div>
-              <span className='text-2xl ml-2'><span className='text-3xl text-primary font-bold'>R</span>emote <span className='text-3xl text-secondary font-bold'>T</span>alks</span>
+              <span className='md:text-2xl  text-xl ml-2'><span className='text-3xl text-primary font-bold'>R</span>emote <span className='text-3xl text-secondary font-bold'>T</span>alks</span>
             </div>
             </div>
           </div>
 
           <div className='hidden lg:flex flex-1'>
             <div className="form-control flex justify-center relative">
-              <input type="text" placeholder="Search" className="input  input-bordered border-secondary h-12 w-80 rounded-3xl" />
+              <input type="text" placeholder="Search" className="input  input-bordered border-secondary h-12 w-full lg:w-80 rounded-3xl" />
               <button className="btn btn-secondary absolute top-0 right-0 rounded-3xl rounded-l-none"><span className='text-white text-xl'><FaSearch></FaSearch></span></button>
             </div>
           </div>

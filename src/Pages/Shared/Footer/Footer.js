@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../../CommonStyles/CommonStyle.css';
 import './Footer.css'
 // import footer from '../../../assets/Footer-img/footer-img.png';
-import logo from '../../../assets/Logo/logo.png'
+import logo from '../../../assets/Logo/video-call (1).png'
 import footer from '../../../assets/Footer-img/water-backgroundps-10468862-removebg-preview.png';
 
 const Footer = () => {
@@ -50,7 +50,7 @@ const Footer = () => {
               </label>
               <div className="relative">
                 <input type="text" placeholder="username@site.com" className="input input-bordered w-full pr-16" />
-                <button className="btn btn-primary absolute top-0 right-0 rounded-l-none">Subscribe</button>
+                <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white absolute top-0 right-0 rounded-l-none">Subscribe</button>
               </div>
             </div>
             <div className="grid grid-flow-col gap-4">
