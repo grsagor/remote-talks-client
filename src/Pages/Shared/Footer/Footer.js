@@ -36,6 +36,13 @@ const Footer = () => {
             <Link className="link link-hover">Press kit</Link>
           </div>
           <div>
+            <span className="footer-title">Our Team</span>
+            <Link className="link link-hover">Golam Rahman Sagor</Link>
+            <Link className="link link-hover">Nusrat Nova</Link>
+            <Link className="link link-hover">Md Anis Molla</Link>
+            <Link className="link link-hover">Ft Sobuj Hasan</Link>
+          </div>
+          <div className='w-full'>
             <span className="footer-title">Newsletter</span>
             <div className="form-control w-full">
               <label className="label">
