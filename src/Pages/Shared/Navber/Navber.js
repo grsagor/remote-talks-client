@@ -28,7 +28,7 @@ const Navbar = () => {
           </div>
 
           <div className='hidden lg:flex'>
-            <div className="form-control flex justify-center px-60 ml-56 ">
+            <div className="form-control flex justify-center">
               <input type="text" placeholder="Search" className="input input-bordered border-secondary h-12 py-0 w-80 rounded-3xl" />
             </div>
           </div>
