@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../../CommonStyles/CommonStyle.css';
+import logo from '../../../assets/Logo/video-call (1).png'
+import { FaSearch } from 'react-icons/fa';
+
 
 const Navbar = () => {
 
@@ -11,8 +15,9 @@ const Navbar = () => {
   </>
 
   return (
-    <div>
-      <div className="navbar h-20 mb-12">
+    <div className='shadow-lg'>
+     <div className='common-width'>
+     <div className="navbar h-20 mb-12">
         <div className="flex-1">
 
           <div className='flex-1'>
@@ -51,7 +56,6 @@ const Navbar = () => {
                   <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
                 </div>
               </label>
-
               <Link className='m-2 text-lg' to='/'>Profile</Link>
               {menuItems}
               <Link className='m-2 text-lg' to='/'>Setting</Link>
@@ -85,6 +89,7 @@ const Navbar = () => {
         </div>
 
       </div>
+     </div>
     </div>
   );
 };

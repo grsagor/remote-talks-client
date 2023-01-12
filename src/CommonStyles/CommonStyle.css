@@ -2,3 +2,11 @@
   width: 80%;
   margin: auto;
 }
+.menu-hover a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
+.menu-hover li a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
