@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import FeedBack from "../FeedBack/FeedBack";
 
 const Home = () => {
-  return (
-    <div>
-      <h1 className='py-40'>This is home page!!</h1>
-     
-    </div>
-  );
+	return (
+		<div>
+			<FeedBack></FeedBack>
+		</div>
+	);
 };
 
 export default Home;
