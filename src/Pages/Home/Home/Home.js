@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FeedBack from '../../Shared/FeedBack/FeedBack';
 
 const Home = () => {
   return (
     <div>
-      <h1 className='py-40'>This is home page!!</h1>
-     
+      <FeedBack></FeedBack>
     </div>
   );
 };
