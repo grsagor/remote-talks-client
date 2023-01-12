@@ -10,3 +10,9 @@ transition: 0.5s;
 color: rgb(243, 15, 91);
 transition: 0.5s;
 }
+.border-set{
+  display: inline-block;
+  border-bottom: 2px solid blueviolet;
+  border-radius: 5px;
+  
+}
