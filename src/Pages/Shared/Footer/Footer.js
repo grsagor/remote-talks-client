@@ -17,8 +17,8 @@ const Footer = () => {
     >
       <div className='common-width'>
         <footer className="footer text-base-content py-3 pt-10">
-          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5'>
-            <div>
+          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 md:gap-y-8 sm:gap-y-8'>
+            <div className='flex justify-center items-center flex-col sm:w-full'>
               <img className='w-28' src={logo} alt="" />
               <p>Call with Remote Task<br />Providing reliable tech since 1992</p>
             </div>
