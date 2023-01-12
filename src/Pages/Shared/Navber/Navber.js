@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../../../CommonStyles/CommonStyle.css';
 import logo from '../../../assets/Logo/video-call (1).png'
 import { FaSearch } from 'react-icons/fa';
+import { FaBeer } from 'react-icons/fa';
+
 
 
 const Navbar = () => {
