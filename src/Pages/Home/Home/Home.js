@@ -6,7 +6,7 @@ import FeedBack from "../FeedBack/FeedBack";
 const Home = () => {
 	return (
 		<div>
-      <Features></Features>
+      		<Features></Features>
 			<FeedBack></FeedBack>
 		</div>
 	);
