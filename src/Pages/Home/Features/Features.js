@@ -15,7 +15,7 @@ const Features = () => {
         </div>
         {/* all features card */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          <div className='text-center bg-base-200 hover:bg-base-300 p-5'>
+          <div className='text-center hover:bg-base-200 p-5'>
             <div className='text-center flex justify-center items-center py-4 lg:py-6 text-5xl text-primary'>
               <FaHeadphones></FaHeadphones>
             </div>
