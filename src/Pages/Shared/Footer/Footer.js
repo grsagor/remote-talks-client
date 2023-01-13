@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import '../../../CommonStyles/CommonStyle.css';
 import './Footer.css'
 // import footer from '../../../assets/Footer-img/footer-img.png';
-import logo from '../../../assets/Logo/video-call (1).png'
+import logo from '../../../assets/Logo/logo.png'
 import footer from '../../../assets/Footer-img/water-backgroundps-10468862-removebg-preview.png';
 import { FaLinkedin } from 'react-icons/fa';
 
 
 const Footer = () => {
   return (
-    <div className='main-footer'
+    <div className='main-footer mt-20'
     //   style={{
     //     background: `url(${footer})`,
     //     backgroundSize: 'cover',
@@ -18,22 +18,24 @@ const Footer = () => {
     // }}
     >
       <div className='common-width'>
-        <footer className="footer text-base-content py-3 pt-10">
+        <footer className="footer text-base-content py-3 pt-10 shadow-xl md:shadow-none">
           <div className='grid w-full  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 md:gap-y-8 sm:gap-y-8'>
             <div className='flex justify-center md:items-start items-center flex-col w-full'>
-              <img className='w-28' src={logo} alt="" />
+              <img className='w-32' src={logo} alt="" />
               <p>Call with Remote Task<br />Providing reliable tech since 1992</p>
             </div>
             <div className='flex md:items-start items-center w-full flex-col gap-2'>
               <span className="footer-title">Services</span>
-              <Link className="link link-hover">Video Call</Link>
-              <Link className="link link-hover">Live Chat</Link>
-              <Link className="link link-hover">Photo Post</Link>
-              <Link className="link link-hover">Advertisement</Link>
+              <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-1 gap-x-2 md:gap-1'>
+                <Link className="link link-hover">Video Call</Link>
+                <Link className="link link-hover">Live Chat</Link>
+                <Link className="link link-hover">Photo Post</Link>
+                <Link className="link link-hover">Advertisement</Link>
+              </div>
             </div>
-            <div className='flex md:items-start items-center w-full flex-col gap-2'>
+            <div className='flex md:items-start items-center  w-full flex-col gap-2'>
               <span className="footer-title">Company</span>
-              <div className='flex md:flex-col gap-3 md:gap-1'>
+              <div className='flex md:flex-col  gap-3 md:gap-1'>
                 <Link className="link link-hover">About us</Link>
                 <Link className="link link-hover">Contact</Link>
                 <Link className="link link-hover">Jobs</Link>
@@ -42,25 +44,27 @@ const Footer = () => {
             </div>
             <div className='flex md:items-start items-center w-full flex-col gap-1'>
               <span className="footer-title">Our Team</span>
-              <div className='flex items-center gap-1'>
-                <span className='text-lg'><FaLinkedin></FaLinkedin></span>
-                <Link className="link link-hover">Golam Rahman Sagor</Link>
-              </div>
-              <div className='flex items-center gap-1'>
-                <span className='text-lg'><FaLinkedin></FaLinkedin></span>
-                <Link className="link link-hover">Nusrat Nova</Link>
-              </div>
-              <div className='flex items-center gap-1'>
-                <span className='text-lg'><FaLinkedin></FaLinkedin></span>
-                <Link className="link link-hover">Md Anis Molla</Link>
-              </div>
-              <div className='flex items-center gap-1'>
-                <span className='text-lg'><FaLinkedin></FaLinkedin></span>
-                <Link className="link link-hover">Ft Sobuj Hasan</Link>
-              </div>
-              <div className='flex items-center gap-1'>
-                <span className='text-lg'><FaLinkedin></FaLinkedin></span>
-                <Link className="link link-hover">Sultan Mahmud</Link>
+              <div className=''>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-400'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Golam Rahman Sagor</Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-500'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Nusrat Nova</Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-600'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Md Anis Molla</Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-700'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Ft Sobuj Hasan</Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-800'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Sultan Mahmud</Link>
+                </div>
               </div>
 
             </div>
@@ -72,7 +76,7 @@ const Footer = () => {
                 </label>
                 <div className="relative">
                   <input type="text" placeholder="username@site.com" className="input input-bordered w-full pr-16" />
-                  <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white absolute top-0 right-0 rounded-l-none">Send</button>
+                  <button className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white absolute top-0 right-0 rounded-l-none">Send</button>
                 </div>
               </div>
               <div className="grid grid-flow-col w-full pt-4 gap-4">
