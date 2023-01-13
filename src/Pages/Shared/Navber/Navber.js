@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../../../assets/Logo/titleLogo/Title Logo.png';
 
 const Navbar = () => {
 
@@ -16,7 +17,7 @@ const Navbar = () => {
         <div className="flex-1">
 
           <div className='flex-1'>
-            <a href='/' className="btn btn-ghost font-bold text-2xl normal-case">LOGO</a>
+            <a href='/' className="btn btn-ghost font-bold text-2xl normal-case"><img className='w-80' src={Logo} alt=''></img></a>
           </div>
 
           <div className='hidden lg:flex flex-1'>
