@@ -1,11 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+ 
+import Banner from "../Banner/Banner";
+import Collabaretions from "../Collabaretions/Collabaretions";
+import Features from "../Features/Features";
+import FeedBack from "../FeedBack/FeedBack";
 
 const Home = () => {
   return (
     <div>
-      <h1>This is home page!!</h1>
      
+        <Banner></Banner>
+       
+     <Collabaretions></Collabaretions>
+    
+
+      <Features></Features>
+      <FeedBack></FeedBack>
     </div>
   );
 };

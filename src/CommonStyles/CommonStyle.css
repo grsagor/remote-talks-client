@@ -2,3 +2,17 @@
   width: 80%;
   margin: auto;
 }
+.menu-hover a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
+.menu-hover li a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
+.border-set{
+  display: inline-block;
+  border-bottom: 2px solid blueviolet;
+  border-radius: 5px;
+  
+}
