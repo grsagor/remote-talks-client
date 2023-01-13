@@ -13,12 +13,12 @@ const Navbar = () => {
 
   return (
     <div className='shadow-lg'>
-      <div className='common-width'>
+      <div className='w-full'>
         <div className="navbar h-20 mb-12">
           <div className="flex-1">
 
             <div className='flex-1'>
-              <a href='/' className="btn btn-ghost font-bold text-2xl normal-case"><img className='w-80' src={Logo} alt=''></img></a>
+              <a href='/' className="btn btn-ghost font-bold text-2xl normal-case"><img className='w-40 md:w-60 lg:w-80' src={Logo} alt=''></img></a>
             </div>
 
             <div className='hidden lg:flex flex-1'>
@@ -35,7 +35,7 @@ const Navbar = () => {
               </button>
               <ul tabIndex={0} className="flex dropdown-content">
                 <div className="form-control flex justify-center">
-                  <input type="text" placeholder="Search" className="input input-bordered border-secondary h-8 w-60 rounded-3xl" />
+                  <input type="text" placeholder="Search" className="input input-bordered border-secondary h-8 w-40 md:w-60 rounded-3xl" />
                 </div>
               </ul>
             </div>
