@@ -18,7 +18,7 @@ const MyRoom = () => {
       sharedLinks: [
         {
           name: 'Copy Link',
-          url: `http://localhost:3000/meeting/room/${roomId}`
+          url: `https://remote-talks.web.app/meeting/room/${roomId}`
         }
       ],
       scenario: {
