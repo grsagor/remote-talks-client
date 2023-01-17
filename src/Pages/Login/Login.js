@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import img from '../../../src/assets/images/loginImage3.jpg';
 import img2 from '../../../src/assets/images/loginImage5.jpg';
 import img3 from '../../../src/assets/images/banner6.webp';
+import { AuthContext } from '../../context/AuthProvider';
+import { GoogleAuthProvider } from '@firebase/auth';
 
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const {LogIn,googleLogIn} = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
 
-  const handleLogin = () => {
 
+  const handleLogin = (data) => {
+      console.log(data);
+      LogIn(data.email,data.password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error =>{
+            console.log(error)
+        });
   }
 
   const handleGoogleSignIn = () => {
-
+    googleLogIn(googleProvider)
+    .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => {
+            console.error(error);
+        })
   }
+
   return (
     <div className="hero p-5 bg-base-100">
       <div className="hero-content grid md:grid-cols-2 gap-8 flex-col lg:flex-row">
