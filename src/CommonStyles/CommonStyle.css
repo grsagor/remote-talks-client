@@ -16,3 +16,8 @@ transition: 0.5s;
   border-radius: 5px;
   
 }
+
+.room-create-border{
+  border-bottom: 2px solid green;
+  border-radius: 10px;
+}
