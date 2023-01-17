@@ -7,6 +7,7 @@ import arow from "./BannerAssests/10601296_41883-removebg-preview.png"
 import help from "./BannerAssests/help.webp"
 import event from "./BannerAssests/7741855_3703471.jpg"
 import interviw from "./BannerAssests/intrerviw.webp"
+import { Link } from "react-router-dom";
 
 
 
@@ -26,7 +27,7 @@ const Banner = () => {
             </p>
           </div>
           <div className="flex items-center space-x-3">
-             <button className="btn">Make a Metting</button>
+             <Link to='/meeting'><button className="btn">Make a Metting</button></Link>
           </div>
         </div>
         <div className="  lg:w-1/2 relative  m-auto">
