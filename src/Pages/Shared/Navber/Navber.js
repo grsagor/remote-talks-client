@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/Logo/titleLogo/Title Logo.png';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
+  const {user,logOut} = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+    .then()
+    .catch(error => {
+        console.log(error);
+    })
+}
 
   const menuItems = <>
     <Link className='m-2 text-lg' to='/'>Home</Link>
     <Link className='m-2 text-lg' to='/participants'>Participants</Link>
     <Link className='m-2 text-lg' to='/message'>Messages</Link>
-    <Link className='m-2 text-lg' to='/login'>Login</Link>
+    {user?.uid?
+       <Link onClick={handleLogOut} className='m-2 text-lg' to='/login'>Sign out</Link>
+      :<Link className='m-2 text-lg' to='/login'>Login</Link>
+    }
   </>
 
   return (

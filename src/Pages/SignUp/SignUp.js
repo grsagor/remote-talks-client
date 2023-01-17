@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import img from '../../../src/assets/images/loginImage5.jpg';
 import img2 from '../../../src/assets/images/loginImage3.jpg';
 import img3 from '../../../src/assets/images/banner6.webp';
+import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const {createUser} = useContext(AuthContext);
 
-  const handleSignUp = () => {
-
+  const handleSignUp = (data) => {
+        console.log(data);
+        createUser(data.email,data.password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error =>console.log(error));
   }
 
   return (
