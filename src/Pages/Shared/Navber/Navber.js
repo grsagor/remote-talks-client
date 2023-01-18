@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <div className='shadow-lg'>
       <div className='w-full'>
-        <div className="navbar h-20 mb-12">
+        <div className="navbar h-20">
           <div className="flex-1">
 
             <div className='flex-1'>
