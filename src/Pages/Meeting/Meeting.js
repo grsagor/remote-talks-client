@@ -14,7 +14,7 @@ const Meeting = () => {
     navigate(`room/${roomId}`)
   }
   return (
-    <div>
+    <div className='meeting-bg md:pt-14 lg:pt-28 h-screen my-0'>
       <div className="hero">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -22,16 +22,16 @@ const Meeting = () => {
             <p className="py-6 text-xl text-gray-400">We re-engineered the service we built for secure business meetings, Google Meet, to make it free and available for all.</p>
           </div>
 
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleJoin}  className="card-body">
-                <div className='text-center'>
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl ">
+            <form onSubmit={handleJoin} className="card-body">
+              <div className='text-center'>
                 <h1 className='text-2xl inline-block text-white font-semibold text-center room-create-border p-2'>Create a new meeting</h1>
-                </div>
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Your room code</span>
                 </label>
-                <input name='roomCode' type="text" required placeholder="Enter your room code" className="input input-bordered" />
+                <input name='roomCode' type="text" required placeholder="Enter your room code" className="input input-bordered bg-none" />
               </div>
               <div className="form-control mt-6">
                 <input type="submit" value="Create" className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white" />
