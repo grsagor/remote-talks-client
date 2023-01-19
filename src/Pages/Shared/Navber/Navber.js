@@ -5,22 +5,23 @@ import Logo from '../../../assets/Logo/titleLogo/Title Logo.png';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
-  const {user,logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
-    .then()
-    .catch(error => {
+      .then()
+      .catch(error => {
         console.log(error);
-    })
-}
+      })
+  }
 
   const menuItems = <>
-    <Link className='m-2 text-lg' to='/'>Home</Link>
-    <Link className='m-2 text-lg' to='/participants'>Participants</Link>
-    <Link className='m-2 text-lg' to='/message'>Messages</Link>
-    {user?.uid?
-       <Link onClick={handleLogOut} className='m-2 text-lg' to='/login'>Sign out</Link>
-      :<Link className='m-2 text-lg' to='/login'>Login</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/'>Home</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/participants'>Participants</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/message'>Messages</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/about'>About Us</Link>
+    {user?.uid ?
+      <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign out</Link>
+      : <Link className='m-2 text-lg hover:text-primary' to='/login'>Login</Link>
     }
   </>
 
@@ -67,10 +68,10 @@ const Navbar = () => {
                     <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
                   </div>
                 </label>
-                <Link className='m-2 text-lg' to='/'>Profile</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/'>Profile</Link>
                 {menuItems}
-                <Link className='m-2 text-lg' to='/'>Setting</Link>
-                <Link className='m-2 text-lg' to='/logOut'>Log Out</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/'>Setting</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/logOut'>Log Out</Link>
 
               </ul>
             </div>

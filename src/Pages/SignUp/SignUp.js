@@ -8,16 +8,16 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const {createUser} = useContext(AuthContext);
+  const { createUser } = useContext(AuthContext);
 
   const handleSignUp = (data) => {
-        console.log(data);
-        createUser(data.email,data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error =>console.log(error));
+    console.log(data);
+    createUser(data.email, data.password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
@@ -27,7 +27,7 @@ const SignUp = () => {
           <img className='w-full h-full rounded-3xl' src={img2} alt="" />
         </div>
 
-        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl ml-3 bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-md shadow-2xl ml-3 bg-base-200">
 
           <form className='card-body' onSubmit={handleSubmit(handleSignUp)}>
             <h2 className='text-2xl font-bold'>Please Register !!!</h2>

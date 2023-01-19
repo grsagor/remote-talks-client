@@ -19,7 +19,7 @@ const Footer = () => {
     >
       <div className='common-width'>
         <footer className="footer text-base-content py-3 pt-10 shadow-xl md:shadow-none">
-          <div className='grid w-full  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6 md:gap-y-8 sm:gap-y-8'>
+          <div className='grid w-full  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 md:gap-y-8 sm:gap-y-8'>
             <div className='flex justify-center md:items-start items-center flex-col w-full'>
               <img className='w-24 mb-2' src={logo} alt="" />
               <p className='text-center md:text-start'>Call with Remote Task<br />Providing reliable tech since 1992</p>
@@ -36,13 +36,13 @@ const Footer = () => {
             <div className='flex md:items-start items-center  w-full flex-col gap-2'>
               <span className="footer-title">Company</span>
               <div className='flex md:flex-col  gap-3 md:gap-1'>
-                <Link className="link link-hover">About us</Link>
+                <Link className="link link-hover" to='/about'>About us</Link>
                 <Link className="link link-hover">Contact</Link>
                 <Link className="link link-hover">Jobs</Link>
                 <Link className="link link-hover">Press kit</Link>
               </div>
             </div>
-            <div className='flex md:items-start items-center w-full flex-col gap-1'>
+            {/* <div className='flex md:items-start items-center w-full flex-col gap-1'>
               <span className="footer-title">Our Team</span>
               <div className=''>
                 <div className='flex items-center gap-1'>
@@ -67,7 +67,7 @@ const Footer = () => {
                 </div>
               </div>
 
-            </div>
+            </div> */}
             <div className='w-full flex flex-col md:items-start items-center '>
               <span className="footer-title">Newsletter</span>
               <div>
