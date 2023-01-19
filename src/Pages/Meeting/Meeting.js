@@ -1,47 +1,255 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../../CommonStyles/CommonStyle.css';
+import React, { useEffect, useState } from 'react';
+import { getMeetingId, getToken, createMeeting } from './API/Api';
+import {Row, Col} from 'react-simple-flex-grid';
+import "react-simple-flex-grid/lib/main.css";
+import {
+  MeetingProvider,
+  MeetingConsumer,
+  useMeeting,
+  useParticipant
+} from "@videosdk.live/react-sdk";
+import { useRef } from 'react';
 
-// https://brilliant-salamander-5f1195.netlify.app/
+const chunk = (arr) => {
+  const newArr = [];
+  while (arr.length) newArr.push(arr.splice(0, 3));
+  return newArr;
+};
 
-const Meeting = () => {
-  const navigate = useNavigate();
+function ParticipantView(props){
+  const webcamRef = useRef(null);
+  const micRef = useRef(null);
+  const screenShareRef = useRef(null);
 
-  const handleJoin = (event) => {
-    event.preventDefault();
-    const roomId = event.target.roomCode.value;
-    console.log(roomId);
-    navigate(`room/${roomId}`)
+  const {
+    displayName,
+    webcamStream,
+    micStream,
+    screenShareStream,
+    webcamOn,
+    micOn,
+    screenShareOn
+  } = useParticipant(props.participantId);
+
+  useEffect(()=> {
+    if(webcamRef.current){
+      // if(!webcamOn){
+      //   webcamRef.current.srcObject = null;
+      // }
+      if(webcamOn){
+        const mediaStream = new MediaStream();
+        mediaStream.addTrack(webcamStream.track);
+
+        webcamRef.current.srcObject = mediaStream;
+        webcamRef.current
+          .play()
+          .catch((error)=>
+            console.log("videoElem.current.play() failed", error)
+          );
+      }
+      else{
+        webcamRef.current.srcObject = null;
+      }
+    }
+  },[webcamOn]);
+  // },[webcamStream,webcamOn]);
+
+  useEffect(() => {
+    if(micRef.current){
+      if(micOn){
+        const mediaStream = new MediaStream();
+        mediaStream.addTrack(micStream.track);
+
+        micRef.current.srcObject = mediaStream;
+        micRef.current
+          .play()
+          .catch((error) => 
+            console.log("videoElem.current.play() failed", error)
+          );
+      } else {
+        micRef.current.srcObject = null;
+      }
+    }
+  },[micOn])
+  // },[micStream, micOn])
+
+  useEffect(() => {
+    if(screenShareRef.current){
+      if(screenShareOn){
+        const mediaStream = new MediaStream();
+        mediaStream?.addTrack(screenShareStream?.track);
+
+        screenShareRef.current.srcObject = mediaStream;
+        screenShareRef.current
+          .play()
+          .catch((error) => 
+            console.log("videoElem.current.play() failed", error)
+          );
+      } else {
+        screenShareRef.current.srcObject = null;
+      }
+    }
+  },[screenShareStream, screenShareOn])
+
+  return(
+    <div key={props.participantId}>
+      <audio ref={micRef} autoPlay/>
+      {webcamRef ? 
+      (
+      <div>
+        <h2>{displayName}</h2>
+        <video
+          height={"100%"}
+          width={"100%"}
+          ref={webcamRef}
+          autoPlay
+        />
+      </div>
+      )
+      :
+      null
+      }
+      {
+        screenShareOn ? (
+          <div>
+            <h2>Screen Shared</h2>
+            <video
+              height={"100%"}
+              width={"100%"}
+              ref={screenShareRef}
+              autoPlay
+            />
+          </div>)
+          :
+          null
+      }
+      <br />
+      <span>
+        Mic:{micOn ? "Yes": "No"}
+        Camera: {webcamOn ? "Yes": "No"}
+        ScreenShare: {screenShareOn ? "Yes": "No"}
+      </span>
+    </div>
+  )
+}
+
+function MeetingGrid(props){
+  const [joined, setJoined] = useState(false);
+  const {
+    join,
+    leave,
+    toggleMic,
+    toggleWebcam,
+    toggleScreenShare,
+  } = useMeeting();
+  const { participants } = useMeeting();
+  const joinMeeting = () => {
+    setJoined(true);
+    join();
   }
-  return (
+  return(
     <div>
-      <div className="hero">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center lg:text-left">
-            <h1 className="lg:text-5xl text-3xl md:text-4xl lg:w-5/6 font-bold">Premium video meetings. Now free for everyone.</h1>
-            <p className="py-6 text-xl text-gray-400">We re-engineered the service we built for secure business meetings, Google Meet, to make it free and available for all.</p>
+      <header>Meeting Id: {props.meetingId}</header>
+      {
+        joined ?
+        (
+          <div>
+            <button onClick={leave}>
+              Leave
+            </button>
+            <button onClick={()=>toggleMic()}>
+              toggleMic
+            </button>
+            <button onClick={()=>toggleWebcam()}>
+              toggleWebcam
+            </button>
+            <button onClick={toggleScreenShare}>
+              toggleScreenShare
+            </button>
           </div>
-
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleJoin}  className="card-body">
-                <div className='text-center'>
-                <h1 className='text-2xl inline-block text-white font-semibold text-center room-create-border p-2'>Create a new meeting</h1>
-                </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Your room code</span>
-                </label>
-                <input name='roomCode' type="text" required placeholder="Enter your room code" className="input input-bordered" />
-              </div>
-              <div className="form-control mt-6">
-                <input type="submit" value="Create" className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white" />
-              </div>
-            </form>
-          </div>
-        </div>
+        ):
+        (
+          <button onClick={joinMeeting}>
+            Join
+          </button>
+        )
+      }
+      <div>
+        {chunk([...participants.keys()]).map((k)=> (
+          <Row
+            key={k}
+            gutter={80}
+          >
+            {
+              k.map((l) => (
+                <Col span={4}>
+                <ParticipantView
+                  key={l}
+                  participantId={l}
+                />
+                </Col>
+              ))
+            }
+          </Row>
+        ))}
       </div>
     </div>
-  );
+  )
+}
+
+function JoinScreen({updateMeetingID, getMeetingAndToken}) {
+  return(
+    <div>
+      <input type="text" placeholder='Enter Your Meeting ID' onChange={(e) => {
+      updateMeetingID(e)
+      }} />
+      <button onClick={getMeetingAndToken}>Join</button>
+      <button onClick={getMeetingAndToken}>Create Meeting</button>
+    </div>
+  )
+}
+
+const Meeting = () => {
+  const [token, setToken] = useState(null);
+  const [meetingId, setMeetingId] = useState(null);
+  const getMeetingToken = async () => {
+    const token = await getToken();
+    setToken(token);
+    setMeetingId(meetingId ? meetingId : (await createMeeting({token})));
+  };
+
+  const updateMeetingID = (meetingId) => {
+    setMeetingId(meetingId);
+  }
+  // console.log("meetingId", meetingId);
+  // useEffect(()=> {
+  //   getMeetingToken();
+  // },[])
+  // console.log(token);
+
+  return token && meetingId ? (
+    <MeetingProvider
+      config={
+        {
+          meetingId,
+          micEnabled: false,
+          webcamEnabled: false,
+          name: "John doe",
+        }  
+      }
+      token={token}
+    >
+      <MeetingConsumer>
+        {()=> <MeetingGrid meetingId={meetingId} getMeetingAndToken={getMeetingToken}></MeetingGrid>}
+      </MeetingConsumer>
+    </MeetingProvider>
+  )
+  :
+  (
+    <JoinScreen
+      updateMeetingID={updateMeetingID} getMeetingAndToken={getMeetingToken}
+    ></JoinScreen>
+  )
 };
 
 export default Meeting;
