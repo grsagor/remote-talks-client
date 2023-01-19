@@ -2,3 +2,29 @@
   width: 80%;
   margin: auto;
 }
+.menu-hover a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
+.menu-hover li a:hover{
+color: rgb(243, 15, 91);
+transition: 0.5s;
+}
+.border-set{
+  display: inline-block;
+  border-bottom: 2px solid blueviolet;
+  border-radius: 5px;
+  
+}
+
+.meeting-bg{
+  background: linear-gradient(rgba(80, 0, 199, 0.347), rgba(45, 6, 59, 0.5)), url(../assets/Meeitng-img//meeting-bg3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.room-create-border{
+  border-bottom: 2px solid green;
+  border-radius: 10px;
+}
