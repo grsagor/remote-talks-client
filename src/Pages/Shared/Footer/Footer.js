@@ -10,7 +10,7 @@ import { FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <div className='main-footer mt-20'
+    <div className='main-footer '
     //   style={{
     //     background: `url(${footer})`,
     //     backgroundSize: 'cover',
@@ -52,6 +52,10 @@ const Footer = () => {
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-500'><FaLinkedin></FaLinkedin></span>
                   <Link className="link link-hover">Nusrat Nova</Link>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-500'><FaLinkedin></FaLinkedin></span>
+                  <Link className="link link-hover">Sharmin Akter</Link>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-600'><FaLinkedin></FaLinkedin></span>

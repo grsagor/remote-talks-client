@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import { Row, Col } from "react-simple-flex-grid";
+import "../../CommonStyles/CommonStyle.css";
 import "react-simple-flex-grid/lib/main.css";
+import { BsMic } from "react-icons/bs";
+import { FiCamera } from "react-icons/fi";
+import { MdOutlineScreenShare } from "react-icons/md";
+import createMeetingImg from "../../assets/Meeitng-img/84726-business-meeting-animation.gif";
 import {
 	MeetingProvider,
 	MeetingConsumer,
