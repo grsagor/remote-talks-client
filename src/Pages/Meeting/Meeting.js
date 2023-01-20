@@ -203,8 +203,8 @@ function JoinScreen({updateMeetingID, getMeetingAndToken}) {
       <input type="text" placeholder='Enter Your Meeting ID' onChange={(e) => {
       updateMeetingID(e)
       }} />
-      <button onClick={getMeetingAndToken}>Join</button>
-      <button onClick={getMeetingAndToken}>Create Meeting</button>
+      <button onClick={()=>getMeetingAndToken()}>Join</button>
+      <button onClick={()=>getMeetingAndToken()}>Create Meeting</button>
     </div>
   )
 }
@@ -212,7 +212,7 @@ function JoinScreen({updateMeetingID, getMeetingAndToken}) {
 const Meeting = () => {
   const [token, setToken] = useState(null);
   const [meetingId, setMeetingId] = useState(null);
-  const getMeetingToken = async () => {
+  const getMeetingAndToken = async () => {
     const token = await getToken();
     setToken(token);
     setMeetingId(meetingId ? meetingId : (await createMeeting({token})));
@@ -240,14 +240,14 @@ const Meeting = () => {
       token={token}
     >
       <MeetingConsumer>
-        {()=> <MeetingGrid meetingId={meetingId} getMeetingAndToken={getMeetingToken}></MeetingGrid>}
+        {()=> <MeetingGrid meetingId={meetingId} getMeetingAndToken={getMeetingAndToken}></MeetingGrid>}
       </MeetingConsumer>
     </MeetingProvider>
   )
   :
   (
     <JoinScreen
-      updateMeetingID={updateMeetingID} getMeetingAndToken={getMeetingToken}
+      updateMeetingID={updateMeetingID} getMeetingAndToken={getMeetingAndToken}
     ></JoinScreen>
   )
 };
