@@ -163,13 +163,13 @@ function MeetingGrid(props) {
             (
               <div className='w-9/12 mx-auto flex justify-around pt-8'>
                 <button onClick={() => toggleMic()} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white mr-2'><BsMic></BsMic></span>  toggle Mic
+                  <span className='text-2xl text-white'><BsMic></BsMic></span>
                 </button>
                 <button onClick={() => toggleWebcam()} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white mr-2'><FiCamera></FiCamera></span> Toggle Webcam
+                  <span className='text-2xl text-white'><FiCamera></FiCamera></span> 
                 </button>
                 <button onClick={toggleScreenShare} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white mr-2'><MdOutlineScreenShare></MdOutlineScreenShare></span> Screen Share
+                  <span className='text-2xl text-white'><MdOutlineScreenShare></MdOutlineScreenShare></span>
                 </button>
                 <button onClick={leave} className="btn btn-error">
                   Leave
