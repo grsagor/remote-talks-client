@@ -25,6 +25,19 @@ const Navbar = () => {
     }
   </>
 
+  const img = <>
+    {
+      user?
+      <>
+        <img src={user?.photoURL} alt="" />
+      </>
+      :
+      <>
+        <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+      </>
+    }
+  </>
+
   return (
     <div className='shadow-lg'>
       <div className='w-full'>
@@ -65,7 +78,7 @@ const Navbar = () => {
               <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <label tabIndex={0} className="flex btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full ">
-                    <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+                    {img}
                   </div>
                 </label>
                 <Link className='m-2 text-lg hover:text-primary' to='/'>Profile</Link>
@@ -88,7 +101,7 @@ const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full ">
-                    <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+                    {img}
                   </div>
                 </label>
                 <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
