@@ -37,7 +37,7 @@
 	background: linear-gradient(to right, #1d0e5f, #540781);
 }
 
-@media only screen and (max-width: 354px) {
+@media only screen and (max-width: 355px) {
 	.feedback__break {
 		display: none;
 	}
