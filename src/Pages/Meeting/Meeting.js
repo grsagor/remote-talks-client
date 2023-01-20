@@ -3,6 +3,9 @@ import { getMeetingId, getToken, createMeeting } from './Api/Api';
 import { Row, Col } from 'react-simple-flex-grid';
 import '../../CommonStyles/CommonStyle.css';
 import "react-simple-flex-grid/lib/main.css";
+import { BsMic } from 'react-icons/bs';
+import { FiCamera } from 'react-icons/fi';
+import { MdOutlineScreenShare } from 'react-icons/md';
 import createMeetingImg from '../../assets/Meeitng-img/84726-business-meeting-animation.gif';
 import {
   MeetingProvider,
@@ -98,14 +101,16 @@ function ParticipantView(props) {
       <audio ref={micRef} autoPlay />
       {webcamRef ?
         (
-          <div>
-            <h2>{displayName}</h2>
-            <video
-              height={"100%"}
-              width={"100%"}
-              ref={webcamRef}
-              autoPlay
-            />
+          <div className='w-full flex justify-center items-center'>
+            <div>
+              <h2>{displayName}</h2>
+              <video
+                height={"100%"}
+                width={"100%"}
+                ref={webcamRef}
+                autoPlay
+              />
+            </div>
           </div>
         )
         :
@@ -150,50 +155,54 @@ function MeetingGrid(props) {
     join();
   }
   return (
-    <div>
-      <header>Meeting Id: {props.meetingId}</header>
-      {
-        joined ?
-          (
-            <div>
-              <button onClick={leave}>
-                Leave
-              </button>
-              <button onClick={() => toggleMic()}>
-                toggleMic
-              </button>
-              <button onClick={() => toggleWebcam()}>
-                toggleWebcam
-              </button>
-              <button onClick={toggleScreenShare}>
-                toggleScreenShare
-              </button>
-            </div>
-          ) :
-          (
-            <button onClick={joinMeeting}>
-              Join
-            </button>
-          )
-      }
-      <div>
-        {chunk([...participants.keys()]).map((k) => (
-          <Row
-            key={k}
-            gutter={80}
-          >
-            {
-              k.map((l) => (
-                <Col span={4}>
-                  <ParticipantView
-                    key={l}
-                    participantId={l}
-                  />
-                </Col>
-              ))
-            }
-          </Row>
-        ))}
+    <div className='meeting-bg h-screen '>
+      <div className='common-width'>
+        {/* <header>Meeting Id: {props.meetingId}</header> */}
+        {
+          joined ?
+            (
+              <div className='w-9/12 mx-auto flex justify-around pt-8'>
+                <button onClick={() => toggleMic()} class="btn btn-outline btn-secondary">
+                  <span className='text-2xl text-white mr-2'><BsMic></BsMic></span>  toggle Mic
+                </button>
+                <button onClick={() => toggleWebcam()} class="btn btn-outline btn-secondary">
+                  <span className='text-2xl text-white mr-2'><FiCamera></FiCamera></span> Toggle Webcam
+                </button>
+                <button onClick={toggleScreenShare} class="btn btn-outline btn-secondary">
+                  <span className='text-2xl text-white mr-2'><MdOutlineScreenShare></MdOutlineScreenShare></span> Screen Share
+                </button>
+                <button onClick={leave} className="btn btn-error">
+                  Leave
+                </button>
+              </div>
+            ) :
+            (
+              <div className='w-full h-screen flex justify-center items-center'>
+                <button onClick={joinMeeting} class="btn btn-active btn-secondary text-white">
+                  Join Now
+                </button>
+              </div>
+            )
+        }
+        <div>
+          {chunk([...participants.keys()]).map((k) => (
+            <Row
+              key={k}
+              gutter={80}
+            >
+              {
+                k.map((l) => (
+                  <Col span={4}>
+                    <ParticipantView
+                      key={l}
+                      participantId={l}
+                    />
+                  </Col>
+                ))
+              }
+            </Row>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -205,11 +214,11 @@ function JoinScreen({ updateMeetingID, getMeetingAndToken }) {
       <div className='common-width '>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5 pt-24'>
           <div className='flex items-center justify-center'>
-           <img className='w-full md:w-3/4' src={createMeetingImg} alt="" />
+            <img className='w-full md:w-3/4' src={createMeetingImg} alt="" />
           </div>
           <div className=''>
-          <h1 className='text-4xl font-bold py-5'>Premium video meetings. Now free for everyone.</h1>
-            <p className='pb-8 text-gray-300'>We re-engineered the service we built for secure business meetings, Google Meet, to make it free and available for all.</p>
+            <h1 className='text-4xl font-bold py-5'>Premium video meetings. Now free for everyone.</h1>
+            <p className='pb-8 text-gray-300'>We re-engineered the service we built for secure business meetings, Remote Talks, to make it free and available for all.</p>
             <div className='w-full  lg:w-3/4 py-7'>
               <div className='w-full pb-4 relative'>
                 <input type="text" placeholder='Enter Your Meeting ID' className="input input-bordered input-secondary w-full " onChange={(e) => {
