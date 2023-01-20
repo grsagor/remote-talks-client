@@ -1,6 +1,5 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 import "./Feedback.css";
 
 const FeedBack = () => {
@@ -28,16 +27,7 @@ const FeedBack = () => {
 			.then((data) => {
 				form.reset();
 				if (data.acknowledged) {
-					toast.success("Your feedBack is sent", {
-						position: "bottom-right",
-						autoClose: 5000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						theme: "colored",
-					});
+					toast.success("feedback is sent successfully");
 				}
 			})
 			.catch((err) => {
@@ -46,21 +36,6 @@ const FeedBack = () => {
 	};
 	return (
 		<>
-			<ToastContainer
-				position="bottom-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="colored"
-			/>
-			{/* Same as */}
-			<ToastContainer />
-
 			<div className="feedback__container w-[90%] pt-[15px] mx-auto">
 				<h1 className="px-5 py-5 text-2xl text-center capitalize sm:px-0 sm:text-3xl feedback__title">
 					We'd love to know what{" "}
