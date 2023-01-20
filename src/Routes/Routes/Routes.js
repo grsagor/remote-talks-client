@@ -5,7 +5,7 @@ import FeedBack from "../../Pages/Home/FeedBack/FeedBack";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Meeting from "../../Pages/Meeting/Meeting";
-import MessageDashboard from "../../Pages/Message/MassegeDashbord/MassegeDahsbord"
+import MassegeDahsbord from "../../Pages/MassegeDashbord/MassegeDahsbord";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
 
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/message",
-				element: <MessageDashboard></MessageDashboard>,
+				element: <MassegeDahsbord></MassegeDahsbord>,
 			},
 			{
 				path: "/login",
