@@ -10,8 +10,8 @@ const Features = () => {
     <div className='common-width'>
       <div className='py-20'>
         <div className='text-center flex flex-col items-center mb-3'>
-        <h1 className='font-bold text-4xl border-set p-2 mb-4'>Check Out All Features</h1>
-        <p className='w-full sm:w-3/4 lg:w-1/2 text-center text-gray-400'>Although Remote Tasks app is primarily a video-conferencing app that facilitates video and audio calling, Remote Tasks provides users with an instant messaging ... Try some of our features</p>
+          <h1 className='font-bold text-4xl border-set p-2 mb-4'>Check Out All Features</h1>
+          <p className='w-full sm:w-3/4 lg:w-1/2 text-center text-gray-400'>Although Remote Tasks app is primarily a video-conferencing app that facilitates video and audio calling, Remote Tasks provides users with an instant messaging ... Try some of our features</p>
         </div>
         {/* all features card */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>

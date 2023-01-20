@@ -1,8 +1,8 @@
 import React from "react";
- 
+
 import mainb from "./BannerAssests/mainBanner.avif"
 import subBanner2 from "./BannerAssests/sub2.webp"
- import feature from "./BannerAssests/fiture.png"
+import feature from "./BannerAssests/fiture.png"
 import arow from "./BannerAssests/10601296_41883-removebg-preview.png"
 import help from "./BannerAssests/help.webp"
 import event from "./BannerAssests/7741855_3703471.jpg"
@@ -17,17 +17,17 @@ const Banner = () => {
       <div className="flex flex-col items-center justify-between w-full mb-10 lg:flex-row">
         <div className="mb-16 lg:mb-0 lg:max-w-lg lg:pr-5">
           <div className="max-w-xl mb-6">
-           
-            <h2 className="font-sans text-3xl capitalize text-white font-bold tracking-tight  sm:text-4xl sm:leading-none max-w-lg mb-6">
+
+            <h1 className="font-sans text-6xl capitalize text-white font-bold tracking-tight  sm:text-4xl sm:leading-none max-w-lg mb-6">
               Remote talks is best <br /> for business meeting
-            </h2>
+            </h1>
             <p className="text-white capitalize text-base md:text-lg">
               You can operate quicker and more flexibly than ever before with
               all of your employees, tools, and communication in one location.
             </p>
           </div>
           <div className="flex items-center space-x-3">
-             <Link to='/meeting'><button className="btn">Make a Metting</button></Link>
+            <Link to='/meeting'><button className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 hover:text-white">Make a Metting</button></Link>
           </div>
         </div>
         <div className="  lg:w-1/2 relative  m-auto">
@@ -75,4 +75,3 @@ const Banner = () => {
 export default Banner;
 
 
- 

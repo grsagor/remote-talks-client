@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "../../Layout/Main/Main";
+import About from "../../Pages/About/About";
 import FeedBack from "../../Pages/Home/FeedBack/FeedBack";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Meeting from "../../Pages/Meeting/Meeting";
-import Message from "../../Pages/Message/Message";
+import MassegeDahsbord from "../../Pages/MassegeDashbord/MassegeDahsbord";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
 
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
 				element: <Participants></Participants>,
 			},
 			{
+				path: "/about",
+				element: <About></About>
+			},
+			{
 				path: "/message",
-				element: <Message></Message>,
+				element: <MassegeDahsbord></MassegeDahsbord>,
 			},
 			{
 				path: "/login",
