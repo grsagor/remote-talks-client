@@ -7,6 +7,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@videosdk.live/js-sdk": "^0.0.58",
+    "@videosdk.live/react-sdk": "^0.1.61",
     "@zegocloud/zego-uikit-prebuilt": "^1.6.2",
     "@zegocloud/zego-uikit-prebuilt-live-streaming-rn": "^1.0.7",
     "daisyui": "^2.46.1",
@@ -16,8 +18,10 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
     "react-icons": "^4.7.1",
+    "react-query": "^3.39.2",
     "react-router-dom": "^6.6.2",
     "react-scripts": "^5.0.1",
+    "react-simple-flex-grid": "^1.3.21",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
