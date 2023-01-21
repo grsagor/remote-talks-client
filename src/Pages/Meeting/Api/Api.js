@@ -50,7 +50,7 @@ export const getMeetingId = async (token) => {
         .catch((error) => console.log("error", error));
         return response;
     }
-    catch(er){
-        console.log(er);
+    catch(e){
+        console.log(e);
     }
 }
