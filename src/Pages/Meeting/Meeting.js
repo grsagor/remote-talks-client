@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMeetingId, getToken, createMeeting } from './Api/Api';
+import { getMeetingId, getToken, createMeeting } from './API/Api';
 import { Row, Col } from 'react-simple-flex-grid';
 import '../../CommonStyles/CommonStyle.css';
 import "react-simple-flex-grid/lib/main.css";
