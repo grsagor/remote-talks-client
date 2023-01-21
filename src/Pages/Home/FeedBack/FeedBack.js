@@ -5,6 +5,7 @@ import "./Feedback.css";
 const FeedBack = () => {
 	const submitHandler = async (e) => {
 		e.preventDefault();
+		// form
 		const form = e.target;
 
 		const firstName = form.firstname.value;
