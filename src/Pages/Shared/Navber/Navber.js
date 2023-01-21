@@ -46,7 +46,7 @@ const Navbar = () => {
 
             <div className='flex-1'>
               {/* <a href='/' className="btn btn-ghost font-bold text-2xl normal-case "><img className='w-40 md:w-60 lg:w-80' src={Logo} alt=''></img></a> */}
-              <Link to='/'><img className='btn btn-ghost h-16' src={Logo} alt="" /></Link>
+              <Link><img className='btn btn-ghost h-16' src={Logo} alt="" /></Link>
             </div>
 
             <div className='hidden lg:flex flex-1'>
