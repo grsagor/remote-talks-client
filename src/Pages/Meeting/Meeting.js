@@ -14,7 +14,7 @@ import {
 	useParticipant,
 } from "@videosdk.live/react-sdk";
 import { useRef } from "react";
-import { createMeeting, getToken } from "./API/Api";
+import { createMeeting, getToken } from "./Api/Api";
 
 const chunk = (arr) => {
 	const newArr = [];
