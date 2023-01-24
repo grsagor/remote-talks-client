@@ -37,11 +37,44 @@ const Login = () => {
             console.log(user);
             toast.success('Login Successfully');
             navigate('/');
+            saveUsers(user);
         })
         .catch(error => {
             console.error(error);
         })
   }
+
+  const saveUsers = (data) => {
+
+    fetch(`https://remote-talks-server.vercel.app/users?email=${data.email}`)
+        .then(res=>res.json())
+        .then(users=> {
+          if(users.length >0 ){
+            console.log('User Found')
+            console.log(users.length);
+          }  
+          if(users.length < 1){
+            const user = { 
+                name: data.displayName,
+                email: data.email,
+                university: 'Not Set',
+                address: 'Not Set',
+                img: data.photoURL
+            };
+            fetch('https://remote-talks-server.vercel.app/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+          }
+        })
+}
 
   return (
     <div className="hero p-5 bg-base-100">
