@@ -96,7 +96,7 @@ const About = () => {
                         <img src={img6} alt="Shoes" />
                     </figure>
                     <div className='m-2'>
-                        <h2 className='text-2xl font-semibold'>Ft Sobuj Hasan</h2>
+                        <h2 className='text-2xl font-semibold'>Md Mahmudul Hasan</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
                             <button className="btn btn-outline btn-secondary"><a href={pdf6} download={'Md Mahmudul Hasan'}>Get Resume</a></button>
