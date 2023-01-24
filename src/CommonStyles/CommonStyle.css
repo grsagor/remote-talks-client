@@ -28,3 +28,7 @@ transition: 0.5s;
   border-bottom: 2px solid green;
   border-radius: 10px;
 }
+
+.modal-bg-color{
+  background: linear-gradient(rgba(29, 29, 154, 0.71), rgba(217, 0, 255, 0.83));
+}
