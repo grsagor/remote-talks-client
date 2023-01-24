@@ -10,8 +10,10 @@ import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { createUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { createUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();    
+  const imageHostKey = process.env.REACT_APP_imgbb_key;    
+
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -21,9 +23,55 @@ const SignUp = () => {
         console.log(user);
         toast.success('Successfully signed up');
         navigate('/login');
+        const userInfo = {
+          displayName: data.name
+      }
+      updateUser(userInfo)
+                    .then(() => {
+                        saveUsers(data, userInfo?.displayName, data?.email)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
       })
       .catch(error => console.log(error));
   }
+
+  const saveUsers = (data, name, email) => {
+    const image = data.image[0];
+const formData = new FormData();
+formData.append('image', image);
+const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+
+fetch(url, {
+  method: 'POST',
+  body: formData
+})
+.then(res => res.json())
+.then(imgData => {
+  if(imgData.success){
+    const user = { 
+        name, 
+        email,
+        university: 'Not Set',
+        address: 'Not Set',
+        img: imgData.data.url
+    };
+    fetch('https://remote-talks-server.vercel.app/users', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            toast.success('User Data Save Successfully');
+        })
+    }
+})
+}
 
   return (
     <div className="hero p-5 bg-base-100">
