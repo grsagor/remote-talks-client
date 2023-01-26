@@ -11,6 +11,7 @@ import pdf3 from './Resume/Sharmin-s Resume.pdf';
 import pdf4 from './Resume/Md Shimul Molla Resume.pdf';
 import pdf5 from './Resume/Md Anis Molla.pdf';
 import pdf6 from './Resume/Md  Mahmudul Hasan.pdf';
+import { Link } from 'react-router-dom';
 
 
 const About = () => {
@@ -29,7 +30,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Golam Rahman Sagor</h2>
                         <p className='text-xl'>Leader</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf1} download={"Golam Rahman Sagor"}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf1} download={"Golam Rahman Sagor"}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
                         </div>
                     </div>
                 </div>
@@ -43,7 +45,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Nusrat Jahan</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf2} download={'Nusrat Jahan'}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf2} download={'Nusrat Jahan'}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
                         </div>
                     </div>
                 </div>
@@ -57,7 +60,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Sharmin Akter</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf3} download={"sharmin Akter"}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf3} download={"sharmin Akter"}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/sharminDetails'>Visit</Link></button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +75,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Md Shimul Molla</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf4} download={"Md Shimul Molla"}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf4} download={"Md Shimul Molla"}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
                         </div>
                     </div>
                 </div>
@@ -85,7 +90,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Md Anis Molla</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf5} download={"Md Anis Molla"}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf5} download={"Md Anis Molla"}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
                         </div>
                     </div>
                 </div>
@@ -99,7 +105,8 @@ const About = () => {
                         <h2 className='text-2xl font-semibold'>Md Mahmudul Hasan</h2>
                         <p className='text-xl'>Member</p>
                         <div className="card-action m-2">
-                            <button className="btn btn-outline btn-secondary"><a href={pdf6} download={'Md Mahmudul Hasan'}>Get Resume</a></button>
+                            {/* <button className="btn btn-outline btn-secondary"><a href={pdf6} download={'Md Mahmudul Hasan'}>Get Resume</a></button> */}
+                            <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
                         </div>
                     </div>
                 </div>

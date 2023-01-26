@@ -8,6 +8,7 @@ import Meeting from "../../Pages/Meeting/Meeting";
 import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
+import SharminDetails from "../../Pages/About/Details/SharminDetails";
 
 const router = createBrowserRouter([
 	{
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
 			{
 				path: "/about",
 				element: <About></About>,
+			},
+			{
+				path: "/sharminDetails",
+				element: <SharminDetails></SharminDetails>,
 			},
 			{
 				path: "/message",
