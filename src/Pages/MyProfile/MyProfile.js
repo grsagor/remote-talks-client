@@ -14,32 +14,20 @@ const MyProfile = () => {
   const navigation = useNavigation();
   const navigate = useNavigate()
   const [loader, setLoader] = useState(true);
-//  console.log(user.email);
- 
-  const url = `http://localhost:5000/users/${user?.email}`
-  // const url = `https://e-media-server-site.vercel.app/users/asadkhan01862@gmail.com`
+
   // const url = `http://localhost:5000/users/asadkhan01862@gmail.com`
 
-if(user){
-  fetch(url)
+  const url = `https://remote-talks-server-two.vercel.app/users/${user?.email}`
+  if (user) {
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setData(data)
         console.log(data);
         setLoader(false)
       })
-}
+  }
 
-  //   const { data: users = [], refetch } = useQuery({
-  //   queryKey: ['users'],
-  //   queryFn: async () => {
-  //     const res = await fetch('https://sq-doctors-lab-server.vercel.app/users');
-  //     const data = await res.json();
-  //     return data;
-  //   }
-  // })
-
-  // console.log(data);
 
   const handleUpdateProfules = event => {
     event.preventDefault();
@@ -57,8 +45,8 @@ if(user){
       address
     }
     console.log(newData);
-    
-    fetch(`http://localhost:5000/users/${data._id}`, {
+
+    fetch(`https://remote-talks-server-two.vercel.app/users/${data._id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
@@ -75,7 +63,7 @@ if(user){
         }
         console.log(data);
       })
-  
+
   }
 
   if (loader) {
@@ -255,17 +243,17 @@ if(user){
               </div>
               <p className='text-sm'>Sultan Ma..</p>
             </div>
-            
+
           </div>
 
           {/* Activity Notifications   */}
           <div>
             <h2 className='p-5 mt-10 font-bold text-3xl'>Notifications</h2>
             <div className='flex flex-col gap-5'>
-                <Request></Request>
-                <Request></Request>
-                <Request></Request>
-                <Request></Request>
+              <Request></Request>
+              <Request></Request>
+              <Request></Request>
+              <Request></Request>
             </div>
           </div>
 
