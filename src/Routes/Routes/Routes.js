@@ -9,7 +9,9 @@ import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord
 import MyProfile from "../../Pages/MyProfile/MyProfile";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
+import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+
 
 const router = createBrowserRouter([
 	{
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
 			{
 				path: "/about",
 				element: <About></About>,
+			},
+			{
+				path: "/sharminDetails",
+				element: <SharminDetails></SharminDetails>,
 			},
 			{
 				path: "/message",
