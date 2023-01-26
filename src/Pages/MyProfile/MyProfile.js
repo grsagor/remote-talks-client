@@ -4,80 +4,81 @@ import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import Spinner from '../Shared/Spinner/Spinner';
 import { BiEdit } from 'react-icons/bi';
+import Request from './Request/Request';
+import { toast } from 'react-hot-toast';
 
 
 const MyProfile = () => {
-  const { user } = useContext(AuthContext);
-  const [data, setData] = useState([])
-  const [mediaData, setMediaData] = useState([])
+  const { user, loading } = useContext(AuthContext);
+  const [data, setData] = useState([]);
   const navigation = useNavigation();
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(true);
-  // const url = `https://final-project-server-zeta.vercel.app/bookings?email=${user?.email}`
-  const url = `https://e-media-server-site.vercel.app/users/${user?.email}`
+  const [loader, setLoader] = useState(true);
+//  console.log(user.email);
+ 
+  const url = `http://localhost:5000/users/${user?.email}`
+  // const url = `https://e-media-server-site.vercel.app/users/asadkhan01862@gmail.com`
+  // const url = `http://localhost:5000/users/asadkhan01862@gmail.com`
 
-  useEffect(() => {
-    fetch(url)
-      .then(res => res.json())
-      .then(data => setData(data))
-  }, [])
-
-
-  // user all post data loaded 
-  const urlTow = `https://e-media-server-site.vercel.app/allMedias?email=${user?.email}`
-  useEffect(() => {
-    fetch(urlTow)
+if(user){
+  fetch(url)
       .then(res => res.json())
       .then(data => {
-        setMediaData(data)
-        setLoading(false)
+        setData(data)
+        console.log(data);
+        setLoader(false)
       })
-  }, [])
+}
+
+  //   const { data: users = [], refetch } = useQuery({
+  //   queryKey: ['users'],
+  //   queryFn: async () => {
+  //     const res = await fetch('https://sq-doctors-lab-server.vercel.app/users');
+  //     const data = await res.json();
+  //     return data;
+  //   }
+  // })
 
   // console.log(data);
-  // console.log(mediaData);
 
   const handleUpdateProfules = event => {
     event.preventDefault();
     const form = event.target;
-    const userName = form.name.value;
+    const name = form.name.value;
     const email = form.email.value;
-    const photoURL = form.photoURL.value;
+    const img = form.photoURL.value;
     const university = form.university.value;
-    const location = form.address.value;
+    const address = form.address.value;
     const newData = {
-      userName,
+      name,
       email,
-      photoURL,
+      img,
       university,
-      location
+      address
     }
     console.log(newData);
-    // console.log('object');
-    // fetch(`https://e-media-server-site.vercel.app/users/${data._id}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(newData)
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     if (data.modifiedCount > 0) {
-    //       Swal.fire(
-    //         'YourLogin is Successfully',
-    //         'Welcome to our shop!',
-    //         'success'
-    //       )
-    //       navigate('/')
-    //       setLoading(false)
-    //     }
-    //     console.log(data);
-    //   })
-
+    
+    fetch(`http://localhost:5000/users/${data._id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          toast.success("Your Information Update Successfully")
+          // navigate('/')
+          navigate('/')
+          setLoader(false)
+        }
+        console.log(data);
+      })
+  
   }
 
-  if (loading) {
+  if (loader) {
     return <div className='py-28'><Spinner></Spinner></div>
   }
 
@@ -92,20 +93,20 @@ const MyProfile = () => {
               <div className="avatar justify-center w-full">
                 <div className="w-1/2 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   {
-                    user?.photoURL ? <img className='w-full' src={data.photoURL} alt="" /> : <img className='w-full' src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" />
+                    user ? <img className='w-full' src={data.img} alt="" /> : <img className='w-full' src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" />
                   }
                 </div>
               </div>
             </div>
             <div className='p-3 lg:p-6 text-center w-full'>
               <div className='flex justify-between'>
-                <p className='text- font-semibold w-full text-center'>Name </p><span className='font-normal w-full text-start'>: {data.userName}</span>
+                <p className='text- font-semibold w-full text-center'>Name </p><span className='font-normal w-full text-start'>: {data.name}</span>
               </div>
               <div className='flex justify-between'>
                 <p className='text- font-semibold w-full text-center'>Email </p><span className='font-normal w-full text-start'>: {data.email}</span>
               </div>
               <div className='flex justify-between'>
-                <p className='text- font-semibold w-full text-center'>Address </p><span className='font-normal w-full text-start'>: {data.location}</span>
+                <p className='text- font-semibold w-full text-center'>Address </p><span className='font-normal w-full text-start'>: {data.address}</span>
               </div>
               <div className='flex justify-between'>
                 <p className='text- font-semibold w-full text-center'>University </p><span className='font-normal w-full text-start'>: {data.university}</span>
@@ -128,15 +129,15 @@ const MyProfile = () => {
               <div>
                 <form onSubmit={handleUpdateProfules} className='grid grid-cols-1 gap-3 mt-10'>
                   <span className='p-0 m-0 font-semibold'>Full name</span>
-                  <input name="name" type="text" defaultValue={data.userName} placeholder="Your Name" className="input w-full input-bordered" required />
+                  <input name="name" type="text" defaultValue={data.name} placeholder="Your Name" className="input w-full input-bordered" required />
                   <span className='p-0 m-0 font-semibold'>Email</span>
                   <input name="email" type="email" defaultValue={user?.email} readOnly placeholder="Email Address" className="input w-full input-bordered" required />
                   <span className='p-0 m-0 font-semibold'>University/Collage</span>
                   <input name="university" type="text" defaultValue={data.university} placeholder="Your University" className="input w-full input-bordered" required />
                   <span className='p-0 m-0 font-semibold'>Address</span>
-                  <input name="address" type="text" defaultValue={data.location} placeholder="Your address" className="input w-full input-bordered" required />
+                  <input name="address" type="text" defaultValue={data.address} placeholder="Your address" className="input w-full input-bordered" required />
                   <span className='p-0 m-0 font-semibold'>Profile URL</span>
-                  <input name="photoURL" type="url" defaultValue={data.photoURL} placeholder="Your address" className="input w-full input-bordered" required />
+                  <input name="photoURL" type="url" defaultValue={data.img} placeholder="Your address" className="input w-full input-bordered" required />
                   {/* <textarea name="location" placeholder="Your Meeting location" className="textarea w-full textarea-bordered" required ></textarea> */}
                   <br />
                   {
@@ -151,7 +152,7 @@ const MyProfile = () => {
 
           {/* Friends section  */}
           <div className=''>
-            <p className='p-5 w-full text-2xl font-bold'>All friends</p>
+            <p className='p-5 w-full text-2xl font-bold'>All Connected</p>
             <div className='grid grid-cols-3 gap-5'>
 
               <div className='flex flex-col w-full gap-3'>
@@ -193,10 +194,81 @@ const MyProfile = () => {
             </div>
           </div>
         </div>
+
+        {/* Rigth section code hare >>>> */}
         <div>
           <h1 className='p-5 font-bold text-3xl'>Recently activity</h1>
-          
-         
+          <div className='flex flex-row gap-5'>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://st3.depositphotos.com/7158420/16888/i/600/depositphotos_168883958-stock-photo-bearded-man-portrait.jpg" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://media.istockphoto.com/id/481864562/photo/passport-picture-of-a-cool-guy-in-a-blue-shirt.jpg?b=1&s=170667a&w=0&k=20&c=s0m7NeznKVBuoei_pCPuvUUoX7TUCsC9ZjEEedz2H_o=" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://st4.depositphotos.com/16122460/25466/i/600/depositphotos_254661340-stock-photo-man-showing-thank-you-gesture.jpg" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://thumbs.dreamstime.com/b/stay-away-me-reluctant-young-man-step-back-hands-stretch-out-defensive-gesture-protecting-himself-standing-over-white-229609711.jpg" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            <div className='flex flex-col items-center'>
+              <div className="avatar online">
+                <div className="w-16 rounded-full">
+                  <img src="https://thumbs.dreamstime.com/b/satisfied-young-man-smiling-showing-okay-gesture-approve-something-good-praising-excellent-thing-standing-blue-satisfied-208636260.jpg" />
+                </div>
+              </div>
+              <p className='text-sm'>Sultan Ma..</p>
+            </div>
+            
+          </div>
+
+          {/* Activity Notifications   */}
+          <div>
+            <h2 className='p-5 mt-10 font-bold text-3xl'>Notifications</h2>
+            <div className='flex flex-col gap-5'>
+                <Request></Request>
+                <Request></Request>
+                <Request></Request>
+                <Request></Request>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

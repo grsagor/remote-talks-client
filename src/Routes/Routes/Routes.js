@@ -9,6 +9,7 @@ import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord
 import MyProfile from "../../Pages/MyProfile/MyProfile";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
 	{
