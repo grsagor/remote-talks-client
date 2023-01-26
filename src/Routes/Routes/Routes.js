@@ -11,6 +11,8 @@ import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import generateMuiTheme from "../../Pages/Meeting/mui/theme";
+import { ThemeProvider } from "@material-ui/styles";
 
 
 const router = createBrowserRouter([
@@ -56,7 +58,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/meeting",
-				element: <Meeting></Meeting>,
+				element: element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 			},
 			{
 				path: "/profile",
