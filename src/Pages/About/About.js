@@ -14,6 +14,7 @@ import pdf6 from './Resume/Md  Mahmudul Hasan.pdf';
 import { Link } from 'react-router-dom';
 
 
+
 const About = () => {
     return (
         <div className='text-center flex flex-col items-center my-4'>
@@ -32,6 +33,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf1} download={"Golam Rahman Sagor"}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
@@ -47,6 +49,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf2} download={'Nusrat Jahan'}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
@@ -62,6 +65,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf3} download={"sharmin Akter"}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/sharminDetails'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
@@ -77,6 +81,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf4} download={"Md Shimul Molla"}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
@@ -92,6 +97,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf5} download={"Md Anis Molla"}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
@@ -107,6 +113,7 @@ const About = () => {
                         <div className="card-action m-2">
                             {/* <button className="btn btn-outline btn-secondary"><a href={pdf6} download={'Md Mahmudul Hasan'}>Get Resume</a></button> */}
                             <button className="btn btn-outline btn-secondary"><Link to='/'>Visit</Link></button>
+
                         </div>
                     </div>
                 </div>
