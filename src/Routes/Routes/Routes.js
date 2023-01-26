@@ -9,6 +9,8 @@ import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord
 import MyProfile from "../../Pages/MyProfile/MyProfile";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
+import generateMuiTheme from "../../Pages/Meeting/mui/theme";
+import { ThemeProvider } from "@material-ui/styles";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import generateMuiTheme from "../../Pages/Meeting/mui/theme";
@@ -58,7 +60,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/meeting",
-				element: element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
+				element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 			},
 			{
 				path: "/profile",

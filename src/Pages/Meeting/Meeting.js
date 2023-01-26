@@ -1,281 +1,217 @@
-import React, { useEffect, useState } from 'react';
-import { getMeetingId, getToken, createMeeting } from './Api/Api';
-import { Row, Col } from 'react-simple-flex-grid';
-import '../../CommonStyles/CommonStyle.css';
-import "react-simple-flex-grid/lib/main.css";
-import { BsMic } from 'react-icons/bs';
-import { FiCamera } from 'react-icons/fi';
-import { MdOutlineScreenShare } from 'react-icons/md';
-import createMeetingImg from '../../assets/Meeitng-img/84726-business-meeting-animation.gif';
-import {
-  MeetingProvider,
-  MeetingConsumer,
-  useMeeting,
-  useParticipant
-} from "@videosdk.live/react-sdk";
-import { useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Constants, MeetingProvider } from "@videosdk.live/react-sdk";
+import { SnackbarProvider } from "notistack";
+import { LeaveScreen } from "./components/screens/LeaveScreen";
+import { useTheme } from "@material-ui/styles";
+import { useMediaQuery } from "@material-ui/core";
+import { JoiningScreen } from "./components/screens/JoiningScreen";
+import { meetingTypes } from "./utils/common";
+import { MeetingContainer } from "./meeting/MeetingContainer";
+import { ILSContainer } from "./interactive-live-streaming/ILSContainer";
 
-const chunk = (arr) => {
-  const newArr = [];
-  while (arr.length) newArr.push(arr.splice(0, 3));
-  return newArr;
-};
+const App = () => {
+  const [token, setToken] = useState("");
+  const [meetingId, setMeetingId] = useState("");
+  const [participantName, setParticipantName] = useState("");
+  const [micOn, setMicOn] = useState(true);
+  const [webcamOn, setWebcamOn] = useState(true);
+  const [selectedMic, setSelectedMic] = useState({ id: null });
+  const [selectedWebcam, setSelectedWebcam] = useState({ id: null });
+  const [selectWebcamDeviceId, setSelectWebcamDeviceId] = useState(
+    selectedWebcam.id
+  );
+  const [meetingType, setMeetingType] = useState(meetingTypes.MEETING);
+  const [meetingMode, setMeetingMode] = useState(Constants.modes.CONFERENCE);
+  const [selectMicDeviceId, setSelectMicDeviceId] = useState(selectedMic.id);
+  const [isMeetingStarted, setMeetingStarted] = useState(false);
+  const [isMeetingLeft, setIsMeetingLeft] = useState(false);
+  const [raisedHandsParticipants, setRaisedHandsParticipants] = useState([]);
 
-function ParticipantView(props) {
-  const webcamRef = useRef(null);
-  const micRef = useRef(null);
-  const screenShareRef = useRef(null);
+  const [draftPolls, setDraftPolls] = useState([]);
+  const [createdPolls, setCreatedPolls] = useState([]);
+  const [endedPolls, setEndedPolls] = useState([]);
+  const [downstreamUrl, setDownstreamUrl] = useState(null);
+  const [afterMeetingJoinedHLSState, setAfterMeetingJoinedHLSState] =
+    useState(null);
 
-  const {
-    displayName,
-    webcamStream,
-    micStream,
-    screenShareStream,
-    webcamOn,
-    micOn,
-    screenShareOn
-  } = useParticipant(props.participantId);
+  const polls = useMemo(
+    () =>
+      createdPolls.map((poll) => ({
+        ...poll,
+        isActive:
+          endedPolls.findIndex(({ pollId }) => pollId === poll.id) === -1,
+      })),
+    [createdPolls, endedPolls]
+  );
 
-  useEffect(() => {
-    if (webcamRef.current) {
-      // if(!webcamOn){
-      //   webcamRef.current.srcObject = null;
-      // }
-      if (webcamOn) {
-        const mediaStream = new MediaStream();
-        mediaStream.addTrack(webcamStream.track);
+  const useRaisedHandParticipants = () => {
+    const raisedHandsParticipantsRef = useRef();
 
-        webcamRef.current.srcObject = mediaStream;
-        webcamRef.current
-          .play()
-          .catch((error) =>
-            console.log("videoElem.current.play() failed", error)
-          );
-      }
-      else {
-        webcamRef.current.srcObject = null;
-      }
-    }
-  }, [webcamOn]);
-  // },[webcamStream,webcamOn]);
+    const participantRaisedHand = (participantId) => {
+      const raisedHandsParticipants = [...raisedHandsParticipantsRef.current];
 
-  useEffect(() => {
-    if (micRef.current) {
-      if (micOn) {
-        const mediaStream = new MediaStream();
-        mediaStream.addTrack(micStream.track);
+      const newItem = { participantId, raisedHandOn: new Date().getTime() };
 
-        micRef.current.srcObject = mediaStream;
-        micRef.current
-          .play()
-          .catch((error) =>
-            console.log("videoElem.current.play() failed", error)
-          );
+      const participantFound = raisedHandsParticipants.findIndex(
+        ({ participantId: pID }) => pID === participantId
+      );
+
+      if (participantFound === -1) {
+        raisedHandsParticipants.push(newItem);
       } else {
-        micRef.current.srcObject = null;
+        raisedHandsParticipants[participantFound] = newItem;
       }
-    }
-  }, [micOn])
-  // },[micStream, micOn])
 
-  useEffect(() => {
-    if (screenShareRef.current) {
-      if (screenShareOn) {
-        const mediaStream = new MediaStream();
-        mediaStream?.addTrack(screenShareStream?.track);
+      setRaisedHandsParticipants(raisedHandsParticipants);
+    };
 
-        screenShareRef.current.srcObject = mediaStream;
-        screenShareRef.current
-          .play()
-          .catch((error) =>
-            console.log("videoElem.current.play() failed", error)
-          );
-      } else {
-        screenShareRef.current.srcObject = null;
+    useEffect(() => {
+      raisedHandsParticipantsRef.current = raisedHandsParticipants;
+    }, [raisedHandsParticipants]);
+
+    const _handleRemoveOld = () => {
+      const raisedHandsParticipants = [...raisedHandsParticipantsRef.current];
+
+      const now = new Date().getTime();
+
+      const persisted = raisedHandsParticipants.filter(({ raisedHandOn }) => {
+        return parseInt(raisedHandOn) + 15000 > parseInt(now);
+      });
+
+      if (raisedHandsParticipants.length !== persisted.length) {
+        setRaisedHandsParticipants(persisted);
       }
-    }
-  }, [screenShareStream, screenShareOn])
+    };
 
-  return (
-    <div key={props.participantId}>
-      <audio ref={micRef} autoPlay />
-      {webcamRef ?
-        (
-          <div className='w-full flex justify-center items-center'>
-            <div>
-              <h2>{displayName}</h2>
-              <video
-                height={"100%"}
-                width={"100%"}
-                ref={webcamRef}
-                autoPlay
-              />
-            </div>
-          </div>
-        )
-        :
-        null
-      }
-      {
-        screenShareOn ? (
-          <div>
-            <h2>Screen Shared</h2>
-            <video
-              height={"100%"}
-              width={"100%"}
-              ref={screenShareRef}
-              autoPlay
-            />
-          </div>)
-          :
-          null
-      }
-      <br />
-      <span>
-        Mic:{micOn ? "Yes" : "No"}
-        Camera: {webcamOn ? "Yes" : "No"}
-        ScreenShare: {screenShareOn ? "Yes" : "No"}
-      </span>
-    </div>
-  )
-}
+    useEffect(() => {
+      const interval = setInterval(_handleRemoveOld, 1000);
 
-function MeetingGrid(props) {
-  const [joined, setJoined] = useState(false);
-  const {
-    join,
-    leave,
-    toggleMic,
-    toggleWebcam,
-    toggleScreenShare,
-  } = useMeeting();
-  const { participants } = useMeeting();
-  const joinMeeting = () => {
-    setJoined(true);
-    join();
-  }
-  return (
-    <div className='meeting-bg h-screen '>
-      <div className='common-width'>
-        {/* <header>Meeting Id: {props.meetingId}</header> */}
-        {
-          joined ?
-            (
-              <div className='w-9/12 mx-auto flex justify-around pt-8'>
-                <button onClick={() => toggleMic()} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white'><BsMic></BsMic></span>
-                </button>
-                <button onClick={() => toggleWebcam()} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white'><FiCamera></FiCamera></span> 
-                </button>
-                <button onClick={toggleScreenShare} class="btn btn-outline btn-secondary">
-                  <span className='text-2xl text-white'><MdOutlineScreenShare></MdOutlineScreenShare></span>
-                </button>
-                <button onClick={leave} className="btn btn-error">
-                  Leave
-                </button>
-              </div>
-            ) :
-            (
-              <div className='w-full h-screen flex justify-center items-center'>
-                <button onClick={joinMeeting} class="btn btn-active btn-secondary text-white">
-                  Join Now
-                </button>
-              </div>
-            )
-        }
-        <div>
-          {chunk([...participants.keys()]).map((k) => (
-            <Row
-              key={k}
-              gutter={80}
-            >
-              {
-                k.map((l) => (
-                  <Col span={4}>
-                    <ParticipantView
-                      key={l}
-                      participantId={l}
-                    />
-                  </Col>
-                ))
-              }
-            </Row>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
+      return () => {
+        clearInterval(interval);
+      };
+    }, []);
 
-function JoinScreen({ updateMeetingID, getMeetingAndToken }) {
-  return (
-    <div className='meeting-bg pb-20 lg:pb-0 lg:h-screen'>
-      <div className='common-width '>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 pt-24'>
-          <div className='flex items-center justify-center'>
-            <img className='w-full md:w-3/4' src={createMeetingImg} alt="" />
-          </div>
-          <div className=''>
-            <h1 className='text-4xl font-bold py-5'>Premium video meetings. Now free for everyone.</h1>
-            <p className='pb-8 text-gray-300'>We re-engineered the service we built for secure business meetings, Remote Talks, to make it free and available for all.</p>
-            <div className='w-full  lg:w-3/4 py-7'>
-              <div className='w-full pb-4 relative'>
-                <input type="text" placeholder='Enter Your Meeting ID' className="input input-bordered input-secondary w-full " onChange={(e) => {
-                  updateMeetingID(e)
-                }} />
-                <button onClick={getMeetingAndToken} className="btn  btn-secondary bg-gradient-to-r from-secondary to-blue-800 text-white absolute top-0 right-0">Join</button>
-              </div>
-              <button onClick={getMeetingAndToken} className="btn btn-outline btn-secondary w-full">Create Meeting</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const Meeting = () => {
-  const [token, setToken] = useState(null);
-  const [meetingId, setMeetingId] = useState(null);
-  const getMeetingToken = async () => {
-    const token = await getToken();
-    setToken(token);
-    setMeetingId(meetingId ? meetingId : (await createMeeting({ token })));
+    return { participantRaisedHand };
   };
 
-  const updateMeetingID = (meetingId) => {
-    setMeetingId(meetingId);
-  }
-  // console.log("meetingId", meetingId);
-  // useEffect(()=> {
-  //   getMeetingToken();
-  // },[])
-  // console.log(token);
+  const theme = useTheme();
+  const isXStoSM = useMediaQuery(theme?.breakpoints.only("xs"));
 
-  return token && meetingId ? (
-    <MeetingProvider
-      config={
-        {
-          meetingId,
-          micEnabled: false,
-          webcamEnabled: false,
-          name: "John doe",
-        }
-      }
-      token={token}
-    >
-      <MeetingConsumer>
-        {() => <MeetingGrid meetingId={meetingId} getMeetingAndToken={getMeetingToken}></MeetingGrid>}
-      </MeetingConsumer>
-    </MeetingProvider>
-  )
-    :
-    (
-      <JoinScreen
-        updateMeetingID={updateMeetingID} getMeetingAndToken={getMeetingToken}
-      ></JoinScreen>
-    )
+  useEffect(() => {
+    if (isXStoSM) {
+      window.onbeforeunload = () => {
+        return "Are you sure you want to exit?";
+      };
+    }
+  }, [isXStoSM]);
+
+  return (
+    <>
+      {isMeetingStarted ? (
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          autoHideDuration={5000}
+          maxSnack={3}
+        >
+          <MeetingProvider
+            config={{
+              meetingId,
+              micEnabled: micOn,
+              webcamEnabled: webcamOn,
+              name: participantName ? participantName : "TestUser",
+              mode: meetingMode,
+              multiStream: meetingType === meetingTypes.MEETING ? true : false,
+            }}
+            token={token}
+            reinitialiseMeetingOnConfigChange={true}
+            joinWithoutUserInteraction={true}
+          >
+            {meetingType === meetingTypes.MEETING ? (
+              <MeetingContainer
+                onMeetingLeave={() => {
+                  setToken("");
+                  setMeetingId("");
+                  setWebcamOn(false);
+                  setMicOn(false);
+                  setMeetingStarted(false);
+                }}
+                setIsMeetingLeft={setIsMeetingLeft}
+                selectedMic={selectedMic}
+                selectedWebcam={selectedWebcam}
+                selectWebcamDeviceId={selectWebcamDeviceId}
+                setSelectWebcamDeviceId={setSelectWebcamDeviceId}
+                selectMicDeviceId={selectMicDeviceId}
+                setSelectMicDeviceId={setSelectMicDeviceId}
+                useRaisedHandParticipants={useRaisedHandParticipants}
+                raisedHandsParticipants={raisedHandsParticipants}
+                micEnabled={micOn}
+                webcamEnabled={webcamOn}
+              />
+            ) : (
+              <ILSContainer
+                onMeetingLeave={() => {
+                  setToken("");
+                  setMeetingId("");
+                  setWebcamOn(false);
+                  setMicOn(false);
+                  setMeetingStarted(false);
+                }}
+                setIsMeetingLeft={setIsMeetingLeft}
+                selectedMic={selectedMic}
+                selectedWebcam={selectedWebcam}
+                selectWebcamDeviceId={selectWebcamDeviceId}
+                setSelectWebcamDeviceId={setSelectWebcamDeviceId}
+                selectMicDeviceId={selectMicDeviceId}
+                setSelectMicDeviceId={setSelectMicDeviceId}
+                useRaisedHandParticipants={useRaisedHandParticipants}
+                raisedHandsParticipants={raisedHandsParticipants}
+                micEnabled={micOn}
+                webcamEnabled={webcamOn}
+                meetingMode={meetingMode}
+                setMeetingMode={setMeetingMode}
+                polls={polls}
+                draftPolls={draftPolls}
+                setDraftPolls={setDraftPolls}
+                setCreatedPolls={setCreatedPolls}
+                setEndedPolls={setEndedPolls}
+                downstreamUrl={downstreamUrl}
+                setDownstreamUrl={setDownstreamUrl}
+                afterMeetingJoinedHLSState={afterMeetingJoinedHLSState}
+                setAfterMeetingJoinedHLSState={setAfterMeetingJoinedHLSState}
+              />
+            )}
+          </MeetingProvider>
+        </SnackbarProvider>
+      ) : isMeetingLeft ? (
+        <LeaveScreen setIsMeetingLeft={setIsMeetingLeft} />
+      ) : (
+        <JoiningScreen
+          participantName={participantName}
+          setParticipantName={setParticipantName}
+          setMeetingId={setMeetingId}
+          setToken={setToken}
+          setMicOn={setMicOn}
+          micEnabled={micOn}
+          webcamEnabled={webcamOn}
+          setSelectedMic={setSelectedMic}
+          setSelectedWebcam={setSelectedWebcam}
+          setWebcamOn={setWebcamOn}
+          onClickStartMeeting={() => {
+            setMeetingStarted(true);
+          }}
+          startMeeting={isMeetingStarted}
+          setIsMeetingLeft={setIsMeetingLeft}
+          meetingType={meetingType}
+          setMeetingType={setMeetingType}
+          meetingMode={meetingMode}
+          setMeetingMode={setMeetingMode}
+        />
+      )}
+    </>
+  );
 };
 
-export default Meeting;
+export default App;

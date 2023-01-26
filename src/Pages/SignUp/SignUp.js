@@ -22,13 +22,13 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success('Successfully signed up');
-        navigate('/login');
         const userInfo = {
           displayName: data.name
       }
       updateUser(userInfo)
                     .then(() => {
-                        saveUsers(data, userInfo?.displayName, data?.email)
+                        saveUsers(data, userInfo?.displayName, data?.email);
+                        navigate('/login');
                     })
                     .catch(error => {
                         console.log(error);
@@ -38,6 +38,7 @@ const SignUp = () => {
   }
 
   const saveUsers = (data, name, email) => {
+    console.log('clicked');
     const image = data.image[0];
 const formData = new FormData();
 formData.append('image', image);
