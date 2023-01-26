@@ -8,6 +8,8 @@ import Meeting from "../../Pages/Meeting/Meeting";
 import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
+import generateMuiTheme from "../../Pages/Meeting/mui/theme";
+import { ThemeProvider } from "@material-ui/styles";
 
 const router = createBrowserRouter([
 	{
@@ -48,7 +50,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/meeting",
-				element: <Meeting></Meeting>,
+				element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 			},
 		],
 	},
