@@ -106,7 +106,7 @@ const Navbar = () => {
                   </div>
                 </label>
                 <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                  <li><a href='/'>Profile</a></li>
+                  <li><Link to='/profile'>Profile</Link></li>
                   <li><a href='/'>Settings</a></li>
                   <li><a href='/logOut'>Log Out</a></li>
                 </ul>
