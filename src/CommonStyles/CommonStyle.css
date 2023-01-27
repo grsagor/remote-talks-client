@@ -28,3 +28,34 @@ transition: 0.5s;
   border-bottom: 2px solid green;
   border-radius: 10px;
 }
+
+.modal-bg-color{
+  background: linear-gradient(rgba(29, 29, 154, 0.71), rgba(217, 0, 255, 0.83));
+}
+
+
+/* Profile section code here >>>>> */
+.connect-btn{
+  border: 1px solid green;
+  padding: 2px 6px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: white;
+}
+.remove-btn{
+  border: 1px solid yellow;
+  padding: 2px 6px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: white;
+}
+.connect-btn:hover{
+ background-color: green;
+
+  
+}
+.remove-btn:hover{
+ background-color: yellow;
+color: black;
+  
+}
