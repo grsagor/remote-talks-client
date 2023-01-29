@@ -12,12 +12,12 @@ const Collabaretions = () => {
     <div className="m-auto my-10 w-full">
       <Tab.Group>
         <Tab.List>
-          <div className=" justify-center flex items-center  flex-wrap">
+          <div className="justify-center flex items-center  flex-wrap">
             <Tab
               type="button"
               className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
-              Remot Talk One 
+              Remote Talk One
             </Tab>
             <Tab
               type="button"
@@ -45,7 +45,7 @@ const Collabaretions = () => {
               type="button"
               className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             >
-              Expriench
+              Expriences
             </Tab>
           </div>
         </Tab.List>

@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../../src/assets/images/loginImage3.jpg';
 import img2 from '../../../src/assets/images/loginImage5.jpg';
 import img3 from '../../../src/assets/images/banner6.webp';
 import { AuthContext } from '../../context/AuthProvider';
 import { GoogleAuthProvider } from '@firebase/auth';
+import { toast } from 'react-hot-toast';
 
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const {LogIn,googleLogIn} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
 
   const handleLogin = (data) => {
@@ -20,6 +22,8 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
+            toast.success('Login Successfully');
+            navigate('/');
         })
         .catch(error =>{
             console.log(error)
@@ -31,11 +35,43 @@ const Login = () => {
     .then(result => {
             const user = result.user;
             console.log(user);
+            toast.success('Login Successfully');
+            navigate('/');
+            saveUsers(user);
         })
         .catch(error => {
             console.error(error);
         })
   }
+
+  const saveUsers = (data) => {
+
+    
+           
+            const user = { 
+                name: data.displayName,
+                email: data.email,
+                img: data.photoURL
+            };
+
+
+      console.log(user)
+
+
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json"
+              },
+              body: JSON.stringify(user)
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
+          }
+  
+
 
   return (
     <div className="hero p-5 bg-base-100">

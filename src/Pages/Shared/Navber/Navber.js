@@ -5,22 +5,36 @@ import Logo from '../../../assets/Logo/titleLogo/Title Logo.png';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
-  const {user,logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
-    .then()
-    .catch(error => {
+      .then()
+      .catch(error => {
         console.log(error);
-    })
-}
+      })
+  }
 
   const menuItems = <>
-    <Link className='m-2 text-lg' to='/'>Home</Link>
-    <Link className='m-2 text-lg' to='/participants'>Participants</Link>
-    <Link className='m-2 text-lg' to='/message'>Messages</Link>
-    {user?.uid?
-       <Link onClick={handleLogOut} className='m-2 text-lg' to='/login'>Sign out</Link>
-      :<Link className='m-2 text-lg' to='/login'>Login</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/'>Home</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/participants'>Participants</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/mesenger'>Messages</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/about'>About Us</Link>
+    {user?.uid ?
+      <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign out</Link>
+      : <Link className='m-2 text-lg hover:text-primary' to='/login'>Login</Link>
+    }
+  </>
+
+  const img = <>
+    {
+      user?
+      <>
+        <img src={user?.photoURL} alt="" />
+      </>
+      :
+      <>
+        <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+      </>
     }
   </>
 
@@ -31,7 +45,8 @@ const Navbar = () => {
           <div className="flex-1">
 
             <div className='flex-1'>
-              <a href='/' className="btn btn-ghost font-bold text-2xl normal-case"><img className='w-40 md:w-60 lg:w-80' src={Logo} alt=''></img></a>
+              {/* <a href='/' className="btn btn-ghost font-bold text-2xl normal-case "><img className='w-40 md:w-60 lg:w-80' src={Logo} alt=''></img></a> */}
+              <Link to='/'><img className='btn btn-ghost h-16' src={Logo} alt="" /></Link>
             </div>
 
             <div className='hidden lg:flex flex-1'>
@@ -64,13 +79,13 @@ const Navbar = () => {
               <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <label tabIndex={0} className="flex btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full ">
-                    <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+                    {img}
                   </div>
                 </label>
-                <Link className='m-2 text-lg' to='/'>Profile</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/'>Profile</Link>
                 {menuItems}
-                <Link className='m-2 text-lg' to='/'>Setting</Link>
-                <Link className='m-2 text-lg' to='/logOut'>Log Out</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/'>Setting</Link>
+                <Link className='m-2 text-lg hover:text-primary' to='/logOut'>Log Out</Link>
 
               </ul>
             </div>
@@ -87,7 +102,7 @@ const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full ">
-                    <img src="https://i.pinimg.com/originals/de/99/93/de9993e752fc52646579448542c411d3.jpg" alt='' />
+                    {img}
                   </div>
                 </label>
                 <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

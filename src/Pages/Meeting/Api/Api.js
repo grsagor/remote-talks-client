@@ -1,4 +1,4 @@
-const LOCAL_SERVER_URL = "http://localhost:5000";
+const LOCAL_SERVER_URL = "https://remote-talks-server.vercel.app";
 const API_BASE_URL = "https://api.videosdk.live";
 
 
