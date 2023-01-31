@@ -1,8 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { CirclesWithBar } from "react-loader-spinner";
+import RatingComponent from "../../Shared/Rating/RatingComponent";
 import "./Feedback.css";
 
 const FeedBack = () => {
+	const [rating, setRating] = useState(5);
+	const [feedBackLoading, setFeedBackLoading] = useState(false);
+	console.log(rating);
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		// form
@@ -16,7 +22,9 @@ const FeedBack = () => {
 			name: `${firstName} ${lastName}`,
 			message,
 			email,
+			rating: Number(rating),
 		};
+		setFeedBackLoading(true);
 		fetch("https://remote-talks-server-tan.vercel.app/api/feedback/", {
 			method: "POST",
 			headers: {
@@ -29,9 +37,11 @@ const FeedBack = () => {
 				form.reset();
 				if (data.acknowledged) {
 					toast.success("feedback is sent successfully");
+					setFeedBackLoading(false);
 				}
 			})
 			.catch((err) => {
+				setFeedBackLoading(false);
 				console.log(err);
 			});
 	};
@@ -49,6 +59,7 @@ const FeedBack = () => {
 								<input
 									type="text"
 									name="firstname"
+									required
 									className="w-full px-1 py-2 text-black border-[1px] rounded-md outline-none feedback__input"
 									placeholder="first name...."
 								/>
@@ -70,6 +81,7 @@ const FeedBack = () => {
 									name="email"
 									className="w-full px-1 py-2 text-black border-[1px] rounded-md outline-none feedback__input"
 									placeholder="example@gmail.com...."
+									required
 								/>
 							</div>
 						</div>
@@ -79,15 +91,34 @@ const FeedBack = () => {
 									name="message"
 									placeholder="How can we Improve?"
 									className="w-full px-3 py-2 rounded-md outline-none feedback__input"
+									required
 								></textarea>
 							</div>
+						</div>
+						<div className="py text-center">
+							<RatingComponent rating={rating} setRating={setRating} />
 						</div>
 						<div className="py-5 text-center ">
 							<button
 								type="submit"
 								className="px-5 py-3 capitalize transition-all duration-500 ease-in-out rounded-md feedback__button"
 							>
-								send feedback
+								{!feedBackLoading ? (
+									"send feedback"
+								) : (
+									<CirclesWithBar
+										height="30"
+										width="30"
+										color="#4fa94d"
+										wrapperStyle={{}}
+										wrapperClass=""
+										visible={true}
+										outerCircleColor=""
+										innerCircleColor=""
+										barColor=""
+										ariaLabel="circles-with-bar-loading"
+									/>
+								)}
 							</button>
 						</div>
 					</form>
