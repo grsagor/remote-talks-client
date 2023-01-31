@@ -72,13 +72,13 @@ const Massenger = () => {
     event.preventDefault();
     const from = event.target;
     const massege = msg;
-
+    const images=img;
     const createMassge = {
       massege: massege ? massege : <e>😀</e>,
       massegeSendTime: moment().format("LT"),
       senderId: curentuser._id,
       sendeName: curentuser.name,
-      img: img,
+      img: images,
       senderPhoto: curentuser.img,
       reciberName: curentFriend.name,
       riciberphto: curentFriend.img,
@@ -95,8 +95,11 @@ const Massenger = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        from.reset();
-        setImg("");
+        if(data.acknowledged){
+          from.reset()
+          
+        }
+       
       });
   };
 
@@ -322,7 +325,7 @@ const Massenger = () => {
                       </label>
                     </div>
 
-                    {msg ? (
+                    {msg ||img ? (
                       <button
                         type="submit"
                         className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
