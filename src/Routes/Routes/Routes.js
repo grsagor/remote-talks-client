@@ -13,8 +13,6 @@ import generateMuiTheme from "../../Pages/Meeting/mui/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import generateMuiTheme from "../../Pages/Meeting/mui/theme";
-import { ThemeProvider } from "@material-ui/styles";
 
 
 const router = createBrowserRouter([
