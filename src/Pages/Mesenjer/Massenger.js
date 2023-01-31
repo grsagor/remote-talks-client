@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../Shared/Navber/Navber";
-import Profile from "./Profile/Profile";
+import { io } from "socket.io-client";
 import Chat from "./Chat/Chat";
 import "./Chat/Chat.css";
 import Users from "./Users/Users.js";
@@ -14,16 +14,21 @@ import moment from "moment";
 import Emoji from "./Emoji/Emoji";
 import { AiOutlineLink, AiOutlineSend } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import { useRef } from "react";
 
 const Massenger = () => {
   const { user } = useContext(AuthContext);
+
+  const socket = useRef();
+  //emoji open and close
   const [ispickervidevle, setIspickervisible] = useState(false);
 
   const [msg, setmsg] = useState("");
   const [img, setImg] = useState();
 
+  //manage emoji
   const handleEmoji = (emoji) => {
-    const newemoji = emoji?.native;
+    let newemoji = emoji.native;
     setmsg(newemoji + msg);
   };
 
@@ -35,7 +40,7 @@ const Massenger = () => {
       .then((data) => {
         setCurrentuser(data);
       });
-  }, [user]);
+  }, [user?.email]);
 
   const { data: allUsers = [], isLoading } = useQuery({
     queryKey: ["allUsers"],
@@ -72,9 +77,9 @@ const Massenger = () => {
     event.preventDefault();
     const from = event.target;
     const massege = msg;
-    const images=img;
+    const images = img;
     const createMassge = {
-      massege: massege ? massege : <e>😀</e>,
+      massege: massege ? massege : "&#9829",
       massegeSendTime: moment().format("LT"),
       senderId: curentuser._id,
       sendeName: curentuser.name,
@@ -95,13 +100,61 @@ const Massenger = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if(data.acknowledged){
-          from.reset()
-          
+        if (data.acknowledged) {
+          refetch()
+          from.reset();
         }
-       
       });
+
+
+
+socket.current.emit("sendmessage",{
+  
+      massege: massege ? massege : <e>😀</e>,
+      massegeSendTime: moment().format("LT"),
+      senderId: curentuser._id,
+      sendeName: curentuser.name,
+      img: images,
+      reciberId: curentFriend._id
+    
+
+})
+
+
+
+
   };
+
+ // get messages
+
+  const {
+    data: conversation = [],refetch} = useQuery({
+    queryKey: ["conversation", curentFriend._id],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/msg/${curentFriend._id}`);
+      const data = await res.json();
+      return data;
+    }
+  });
+
+  //socekt io is  connect  here
+
+  const [activeuser, setActiveuser] = useState();
+  const [socetmsg,setsocketmsg]=useState("");
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8000");
+    socket.current.on("getmsg",(data)=>{
+      console.log(data)
+    })
+  }, []);
+
+  //pass user socket server
+  useEffect(() => {
+    socket.current.emit("adduser", curentuser._id, curentuser);
+  }, [curentuser]);
+
+  //get user
 
   if (isLoading) {
     return (
@@ -109,6 +162,11 @@ const Massenger = () => {
     );
   }
 
+  
+  if(isLoading){
+    return <div> loading .......</div>  
+  
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -237,10 +295,13 @@ const Massenger = () => {
                 </div>
 
                 <div className="chat-body p-4 flex-1 overflow-y-scroll">
-                  <Chat
+                  {
+                    curentFriend || curentFriend.length ? <Chat
+                    conversation={conversation}
                     curentuser={curentuser}
                     curentFriend={curentFriend}
-                  ></Chat>
+                  ></Chat>: <div><h2  className="text-4xl justify-center items-center">plsease select a friend</h2></div>
+                  }
                 </div>
 
                 <div className="chat-footer flex-none">
@@ -325,7 +386,7 @@ const Massenger = () => {
                       </label>
                     </div>
 
-                    {msg ||img ? (
+                    {msg || img ? (
                       <button
                         type="submit"
                         className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"

@@ -1,47 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
-import moment from "moment/moment";
+
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { useState } from "react";
 
 
-const Chat = ({ curentFriend, curentuser }) => {
+
+const Chat = ({conversation , curentFriend, curentuser, }) => {
   const scrollref = useRef();
-  ;
-  
 
-
+  // const [conversation, setConversion] = useState([]);
 
   //get messages
 
-  const {
-    data: conversation = [],
-    isLoading,
-    refetch
-  } = useQuery({
-    queryKey: ["conversation", curentFriend._id],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/msg/${curentFriend._id}`);
-      const data = await res.json();
-      return data;
-    }
-  });
+  // const {
+  //   data: conversation = [],
+  //   isLoading,
+  //   refetch
+  // } = useQuery({
+  //   queryKey: ["conversation", curentFriend._id],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/msg/${curentFriend._id}`);
+  //     const data = await res.json();
+  //     return data;
+  //   }
+  // });
 
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/msg/${curentFriend._id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setConversion(data));
+  // }, [curentFriend._id]);
+
+  //smooth scroll bar
   useEffect(() => {
     scrollref.current?.scrollIntoView({ behavior: "smooth" });
   }, [conversation]);
 
-  //imoji
-
-
-
-
-  
-
-  if (isLoading) {
-    return <div>loding..........</div>;
-  }
+  // if (isLoading) {
+  //   return <div>loding..........</div>;
+  // }
   return (
     <>
       <div
@@ -95,18 +93,16 @@ const Chat = ({ curentFriend, curentuser }) => {
                           </svg>
                         </button>
                       </div>
-                      {msg?.img && (
+                      {msg.img && (
                         <div className="flex items-center flex-row-reverse group">
-                          <a
-                            className="block w-64 h-64 relative flex flex-shrink-0 max-w-xs lg:max-w-md"
-                            href="#"
-                          >
+                           
+                        
                             <img
                               className="absolute shadow-md w-full h-full rounded-l-lg object-cover"
                               src={msg.img}
-                              alt="f"
+                           
                             />
-                          </a>
+                       
                           <button
                             type="button"
                             className="hidden group-hover:block flex flex-shrink-0 focus:outline-none mx-2 block rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-700 bg-gray-800 w-8 h-8 p-2"
