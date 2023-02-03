@@ -34,6 +34,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/participants",
+				loader: async () => {
+					return fetch('https://remote-talks-server.vercel.app/users');
+				},
 				element: <Participants></Participants>,
 			},
 			{
@@ -57,14 +60,14 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 			{
-				path: "/meeting",
-				element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
-			},
-			{
 				path: "/profile",
 				element: <MyProfile></MyProfile>,
 			},
 		],
+	},
+	{
+		path: "/meeting",
+		element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 	},
 ]);
 export default router;

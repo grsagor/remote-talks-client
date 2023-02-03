@@ -56,7 +56,10 @@ fetch(url, {
         email,
         university: 'Not Set',
         address: 'Not Set',
-        img: imgData.data.url
+        img: imgData.data.url,
+        requests: [],
+        sentRequest: [],
+        friends: []
     };
     fetch('https://remote-talks-server.vercel.app/users', {
         method: 'POST',

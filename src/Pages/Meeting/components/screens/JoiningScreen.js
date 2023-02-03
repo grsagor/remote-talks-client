@@ -347,7 +347,7 @@ export function JoiningScreen({
   }, []);
 
   return (
-    <>
+    <div className="">
       <Box
         className="overflow-y-auto"
         style={{
@@ -377,6 +377,7 @@ export function JoiningScreen({
               flexDirection: isXStoSM ? "column" : "row",
               alignItems: "center",
               justifyContent: "center",
+              background: '',
             }}
           >
             <Grid
@@ -645,6 +646,6 @@ export function JoiningScreen({
           />
         </Box>
       </Box>
-    </>
+    </div>
   );
 }
