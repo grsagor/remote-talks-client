@@ -62,17 +62,17 @@ const EachRequest = ({mongouser, users}) => {
             })
     }
     return (
-        <div>
+        <div className='mb-5 bg-violet-900 p-4 rounded mx-4'>
             
-            <h1>{mongouser.name}</h1>
+            <h1 className='font-bold mb-3'>{mongouser.name}</h1>
             {
                 !clicked?
                 <>
-                    <button onClick={() => handleRequest(mongouser)} className='btn'>Send Request</button>
+                    <button onClick={() => handleRequest(mongouser)} className='btn rounded-full'>Send Request</button>
                 </>
                 :
                 <>
-                    <button className='btn btn-disabled'>Request Sent</button>
+                    <button className='btn btn-disabled rounded-full'>Request Sent</button>
                 </>
                 }
             

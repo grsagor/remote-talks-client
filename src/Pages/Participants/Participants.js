@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthProvider';
 import SendRequest from './SendRequest/SendRequest';
 import ReceivedRequest from './ReceivedRequest/ReceivedRequest'
 import { useLoaderData } from 'react-router-dom';
+import SeeFriends from './SeeFriends/SeeFriends';
 
 const Participants = () => {
     const {user} = useContext(AuthContext);
@@ -25,13 +26,14 @@ const Participants = () => {
     } );
     console.log(receivedusers);
     return (
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-3'>
             {/* Sending Friend Request */}
             {
                 user &&
                 <>
                 <SendRequest users={users}></SendRequest>
                 <ReceivedRequest></ReceivedRequest>
+                <SeeFriends></SeeFriends>
                 </>
                 
             }
