@@ -30,8 +30,8 @@ export function MeetingDetailsScreen({
     xs: 1.5,
   });
   const selectType = [
-    { label: "Meeting", value: meetingTypes.MEETING },
-    { label: "Interactive Live Streaming", value: meetingTypes.ILS },
+    { label: "General Meeting", value: meetingTypes.MEETING },
+    { label: "Live Streaming", value: meetingTypes.ILS },
   ];
 
   return (
@@ -132,7 +132,7 @@ export function MeetingDetailsScreen({
 
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
         <div className="w-full md:mt-0 mt-4 flex flex-col">
-          <p className="text-white text-base">Select Type</p>
+          <p className="text-white text-base">Choose Meeting Type</p>
           <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-between w-full mb-4">
             {selectType.map((item, index) => (
               <div
