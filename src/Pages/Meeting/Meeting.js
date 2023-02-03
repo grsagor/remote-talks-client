@@ -106,7 +106,7 @@ const App = () => {
   }, [isXStoSM]);
 
   return (
-    <>
+    <div className="">
       {isMeetingStarted ? (
         <SnackbarProvider
           anchorOrigin={{
@@ -210,7 +210,7 @@ const App = () => {
           setMeetingMode={setMeetingMode}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -15,21 +15,19 @@ const SendRequest = ({ users }) => {
         fetch(`https://remote-talks-server.vercel.app/users?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setLoggedUser(data[0]))
-    }, [user])
+    }, [])
 
-    const showUsers = users.filter(user => {
-        return loggedUser?.sentRequest?.every(mail => mail !== user.email);
+    const showUsers = users?.filter(user => {
+        return loggedUser?.sentRequest?.every(mail => mail !== user?.email);
     })
-    // console.log(loggedUser);
+    console.log(loggedUser);
     
     return (
         <div>
+            <h1>Send Request</h1>
             {
                 user ?
                     <>{
-                        showUsers.length !== 0? 
-                        <>
-                            {
                             showUsers?.map(mongouser => <EachRequest
                                 key={mongouser._id}
                                 mongouser={mongouser}
@@ -37,13 +35,6 @@ const SendRequest = ({ users }) => {
                             ></EachRequest>)
                             }
                         </>
-                        :
-                        <>
-                            <h1>Nothing to show</h1>
-                        </>
-                    }
-                        
-                    </>
                     :
                     <>
                         <h1>Loading</h1>

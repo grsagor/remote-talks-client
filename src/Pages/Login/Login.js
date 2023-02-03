@@ -59,7 +59,10 @@ const Login = () => {
                 email: data.email,
                 university: 'Not Set',
                 address: 'Not Set',
-                img: data.photoURL
+                img: data.photoURL,
+                requests: [],
+                sentRequest: [],
+                friends: []
             };
             fetch('https://remote-talks-server.vercel.app/users', {
                 method: 'POST',

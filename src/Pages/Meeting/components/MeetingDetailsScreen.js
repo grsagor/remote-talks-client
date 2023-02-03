@@ -80,9 +80,8 @@ export function MeetingDetailsScreen({
             className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
           />
           {meetingIdError && (
-            <p className="text-xs text-red-600">{`Please enter valid ${
-              meetingType === meetingTypes.MEETING ? "meetingId" : "studioCode"
-            }`}</p>
+            <p className="text-xs text-red-600">{`Please enter valid ${meetingType === meetingTypes.MEETING ? "meetingId" : "studioCode"
+              }`}</p>
           )}
         </>
       ) : null}
@@ -101,9 +100,8 @@ export function MeetingDetailsScreen({
           </p> */}
           <button
             disabled={participantName.length < 3}
-            className={`w-full ${
-              participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
-            }  text-white px-2 py-3 rounded-xl mt-5`}
+            className={`w-full ${participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
+              }  text-white px-2 py-3 rounded-xl mt-5`}
             onClick={(e) => {
               if (iscreateMeetingClicked) {
                 if (videoTrack) {
@@ -123,11 +121,11 @@ export function MeetingDetailsScreen({
                 ? "Start a meeting"
                 : "Join a meeting"
               : iscreateMeetingClicked
-              ? "Start a meeting"
-              : isJoinMeetingClicked &&
-                meetingMode === Constants.modes.CONFERENCE
-              ? "Join Studio"
-              : "Join Streaming Room"}
+                ? "Start a meeting"
+                : isJoinMeetingClicked &&
+                  meetingMode === Constants.modes.CONFERENCE
+                  ? "Join Studio"
+                  : "Join Streaming Room"}
           </button>
         </>
       )}
@@ -139,9 +137,8 @@ export function MeetingDetailsScreen({
             {selectType.map((item, index) => (
               <div
                 key={`radio_${index}`}
-                className={`flex  ${
-                  index === 1 ? "flex-1 md:ml-2 lg:ml-0 xl:ml-2" : "2xl:flex-1"
-                } items-center mb-2 md:mb-4 mt-2 lg:mb-2 xl:mb-4 bg-gray-650 rounded-lg`}
+                className={`flex  ${index === 1 ? "flex-1 md:ml-2 lg:ml-0 xl:ml-2" : "2xl:flex-1"
+                  } items-center mb-2 md:mb-4 mt-2 lg:mb-2 xl:mb-4 bg-gray-650 rounded-lg`}
               >
                 <input
                   id={`radio${index}`}
