@@ -154,26 +154,26 @@ export function TopBar({ topBarHeight }) {
         onClick={_handleClick}
         tooltipTitle={
           hlsState === Constants.hlsEvents.HLS_STARTED
-            ? "Stop HLS"
+            ? "Stop Live"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
             ? "Stopping HLS"
-            : "Start HLS"
+            : "Start Live"
         }
         Icon={LiveIcon}
         buttonText={
           hlsState === Constants.hlsEvents.HLS_STARTED
             ? "Stop HLS"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Live"
+            : "Start Live"
         }
         isFocused={isHls}
         lottieOption={isHls ? defaultOptions : null}
@@ -184,25 +184,25 @@ export function TopBar({ topBarHeight }) {
         onClick={_handleClick}
         tooltipTitle={
           hlsState === Constants.hlsEvents.HLS_STARTED
-            ? "Stop HLS"
+            ? "Stop Live"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Live"
+            : "Start Live"
         }
         buttonText={
           hlsState === Constants.hlsEvents.HLS_STARTED
-            ? "Stop HLS"
+            ? "Stop Live"
             : hlsState === Constants.hlsEvents.HLS_STARTING
-            ? "Starting HLS"
+            ? "Starting Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPED
-            ? "Start HLS"
+            ? "Start Live"
             : hlsState === Constants.hlsEvents.HLS_STOPPING
-            ? "Stopping HLS"
-            : "Start HLS"
+            ? "Stopping Live"
+            : "Start Live"
         }
         lottieOption={isHls ? defaultOptions : null}
         isRequestProcessing={isRequestProcessing}
