@@ -24,7 +24,7 @@ const SendRequest = ({ users }) => {
     
     return (
         <div>
-            <h1>Send Request</h1>
+            <h1 className='font-extrabold text-xl my-2'>Send Request</h1>
             {
                 user ?
                     <>{

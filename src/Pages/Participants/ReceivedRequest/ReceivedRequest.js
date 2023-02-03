@@ -31,7 +31,7 @@ const ReceivedRequest = () => {
     console.log(showUsers);
     return (
         <div>
-            <h1>Received Request</h1>
+            <h1 className='font-extrabold text-xl my-2'>Received Request</h1>
             {
                 
                 user ?
