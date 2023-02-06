@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { BsMessenger } from 'react-icons/bs';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import '../../../CommonStyles/CommonStyle.css';
 
 
-const EachRequest = ({mongouser, users}) => {
+const EachRequest = ({ mongouser, users }) => {
     const { user } = useContext(AuthContext);
     const [showUser, setShowUser] = useState([]);
     const [loggedUser, setLoggedUser] = useState();
@@ -61,22 +64,41 @@ const EachRequest = ({mongouser, users}) => {
                 }
             })
     }
+    console.log(mongouser)
     return (
-        <div className='mb-5 bg-violet-900 p-4 rounded mx-4'>
-            
-            <h1 className='font-bold mb-3'>{mongouser.name}</h1>
-            {
-                !clicked?
-                <>
-                    <button onClick={() => handleRequest(mongouser)} className='btn rounded-full'>Send Request</button>
-                </>
-                :
-                <>
-                    <button className='btn btn-disabled rounded-full'>Request Sent</button>
-                </>
+        <div className='bg-base-200 p-4 rounded flex flex-col md:flex-row gap-3 relative'>
+            <div className='flex gap-3'>
+                <div>
+                    <div class="avatar">
+                        <div class="w-24 rounded">
+                            <img src={mongouser.img} alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h1 className='font-bold mb-3'>{mongouser.name}</h1>
+                    <p>{mongouser.address}</p>
+                    <p>{mongouser.friends}</p>
+                    <p className='text-xs text-gray-200'>Joined: 12/02/2023</p>
+                </div>
+            </div>
+            <div className='md:ml-10 lg:ml-16'>
+                <p className='mb-3 pl-2'>Friends: {mongouser.friends.length}</p>
+                {
+                    !clicked ?
+                        <>
+                            <button onClick={() => handleRequest(mongouser)} className='btn md:rounded-full w-full '><span className='mr-2 text-xl '><AiOutlineUserAdd></AiOutlineUserAdd></span> Send Request</button>
+                        </>
+                        :
+                        <>
+                            <button className='btn btn-disabled md:rounded-full w-full'>Request Sent</button>
+                        </>
                 }
-            
+            </div>
 
+            <div className='text-white font-bold text-4xl md:text-5xl absolute top-8 cursor-pointer hover:text-6xl right-5'>
+                <BsMessenger></BsMessenger>
+            </div>
         </div>
     );
 };

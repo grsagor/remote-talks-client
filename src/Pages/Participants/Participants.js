@@ -6,9 +6,10 @@ import SendRequest from './SendRequest/SendRequest';
 import ReceivedRequest from './ReceivedRequest/ReceivedRequest'
 import { useLoaderData } from 'react-router-dom';
 import SeeFriends from './SeeFriends/SeeFriends';
+import '../../CommonStyles/CommonStyle.css';
 
 const Participants = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const receivedusers = useLoaderData();
     // const { data: receivedusers = [], refetch } = useQuery({
     //     queryKey: ['users'],
@@ -20,25 +21,27 @@ const Participants = () => {
     // });
     const filter = ['asadkhan01862@gmail.com', 'hasanmdmahmudul222@gmail.com'];
     const users = receivedusers.filter(receiveduser => {
-        return receiveduser.email !== user?.email 
+        return receiveduser.email !== user?.email
         // &&
         // filter?.every(mail=> mail !== receiveduser.email)
-    } );
+    });
     console.log(receivedusers);
     return (
-        <div className='grid grid-cols-3'>
-            {/* Sending Friend Request */}
-            {
-                user &&
-                <>
-                <SendRequest users={users}></SendRequest>
-                <ReceivedRequest></ReceivedRequest>
-                <SeeFriends></SeeFriends>
-                </>
+        <div className=' '>
+            <div className='common-width'>
                 
-            }
+                {
+                    user &&
+                    <>
+                        <SendRequest users={users}></SendRequest>
+                        {/* <ReceivedRequest></ReceivedRequest> */}
+                        {/* <SeeFriends></SeeFriends> */}
+                    </>
 
-            {/* See all friend request */}
+                }
+
+                
+            </div>
         </div>
     );
 };
