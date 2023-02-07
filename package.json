@@ -11,7 +11,7 @@
 =======
     "@emotion/styled": "^11.10.5",
     "@headlessui/react": "^1.7.7",
-     "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^1.0.6",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
@@ -24,7 +24,11 @@
     "@videosdk.live/react-sdk": "^0.1.61",
     "@zegocloud/zego-uikit-prebuilt": "^1.6.2",
     "@zegocloud/zego-uikit-prebuilt-live-streaming-rn": "^1.0.7",
+<<<<<<< HEAD
     "axios": "^1.2.4",
+=======
+    "axios": "^1.2.5",
+>>>>>>> 421b7e9489cf3145122a604d5aecce40bca303f2
     "daisyui": "^2.46.1",
     "firebase": "^9.15.0",
     "framer-motion": "^8.4.2",
@@ -35,8 +39,12 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-loader-spinner": "^5.3.4",
 =======
+=======
+    "react-loader-spinner": "^5.3.4",
+>>>>>>> 421b7e9489cf3145122a604d5aecce40bca303f2
     "react-lottie": "^1.2.3",
     "react-motion": "^0.5.2",
     "react-player": "^2.11.0",
@@ -51,8 +59,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --max_old_space_size=4096 start",
+    "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

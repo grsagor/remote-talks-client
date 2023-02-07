@@ -40,7 +40,7 @@ const WaitingToJoinScreen = () => {
   const animationDefaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    // animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -57,12 +57,12 @@ const WaitingToJoinScreen = () => {
       }}
     >
       <div className="flex flex-col">
-        <Lottie
+        {/* <Lottie
           options={animationDefaultOptions}
           eventListeners={[{ eventName: "done" }]}
           height={lottieSize}
           width={lottieSize}
-        />
+        /> */}
         <h1 className="text-white text-center font-bold mt-1 text-xl">
           {message.text}
         </h1>

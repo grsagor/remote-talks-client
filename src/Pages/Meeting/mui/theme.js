@@ -8,7 +8,7 @@ export default function generateMuiTheme(type, primary, secondary) {
       },
 
       palette: {
-        type: "dark",
+        type: "light",
         text: { primary: "#fff", secondary: "#9fa0a7" },
         success: { main: "#4aa96c" },
         error: { main: "#D32F2F" },
@@ -38,7 +38,7 @@ export default function generateMuiTheme(type, primary, secondary) {
           six: "#404B53",
           seven: "#232830", //"#26282C", //"#2B3034",
           slightLighter: "#1A1C22",
-          main: "#050A0E",
+          main: "rgba(80, 0, 199, 0.347)",
           eight: "#26282C",
           contrastText: "#95959E",
         },

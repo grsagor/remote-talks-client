@@ -13,8 +13,6 @@ import generateMuiTheme from "../../Pages/Meeting/mui/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import generateMuiTheme from "../../Pages/Meeting/mui/theme";
-import { ThemeProvider } from "@material-ui/styles";
 
 
 const router = createBrowserRouter([
@@ -36,6 +34,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/participants",
+				loader: async () => {
+					return fetch('https://remote-talks-server.vercel.app/users');
+				},
 				element: <Participants></Participants>,
 			},
 			{
@@ -59,14 +60,14 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 			{
-				path: "/meeting",
-				element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
-			},
-			{
 				path: "/profile",
 				element: <MyProfile></MyProfile>,
 			},
 		],
+	},
+	{
+		path: "/meeting",
+		element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 	},
 ]);
 export default router;
