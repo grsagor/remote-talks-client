@@ -1,12 +1,13 @@
 import React from 'react';
 
-const FriendCard = () => {
+const FriendCard = ({showUser, allusers}) => {
+  const {name, img} = showUser;
   return (
     <div className='flex flex-col w-full gap-3'>
       <div className='w-full'>
-        <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
+        <img className='w-full h-20 md:h-28 lg:h-36' src={img} alt="" />
       </div>
-      <p>User Name</p>
+      <p>{name}</p>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import Request from './Notifications/Request/Request';
 import Notifications from './Notifications/Notifications';
 import { toast } from 'react-hot-toast';
 import Friends from './Friends/Friends';
+import SeeFriends from '../Participants/SeeFriends/SeeFriends';
 
 
 const MyProfile = () => {
@@ -56,7 +57,7 @@ const MyProfile = () => {
       university,
       address
     }
-    console.log(newData);
+    // console.log(newData);
 
     fetch(`https://remote-talks-server-two.vercel.app/users/${data._id}`, {
       method: 'PUT',
@@ -154,8 +155,9 @@ const MyProfile = () => {
                    Friends Request section  
            ======================================= */}
           <div className=''>
-            <p className='p-5 w-full text-2xl font-bold'>All Connected</p>
+            {/* <p className='p-5 w-full text-2xl font-bold'>All Connected {data.sentRequest.length}</p> */}
               <Friends></Friends>
+              {/* <SeeFriends></SeeFriends> */}
           </div>
         </div>
         
