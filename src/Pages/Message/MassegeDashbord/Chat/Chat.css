@@ -1,4 +1,6 @@
-.group:hover .group-hover\:block {
+ 
+  /* can be configured in tailwind.config.js */
+  .group:hover .group-hover\:block {
     display: block;
   }
   .hover\:w-64:hover {
@@ -41,3 +43,4 @@
     background: transparent;
   }
   
+ 

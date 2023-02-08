@@ -28,7 +28,7 @@ const SeeFriends = () => {
     console.log(allusers);
     return (
         <div>
-            <h1>Frineds</h1>
+            <h1 className='font-extrabold text-xl my-2'>Frineds</h1>
             {
                 
                 user ?
