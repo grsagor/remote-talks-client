@@ -25,9 +25,10 @@ const SeeFriends = () => {
         return loggedUser?.friends?.every(mail => mail == user?.email);
     })
     console.log(showUsers);
+    console.log(allusers);
     return (
         <div>
-            <h1 className='font-extrabold text-xl my-2'>Frineds</h1>
+            <h1>Frineds</h1>
             {
                 
                 user ?

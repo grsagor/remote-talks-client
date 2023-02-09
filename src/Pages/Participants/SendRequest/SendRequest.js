@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../context/AuthProvider';
 import EachRequest from './EachRequest';
+import '../../../CommonStyles/CommonStyle.css';
 
 const SendRequest = ({ users }) => {
     const { user } = useContext(AuthContext);
@@ -20,26 +21,28 @@ const SendRequest = ({ users }) => {
     const showUsers = users?.filter(user => {
         return loggedUser?.sentRequest?.every(mail => mail !== user?.email);
     })
-    console.log(loggedUser);
-    
+    // console.log(loggedUser);
+
     return (
         <div>
-            <h1 className='font-extrabold text-xl my-2'>Send Request</h1>
-            {
-                user ?
-                    <>{
+            <h1>All Participants</h1>
+            <div className='flex flex-col gap-y-4'>
+                {
+                    user ?
+                        <>{
                             showUsers?.map(mongouser => <EachRequest
                                 key={mongouser._id}
                                 mongouser={mongouser}
                                 users={users}
                             ></EachRequest>)
-                            }
+                        }
                         </>
-                    :
-                    <>
-                        <h1>Loading</h1>
-                    </>
-            }
+                        :
+                        <>
+                            <h1>Loading</h1>
+                        </>
+                }
+            </div>
         </div>
     );
 };
