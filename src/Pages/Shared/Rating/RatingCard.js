@@ -37,41 +37,6 @@ function RatingCard({ rating }) {
 			) : (
 				<FaRegStar className="w-5 m-1 h-6 rating__color" />
 			)}
-			{rating > 5.5 ? (
-				<FaStar className="w-5 m-1 h-6 rating__color" />
-			) : rating === 5.5 ? (
-				<FaStarHalfAlt className="w-5 m-1 h-6 rating__color" />
-			) : (
-				<FaRegStar className="w-5 m-1 h-6 rating__color" />
-			)}
-			{rating > 6.5 ? (
-				<FaStar className="w-5 m-1 h-6 rating__color" />
-			) : rating === 6.5 ? (
-				<FaStarHalfAlt className="w-5 m-1 h-6 rating__color" />
-			) : (
-				<FaRegStar className="w-5 m-1 h-6 rating__color" />
-			)}
-			{rating > 7.5 ? (
-				<FaStar className="w-5 m-1 h-6 rating__color" />
-			) : rating === 7.5 ? (
-				<FaStarHalfAlt className="w-5 m-1 h-6 rating__color" />
-			) : (
-				<FaRegStar className="w-5 m-1 h-6 rating__color" />
-			)}
-			{rating > 8.5 ? (
-				<FaStar className="w-5 m-1 h-6 rating__color" />
-			) : rating === 8.5 ? (
-				<FaStarHalfAlt className="w-5 m-1 h-6 rating__color" />
-			) : (
-				<FaRegStar className="w-5 m-1 h-6 rating__color" />
-			)}
-			{rating > 9.5 ? (
-				<FaStar className="w-5 m-1 h-6 rating__color" />
-			) : rating === 9.5 ? (
-				<FaStarHalfAlt className="w-5 m-1 h-6 rating__color" />
-			) : (
-				<FaRegStar className="w-5 m-1 h-6 rating__color" />
-			)}
 			<span className="ml-2 my-1">{`(${rating})`}</span>
 		</div>
 	);

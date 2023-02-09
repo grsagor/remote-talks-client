@@ -5,8 +5,8 @@ import { CirclesWithBar } from "react-loader-spinner";
 import RatingComponent from "../../Shared/Rating/RatingComponent";
 import "./Feedback.css";
 
-const FeedBack = () => {
-	const [rating, setRating] = useState(5);
+const FeedBack = ({ refetch }) => {
+	const [rating, setRating] = useState(2.5);
 	const [feedBackLoading, setFeedBackLoading] = useState(false);
 	console.log(rating);
 	const submitHandler = async (e) => {
@@ -37,6 +37,7 @@ const FeedBack = () => {
 				form.reset();
 				if (data.acknowledged) {
 					toast.success("feedback is sent successfully");
+					refetch();
 					setFeedBackLoading(false);
 				}
 			})
@@ -48,7 +49,7 @@ const FeedBack = () => {
 	return (
 		<>
 			<div className="feedback__container w-[90%] pt-[15px] mx-auto">
-				<h1 className="px-5 py-5 text-2xl text-center capitalize sm:px-0 sm:text-3xl feedback__title">
+				<h1 className="px-5 py-5 text-2xl text-center capitalize sm:px-0 sm:text-3xl text-white">
 					We'd love to know what{" "}
 					<br className="block sm:hidden feedback__break" /> you think
 				</h1>
