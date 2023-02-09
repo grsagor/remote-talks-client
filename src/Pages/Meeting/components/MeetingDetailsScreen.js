@@ -77,7 +77,7 @@ export function MeetingDetailsScreen({
                 ? "Enter meeting Id"
                 : "Enter studio code"
             }
-            className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
+            className="px-4 py-3  rounded-xl text-white  text-center input input-bordered input-secondary w-full"
           />
           {meetingIdError && (
             <p className="text-xs text-red-600">{`Please enter valid ${meetingType === meetingTypes.MEETING ? "meetingId" : "studioCode"
@@ -92,7 +92,7 @@ export function MeetingDetailsScreen({
             value={participantName}
             onChange={(e) => setParticipantName(e.target.value)}
             placeholder="Enter your name"
-            className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center"
+            className="px-4 py-3 mt-5  rounded-xl text-white  text-center input input-bordered input-secondary w-full"
           />
 
           {/* <p className="text-xs text-white mt-1 text-center">
@@ -100,7 +100,7 @@ export function MeetingDetailsScreen({
           </p> */}
           <button
             disabled={participantName.length < 3}
-            className={`w-full ${participantName.length < 3 ? "bg-gray-650" : "bg-purple-350"
+            className={`w-full ${participantName.length < 3 ? "bg-gray-650 btn btn-active btn-secondary" : "bg-purple-350 btn btn-active btn-secondary"
               }  text-white px-2 py-3 rounded-xl mt-5`}
             onClick={(e) => {
               if (iscreateMeetingClicked) {
@@ -132,7 +132,7 @@ export function MeetingDetailsScreen({
 
       {!iscreateMeetingClicked && !isJoinMeetingClicked && (
         <div className="w-full md:mt-0 mt-4 flex flex-col">
-          <p className="text-white text-base">Choose Meeting Type</p>
+          <p className="text-white text-2xl md:text-4xl text-center font-semibold pb-4">Choose Meeting Type</p>
           <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-between w-full mb-4">
             {selectType.map((item, index) => (
               <div
@@ -144,7 +144,7 @@ export function MeetingDetailsScreen({
                   id={`radio${index}`}
                   type="radio"
                   name="radio"
-                  className="hidden"
+                  className="radio radio-accent w-4"
                   value={item.value}
                   onChange={(e) => {
                     setMeetingType(e.target.value);
@@ -155,7 +155,7 @@ export function MeetingDetailsScreen({
                   htmlFor={`radio${index}`}
                   className="flex items-center cursor-pointer text-white w-full px-2 py-2 lg:w-full xl:px-2 xl:py-2"
                 >
-                  <span className="w-4 h-4 inline-block mr-2 rounded-full border border-grey"></span>
+                  {/* <span className="w-4 h-4 inline-block mr-2 rounded-full border border-grey"></span> */}
                   {item.label}
                 </label>
               </div>
@@ -166,7 +166,7 @@ export function MeetingDetailsScreen({
             {meetingType === meetingTypes.ILS ? (
               <>
                 <button
-                  className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
+                  className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl btn btn-outline btn-secondary"
                   onClick={async (e) => {
                     const meetingId = await _handleOnCreateMeeting();
                     setMeetingId(meetingId);
@@ -180,7 +180,7 @@ export function MeetingDetailsScreen({
                 </button>
 
                 <button
-                  className="w-full bg-purple-350 text-white px-2 py-3 mt-5 rounded-xl"
+                  className="w-full bg-purple-350 text-white px-2 py-3 mt-5 rounded-xl btn btn-outline btn-secondary"
                   onClick={async (e) => {
                     setIsJoinMeetingClicked(true);
                     if (meetingType === meetingTypes.ILS) {
@@ -191,7 +191,7 @@ export function MeetingDetailsScreen({
                   Join as a Host
                 </button>
                 <button
-                  className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
+                  className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5 btn btn-outline btn-secondary"
                   onClick={(e) => {
                     setIsJoinMeetingClicked(true);
                     if (meetingType === meetingTypes.ILS) {
@@ -205,7 +205,8 @@ export function MeetingDetailsScreen({
             ) : (
               <>
                 <button
-                  className="w-full bg-purple-350 text-white px-2 py-3 rounded-xl"
+                // className="btn btn-outline btn-secondary"
+                  className="w-full  text-white px-2 py-3 rounded-xl btn btn-outline btn-secondary"
                   onClick={async (e) => {
                     const meetingId = await _handleOnCreateMeeting();
                     setMeetingId(meetingId);
@@ -218,7 +219,7 @@ export function MeetingDetailsScreen({
                   Create a meeting
                 </button>
                 <button
-                  className="w-full bg-gray-650 text-white px-2 py-3 rounded-xl mt-5"
+                  className="w-full  text-white px-2 py-3 rounded-xl mt-5 btn btn-outline btn-secondary"
                   onClick={(e) => {
                     setIsJoinMeetingClicked(true);
                     if (meetingType === meetingTypes.ILS) {
