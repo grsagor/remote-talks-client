@@ -7,6 +7,7 @@ import { AuthContext } from '../../../context/AuthProvider';
 import { useEffect } from 'react';
 
 const Friends = ({ data }) => {
+
   const { user } = useContext(AuthContext);
   const [loggedUser, setLoggedUser] = useState();
 
@@ -26,10 +27,9 @@ const Friends = ({ data }) => {
     }
   });
   const showUsers = allusers?.filter(user => {
-    return loggedUser?.friends?.every(mail => mail == user?.email);
+    return loggedUser?.friends?.find(mail => mail == user?.email);
   })
-  console.log(showUsers);
-  console.log(allusers);
+
   return (
     <div>
       <p className='p-5 w-full text-2xl font-bold'>All Connected {showUsers.length}</p>
