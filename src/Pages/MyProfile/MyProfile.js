@@ -164,7 +164,7 @@ const MyProfile = () => {
 
         {/* Rigth section code hare >>>> */}
         <div>
-          <h1 className='p-5 font-bold text-3xl'>Recently activity</h1>
+          {/* <h1 className='p-5 font-bold text-3xl'>Recently activity</h1>
           <div className='flex flex-row gap-5'>
             <div className='flex flex-col items-center'>
               <div className="avatar online">
@@ -223,7 +223,7 @@ const MyProfile = () => {
               <p className='text-sm'>Sultan Ma..</p>
             </div>
 
-          </div>
+          </div> */}
 
 
 

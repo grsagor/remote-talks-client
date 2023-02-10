@@ -19,6 +19,7 @@ const Navbar = () => {
     <Link className='m-2 text-lg hover:text-primary' to='/participants'>Participants</Link>
     <Link className='m-2 text-lg hover:text-primary' to='/message'>Messages</Link>
     <Link className='m-2 text-lg hover:text-primary' to='/about'>About Us</Link>
+    <Link className='m-2 text-lg hover:text-primary' to='/whiteboard'>Whiteboard</Link>
     {user?.uid ?
       <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign out</Link>
       : <Link className='m-2 text-lg hover:text-primary' to='/login'>Login</Link>
@@ -49,15 +50,15 @@ const Navbar = () => {
               <Link to='/'><img className='btn btn-ghost h-16' src={Logo} alt="" /></Link>
             </div>
 
-            <div className='hidden lg:flex flex-1'>
+            {/* <div className='hidden lg:flex flex-1'>
               <div className="form-control relative flex justify-center">
                 <input type="text" placeholder="Search" className="input input-bordered border-secondary h-12 w-80 rounded-3xl" />
                 <button className="btn btn-secondary text-xl bg-secondary rounded-3xl text-white absolute top-0 right-0 rounded-l-none"><FaSearch></FaSearch></button>
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className='lg:hidden'>
+          {/* <div className='lg:hidden'>
             <div className="dropdown dropdown-left mt-4">
               <button className="btn btn-ghost btn-circle">
                 <FaSearch className="h-5 w-5 mb-4 text-secondary"></FaSearch>
@@ -68,7 +69,7 @@ const Navbar = () => {
                 </div>
               </ul>
             </div>
-          </div>
+          </div> */}
 
           <div className="dropdown mr-2">
             <div className="dropdown-end">

@@ -52,8 +52,6 @@ const Home = () => {
 			)}
 			<ShowFeedBack feedbacks={feedbacks}></ShowFeedBack>
 			<FeedBack refetch={refetch}></FeedBack>
-      <ShowFeedBack></ShowFeedBack>
-      <FeedBack></FeedBack>
     </div>
   );
 };
