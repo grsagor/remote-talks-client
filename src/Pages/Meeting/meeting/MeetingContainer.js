@@ -230,12 +230,13 @@ export function MeetingContainer({
     <div
       // style={{ height: windowHeight }}
       ref={containerRef}
-      className="h-screen flex flex-col bg-gray-800"
+      className="h-screen flex flex-col"
+      style={{backgroundcolor: 'rgba(80, 0, 199, 0.347)'}}
     >
       {typeof localParticipantAllowedJoin === "boolean" ? (
         localParticipantAllowedJoin ? (
           <>
-            <div className={` flex flex-1 flex-row bg-gray-800 `}>
+            <div className={` flex flex-1 flex-row `} style={{backgroundcolor: 'rgba(80, 0, 199, 0.347)'}}>
               <div className={`flex flex-1 `}>
                 {isPresenting ? (
                   <PresenterView height={containerHeight - bottomBarHeight} />

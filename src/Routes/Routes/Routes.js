@@ -5,7 +5,7 @@ import FeedBack from "../../Pages/Home/FeedBack/FeedBack";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Meeting from "../../Pages/Meeting/Meeting";
-import MassegeDahsbord from "../../Pages/Message/MassegeDashbord/MassegeDahsbord"
+import Massenger from "../../Pages/Message/MassegeDashbord/Massenger"
 import MyProfile from "../../Pages/MyProfile/MyProfile";
 import Participants from "../../Pages/Participants/Participants";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -34,6 +34,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/participants",
+				loader: async () => {
+					return fetch('https://remote-talks-server.vercel.app/users');
+				},
 				element: <Participants></Participants>,
 			},
 			{
@@ -46,7 +49,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/message",
-				element: <MassegeDahsbord></MassegeDahsbord>,
+				element: <Massenger></Massenger>,
 			},
 			{
 				path: "/login",
@@ -57,14 +60,14 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 			{
-				path: "/meeting",
-				element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
-			},
-			{
 				path: "/profile",
 				element: <MyProfile></MyProfile>,
 			},
 		],
+	},
+	{
+		path: "/meeting",
+		element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 	},
 ]);
 export default router;
