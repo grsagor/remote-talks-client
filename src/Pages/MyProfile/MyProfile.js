@@ -4,8 +4,11 @@ import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import Spinner from '../Shared/Spinner/Spinner';
 import { BiEdit } from 'react-icons/bi';
-import Request from './Request/Request';
+import Request from './Notifications/Request/Request';
+import Notifications from './Notifications/Notifications';
 import { toast } from 'react-hot-toast';
+import Friends from './Friends/Friends';
+import SeeFriends from '../Participants/SeeFriends/SeeFriends';
 
 
 const MyProfile = () => {
@@ -18,15 +21,25 @@ const MyProfile = () => {
   // const url = `http://localhost:5000/users/asadkhan01862@gmail.com`
 
   const url = `https://remote-talks-server-two.vercel.app/users/${user?.email}`
-  if (user) {
+  // if (user) {
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setData(data)
+  //       console.log(data);
+  //       setLoader(false)
+  //     })
+  // }
+
+  useEffect( () => {
     fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setData(data)
-        console.log(data);
-        setLoader(false)
-      })
-  }
+    .then(res => res.json())
+    .then(data => {
+      setData(data)
+      console.log(data);
+      setLoader(false)
+    })
+  },[user])
 
 
   const handleUpdateProfules = event => {
@@ -44,7 +57,7 @@ const MyProfile = () => {
       university,
       address
     }
-    console.log(newData);
+    // console.log(newData);
 
     fetch(`https://remote-talks-server-two.vercel.app/users/${data._id}`, {
       method: 'PUT',
@@ -57,8 +70,8 @@ const MyProfile = () => {
       .then(data => {
         if (data.modifiedCount > 0) {
           toast.success("Your Information Update Successfully")
-          // navigate('/')
           navigate('/')
+          // navigate('/profile')
           setLoader(false)
         }
         console.log(data);
@@ -138,54 +151,20 @@ const MyProfile = () => {
 
 
 
-          {/* Friends section  */}
+          {/*========================================
+                   Friends Request section  
+           ======================================= */}
           <div className=''>
-            <p className='p-5 w-full text-2xl font-bold'>All Connected</p>
-            <div className='grid grid-cols-3 gap-5'>
-
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-              <div className='flex flex-col w-full gap-3'>
-                <div className='w-full'>
-                  <img className='w-full' src="https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/mialima160300025.jpg?ver=6" alt="" />
-                </div>
-                <p>User Name</p>
-              </div>
-            </div>
+            {/* <p className='p-5 w-full text-2xl font-bold'>All Connected {data.sentRequest.length}</p> */}
+              <Friends></Friends>
+              {/* <SeeFriends></SeeFriends> */}
           </div>
         </div>
+        
 
         {/* Rigth section code hare >>>> */}
         <div>
-          <h1 className='p-5 font-bold text-3xl'>Recently activity</h1>
+          {/* <h1 className='p-5 font-bold text-3xl'>Recently activity</h1>
           <div className='flex flex-row gap-5'>
             <div className='flex flex-col items-center'>
               <div className="avatar online">
@@ -244,17 +223,21 @@ const MyProfile = () => {
               <p className='text-sm'>Sultan Ma..</p>
             </div>
 
-          </div>
+          </div> */}
 
-          {/* Activity Notifications   */}
+
+
+          {/*========================================
+                      Activity Notifications  
+           ======================================= */}
           <div>
             <h2 className='p-5 mt-10 font-bold text-3xl'>Notifications</h2>
-            <div className='flex flex-col gap-5'>
-              <Request></Request>
-              <Request></Request>
-              <Request></Request>
-              <Request></Request>
-            </div>
+            {
+              user?
+              <Notifications></Notifications>
+              :
+              <></>
+            }
           </div>
 
         </div>

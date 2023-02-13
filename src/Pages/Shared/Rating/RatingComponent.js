@@ -6,25 +6,14 @@ const RatingComponent = ({ rating, setRating }) => {
 
 	const labels = {
 		0.5: "Useless",
-		1: "Useless+",
-		1.5: "Useless+",
-		2: "Useless+++",
-		2.5: "Ugly",
-		3: "Ugly+",
-		3.5: "Ugly++",
-		4: "Ok",
-		4.5: "Ok+",
-		5: "Ok++",
-		5.5: "Ok+++",
-		6: "Good",
-		6.5: "Good+",
-		7: "Good++",
-		7.5: "Excellent",
-		8: "Excellent+",
-		8.5: "Excellent++",
-		9: "Excellent++",
-		9.5: "Awesome",
-		10: "Awesome+",
+		1.0: "Useless",
+		1.5: "Ugly",
+		2.0: "Ugly",
+		2.5: "Ok",
+		3.5: "Good",
+		4.0: "Excellent",
+		4.5: "Awesome",
+		5.0: "Awesome",
 	};
 	return (
 		<div>
@@ -35,7 +24,7 @@ const RatingComponent = ({ rating, setRating }) => {
 					precision={0.5}
 					defaultValue={3}
 					value={Number(rating)}
-					max={10}
+					max={5}
 					onChange={(event) => {
 						setRating(event.target.value);
 					}}
