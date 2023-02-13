@@ -20,6 +20,7 @@ import SettingDialogueBox from "../SettingDialogueBox";
 import ConfirmBox from "../ConfirmBox";
 import { meetingTypes } from "../../utils/common";
 import { Constants } from "@videosdk.live/react-sdk";
+import "../../../../CommonStyles/CommonStyle.css";
 
 const useStyles = makeStyles((theme) => ({
   video: {
@@ -347,7 +348,8 @@ export function JoiningScreen({
   }, []);
 
   return (
-    <div className="">
+   <div className="meeting-bg">
+     <div className="common-width">
       <Box
         className="overflow-y-auto"
         style={{
@@ -355,7 +357,7 @@ export function JoiningScreen({
           flex: 1,
           flexDirection: "column",
           height: "100vh",
-          backgroundColor: theme.palette.darkTheme.main,
+          // backgroundColor: theme.palette.darkTheme.main,
         }}
       >
         <Box
@@ -465,10 +467,12 @@ export function JoiningScreen({
                       ) : null}
 
                       <Box
+                      className="absolute left-0 right-0 bottom-6"
                         position="absolute"
                         bottom={theme.spacing(2)}
                         left="0"
                         right="0"
+                        
                       >
                         <Grid
                           container
@@ -487,7 +491,9 @@ export function JoiningScreen({
                                 variant="contained"
                                 style={
                                   micOn
-                                    ? {}
+                                    ? {
+                                      color: "blue",
+                                    }
                                     : {
                                         backgroundColor: red[500],
                                         color: "white",
@@ -516,7 +522,7 @@ export function JoiningScreen({
                                 variant="contained"
                                 style={
                                   webcamOn
-                                    ? {}
+                                    ? {color: "blue"}
                                     : {
                                         backgroundColor: red[500],
                                         color: "white",
@@ -647,5 +653,6 @@ export function JoiningScreen({
         </Box>
       </Box>
     </div>
+   </div>
   );
 }

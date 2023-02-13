@@ -7,7 +7,7 @@ const FriendCard = ({ showUser, allusers }) => {
 			<div className="w-full">
 				<img className="w-full h-20 md:h-28 lg:h-36" src={img} alt="" />
 			</div>
-			<p>{name}</p>
+			<p className="font-bold">{name}</p>
 		</div>
 	);
 };

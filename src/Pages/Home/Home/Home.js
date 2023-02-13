@@ -10,7 +10,7 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 
 const Home = () => {
-	const {
+  const {
 		data: feedbacks = [],
 		isLoading,
 		refetch,
@@ -24,13 +24,17 @@ const Home = () => {
 		},
 	});
 
-	return (
-		<div>
-			<Banner></Banner>
+  return (
+    <div>
+     
+        <Banner></Banner>
+       
+     <Collabaretions></Collabaretions>
+    
 
-			<Features></Features>
+      <Features></Features>
 
-			{isLoading && (
+      {isLoading && (
 				<div className="flex justify-center">
 					<Oval
 						height={50}
@@ -48,8 +52,8 @@ const Home = () => {
 			)}
 			<ShowFeedBack feedbacks={feedbacks}></ShowFeedBack>
 			<FeedBack refetch={refetch}></FeedBack>
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Home;

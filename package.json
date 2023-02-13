@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@emoji-mart/data": "^1.1.2",
+		"@emoji-mart/react": "^1.1.1",
 		"@emotion/styled": "^11.10.5",
 		"@headlessui/react": "^1.7.7",
 		"@heroicons/react": "^1.0.6",
@@ -27,6 +28,7 @@
 		"moment": "^2.29.4",
 		"notistack": "^2.0.8",
 		"react": "^18.2.0",
+		"react-color-palette": "^6.2.0",
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.42.1",
 		"react-hot-toast": "^2.4.0",
@@ -41,6 +43,8 @@
 		"react-scripts": "^5.0.1",
 		"react-simple-flex-grid": "^1.3.21",
 		"react-slick": "^0.29.0",
+		"reactcss": "^1.2.3",
+		"roughjs": "^4.4.1",
 		"slick-carousel": "^1.8.1",
 		"socket.io-client": "^4.5.4",
 		"web-vitals": "^2.1.4"

@@ -28,7 +28,7 @@ const ReceivedRequest = () => {
     const showUsers = allusers?.filter(user=> {
         return loggedUser?.requests?.every(mail => mail == user?.email);
     })
-    console.log(showUsers);
+    console.log(allusers);
     return (
         <div>
             <h1 className='font-extrabold text-xl my-2'>Received Request</h1>

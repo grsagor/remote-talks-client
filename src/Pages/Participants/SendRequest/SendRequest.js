@@ -18,10 +18,16 @@ const SendRequest = ({ users }) => {
             .then(data => setLoggedUser(data[0]))
     }, [])
 
-    const showUsers = users?.filter(user => {
+    const showUsers1 = users?.filter(user => {
         return loggedUser?.sentRequest?.every(mail => mail !== user?.email);
     })
-    // console.log(loggedUser);
+    const showUsers2 = showUsers1?.filter(user => {
+        return loggedUser?.requests?.every(mail => mail !== user?.email);
+    })
+    const showUsers = showUsers2?.filter(user => {
+        return loggedUser?.friends?.every(mail => mail !== user?.email);
+    })
+    
 
     return (
         <div>
