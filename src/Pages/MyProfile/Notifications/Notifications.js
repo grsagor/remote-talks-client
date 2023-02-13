@@ -36,6 +36,8 @@ const Notifications = () => {
           key={showUser._id}
           showUser={showUser}
           allusers={allusers}
+          loggedUser={loggedUser}
+          refetch={refetch}
         ></Request>)
       }
     </div>
