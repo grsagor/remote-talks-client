@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { useContext } from "react";
+// import { AuthContext } from "../../context/AuthProvider";
 import { useEffect } from "react";
 import moment from "moment";
 import Emoji from "./Emoji/Emoji";
@@ -18,7 +19,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 const Massenger = () => {
   const { user } = useContext(AuthContext);
 
-  const socket = useRef();
+
   //emoji open and close
   const [ispickervidevle, setIspickervisible] = useState(false);
 
@@ -28,34 +29,31 @@ const Massenger = () => {
   //manage emoji
   const handleEmoji = (emoji) => {
     let newemoji = emoji.native;
-    setmsg(newemoji + msg);
+
+    setmsg((msg) => [msg + newemoji]);
   };
 
-  const [curentFriend, setCurrentFriend] = useState({});
+  const [curentFriend, setCurrentFriend] = useState("")
   const [curentuser, setCurrentuser] = useState({});
-  console.log("frind id"+curentFriend._id);
-  console.log("user id"+curentuser._id);
+ 
   useEffect(() => {
-    fetch(`https://mesenjer-server.vercel.app/curentuser?email=${user?.email}`)
+    fetch(`https://remote-server-devsobuj910.vercel.app/curentuser?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setCurrentuser(data);
       });
   }, [user?.email]);
 
- 
-const[allUsers,setAlluser]=useState([])
+  const [allUsers, setAlluser] = useState([]);
 
-useEffect(()=>{
-  fetch("https://mesenjer-server.vercel.app/allusers")
-  .then(res=>res.json())
-  .then(data=>{
- setAlluser(data)
-  })
-},[curentuser._id])
-
-
-
+  useEffect(() => {
+    fetch(`https://remote-server-devsobuj910.vercel.app/allusers?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+   
+        setAlluser(data);
+      });
+  }, [user?.email]);
 
   const handleimg = (e) => {
     const img = e.target.files[0];
@@ -83,21 +81,16 @@ useEffect(()=>{
     event.preventDefault();
     const from = event.target;
     const massege = msg;
-    const images = img;
     const createMassge = {
-      massege: massege ? massege : "&#9829",
-      massegeSendTime: moment().format("LT"),
+      massege: massege,
+      img:img,
+      time:moment().format('LT'),
       senderId: curentuser._id,
-      sendeName: curentuser.name,
-      img: images,
-      senderPhoto: curentuser.img,
-      reciberName: curentFriend.name,
-      riciberphto: curentFriend.img,
       reciberId: curentFriend._id,
-      text:curentFriend._id
+      msg: curentFriend._id
     };
 
-    fetch("https://mesenjer-server.vercel.app/massege", {
+    fetch("https://remote-server-devsobuj910.vercel.app/sendmsg", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -108,33 +101,53 @@ useEffect(()=>{
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          refetch();
           from.reset();
-          setmsg("")
-          setImg("")
+          // refetch()
+          setmsg("");
+          setImg("");
+          refetch()
         }
       });
-
-    
   };
 
   // get messages
 
   const { data: conversation = [], refetch } = useQuery({
-    queryKey: ["conversation", curentFriend],
+    queryKey: ["conversation", curentuser._id, curentFriend._id],
     queryFn: async () => {
-      const res = await fetch(`https://mesenjer-server.vercel.app/msg/${curentFriend._id}`);
+      const res = await  fetch(`https://remote-server-devsobuj910.vercel.app/getmsg/${curentuser._id}/${curentFriend._id}`)
       const data = await res.json();
-      
+
       return data;
     }
   });
-
-console.log(conversation)
+ 
 
   //socekt io is  connect  here
- 
- 
+
+  const socket = useRef();
+  useEffect(()=>{
+socket.current=io("ws://localhost:8000")
+
+  },[])
+
+
+useEffect(()=>{
+  socket.current.emit("addUser", curentuser, curentuser._id);
+},[curentuser])
+
+
+const [onlineuser,setOnlineuser]=useState([])
+useEffect(()=>{
+  socket.current.on("getUser",(users)=>{
+    const fileterwithouturentusr = users.filter((usr) => usr.userId !==curentuser._id);
+    setOnlineuser(fileterwithouturentusr)
+
+  })
+},[curentuser])
+
+
+console.log(onlineuser.length + "curen frd")
   return (
     <div>
       <>
@@ -149,14 +162,11 @@ console.log(conversation)
             <main className="flex-grow flex flex-row min-h-0">
               <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
                 <div className="header p-4 flex flex-row justify-between items-center flex-none">
-                  <div
-                    className="w-16 h-16 relative flex flex-shrink-0"
-                    style={{ filter: "invert(100%)" }}
-                  >
+                  <div className="w-16 h-16 relative flex flex-shrink-0">
                     <img
                       className="rounded-full w-full h-full object-cover"
                       alt="ravisankarchinnam"
-                      src="https://avatars3.githubusercontent.com/u/22351907?s=60"
+                      src={curentuser.img}
                     />
                   </div>
                   <p className="text-md font-bold hidden md:block group-hover:block">
@@ -200,6 +210,8 @@ console.log(conversation)
                 <div className="contacts p-2 flex-1 overflow-y-scroll">
                   {allUsers?.map((user) => (
                     <Users
+                      onlineuser={onlineuser}
+                      curentuser={curentuser}
                       setCurrentFriend={setCurrentFriend}
                       key={user._id}
                       user={user}
@@ -263,8 +275,10 @@ console.log(conversation)
                   </div>
 
                   <div className="chat-body p-4 flex-1 overflow-y-scroll">
-                    {curentFriend || curentFriend.length ? (
+                    {curentFriend || curentFriend.length > 0 ? (
                       <Chat
+                        onlineuser={onlineuser}
+
                         conversation={conversation}
                         curentuser={curentuser}
                         curentFriend={curentFriend}
@@ -288,17 +302,6 @@ console.log(conversation)
                       onSubmit={handelmassege}
                       className="flex flex-row items-center p-4"
                     >
-                      <button
-                        type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
-                      >
-                        <svg
-                          viewBox="0 0 20 20"
-                          className="w-full h-full fill-current"
-                        >
-                          <path d="M10,1.6c-4.639,0-8.4,3.761-8.4,8.4s3.761,8.4,8.4,8.4s8.4-3.761,8.4-8.4S14.639,1.6,10,1.6z M15,11h-4v4H9  v-4H5V9h4V5h2v4h4V11z" />
-                        </svg>
-                      </button>
                       <button
                         type="button"
                         className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
@@ -336,7 +339,7 @@ console.log(conversation)
                             onChange={(e) => setmsg(e.target.value)}
                             className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
                             type="text"
-                            defaultValue={msg}
+                            Value={msg}
                             placeholder="Aa"
                           />
                           <button
@@ -389,7 +392,9 @@ console.log(conversation)
                   </div>
                 </section>
               ) : (
-                <h2  className="text-4xl flex justify-center items-center m-auto capitalize ">pls select friend </h2>
+                <h2 className="text-4xl flex justify-center items-center m-auto capitalize ">
+                  pls select friend{" "}
+                </h2>
               )}
             </main>
           </div>
