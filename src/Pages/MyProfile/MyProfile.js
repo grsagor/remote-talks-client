@@ -232,7 +232,12 @@ const MyProfile = () => {
            ======================================= */}
           <div>
             <h2 className='p-5 mt-10 font-bold text-3xl'>Notifications</h2>
-            <Notifications></Notifications>
+            {
+              user?
+              <Notifications></Notifications>
+              :
+              <></>
+            }
           </div>
 
         </div>

@@ -22,13 +22,13 @@ const Footer = () => {
           <div className='grid w-full  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 md:gap-y-8 sm:gap-y-8'>
             <div className='flex justify-center md:items-start items-center flex-col w-full'>
               <img className='w-24 mb-2' src={logo} alt="" />
-              <p className='text-center md:text-start'>Call with Remote Task<br />Providing reliable tech since 1992</p>
+              <p className='text-center md:text-start'>Call with Remote Talks<br />Providing reliable tech since 2022</p>
             </div>
             <div className='flex md:items-start items-center w-full flex-col gap-2'>
               <span className="footer-title">Services</span>
               <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-1 gap-x-2 md:gap-1'>
-                <Link className="link link-hover">Video Call</Link>
-                <Link className="link link-hover">Live Chat</Link>
+                <Link className="link link-hover" to='/meeting'>Video Call</Link>
+                <Link className="link link-hover" to='/message'>Live Chat</Link>
                 <Link className="link link-hover">Photo Post</Link>
                 <Link className="link link-hover">Advertisement</Link>
               </div>
@@ -96,7 +96,7 @@ const Footer = () => {
 
       </div>
       <div className='border-t-2 mt-4'>
-        <span className='text-center text-gray-300 block py-5'>© Copyright 2023 Remote Task</span>
+        <span className='text-center text-gray-300 block py-5'>© Copyright 2023 Remote Talks</span>
       </div>
     </div>
   );
