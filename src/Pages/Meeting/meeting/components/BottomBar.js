@@ -512,7 +512,7 @@ export function BottomBar({
     return (
       <OutlinedButton
         Icon={EndIcon}
-        bgColor="bg-red-150"
+        bgColor="bg-red-500"
         onClick={() => {
           leave();
           setIsMeetingLeft(true);

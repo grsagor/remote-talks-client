@@ -48,7 +48,7 @@ export function ParticipantView({ participantId }) {
       onMouseLeave={() => {
         setMouseOver(false);
       }}
-      className={`h-full w-full  bg-gray-750 relative overflow-hidden rounded-lg video-cover`}
+      className={`h-full w-full  relative overflow-hidden rounded-lg video-cover`}
     >
       <audio ref={micRef} autoPlay muted={isLocal} />
       {webcamOn ? (
@@ -65,6 +65,7 @@ export function ParticipantView({ participantId }) {
           //
           url={webcamMediaStream}
           //
+          // className='w-full h-full'
           height={"100%"}
           width={"100%"}
           onError={(err) => {
@@ -72,14 +73,16 @@ export function ParticipantView({ participantId }) {
           }}
         />
       ) : (
-        <div className="h-full w-full flex items-center justify-center">
+        <div className="h-full  w-full flex items-center justify-center">
+          <div className="h-full  max-h-[373px]  w-full flex items-center justify-center bg-gray-800">
           <div
-            className={`z-10 flex items-center justify-center rounded-full bg-gray-800 2xl:h-[92px] h-[52px] 2xl:w-[92px] w-[52px]`}
+            className={`z-10 flex items-center justify-center rounded-full bg-base-200 2xl:h-[92px] h-[52px] 2xl:w-[92px] w-[52px]`}
           >
-            <p className="text-2xl text-white">
+            <p className="text-2xl font-bold text-white">
               {String(displayName).charAt(0).toUpperCase()}
             </p>
           </div>
+        </div>
         </div>
       )}
       <CornerDisplayName
