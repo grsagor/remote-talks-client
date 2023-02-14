@@ -49,10 +49,11 @@ const FeedBack = ({ refetch }) => {
 	return (
 		<>
 			<div className="feedback__container w-[90%] pt-[15px] mx-auto">
-				<h1 className="px-5 py-5 text-2xl text-center capitalize sm:px-0 sm:text-3xl text-white">
-					We'd love to know what{" "}
-					<br className="block sm:hidden feedback__break" /> you think
+				<h1 className="px-5  text-2xl text-center font-semibold capitalize sm:px-0 sm:text-3xl text-white">
+					Share Your Feedback{" "}
+					{/* <br className="block sm:hidden feedback__break" /> Feedback */}
 				</h1>
+				<h1 className="text-center text-xl font-semibold text-white">Help us to grow</h1>
 				<div className="feedback__subcontainer pt-[10px]">
 					<form onSubmit={submitHandler} className="w-[80%] mx-auto">
 						<div className="flex flex-col justify-center w-full py-5 sm:flex-row">
@@ -62,7 +63,7 @@ const FeedBack = ({ refetch }) => {
 									name="firstname"
 									required
 									className="w-full px-1 py-2 text-black border-[1px] rounded-md outline-none feedback__input"
-									placeholder="first name...."
+									placeholder="First Name"
 								/>
 							</div>
 							<div className="sm:w-[50%] sm:pt-0 pt-10 w-full">
@@ -70,7 +71,7 @@ const FeedBack = ({ refetch }) => {
 									type="text"
 									name="lastname"
 									className="w-full px-1 py-2 text-black border-[1px] rounded-md outline-none feedback__input"
-									placeholder="last name....."
+									placeholder="Last Name"
 								/>
 							</div>
 						</div>
@@ -81,7 +82,7 @@ const FeedBack = ({ refetch }) => {
 									type="email"
 									name="email"
 									className="w-full px-1 py-2 text-black border-[1px] rounded-md outline-none feedback__input"
-									placeholder="example@gmail.com...."
+									placeholder="Email Address"
 									required
 								/>
 							</div>

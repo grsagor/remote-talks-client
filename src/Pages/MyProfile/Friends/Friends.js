@@ -32,7 +32,7 @@ const Friends = ({ data }) => {
 
   return (
     <div>
-      <p className='p-5 w-full text-2xl font-bold'>All Connected {showUsers.length}</p>
+      <h1 className='p-5 w-full text-2xl font-bold'>All Connected {showUsers.length}</h1>
 
       <div className='grid grid-cols-3 gap-5'>
         {

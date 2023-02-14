@@ -27,11 +27,11 @@ const SendRequest = ({ users }) => {
     const showUsers = showUsers2?.filter(user => {
         return loggedUser?.friends?.every(mail => mail !== user?.email);
     })
-    
+
 
     return (
         <div>
-            <h1>All Participants</h1>
+            <h1 className='text-3xl font-bold my-3'>All Participants</h1>
             <div className='flex flex-col gap-y-4'>
                 {
                     user ?
