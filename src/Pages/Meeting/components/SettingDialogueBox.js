@@ -213,7 +213,7 @@ export default function SettingDialogueBox({
   });
 
   return (
-    <ThemeProvider theme={theme}className="">
+    <ThemeProvider theme={theme}>
       <Grid container>
         <Box>
           <Dialog onClose={handleClose} open={open} maxWidth={"xl"}>
