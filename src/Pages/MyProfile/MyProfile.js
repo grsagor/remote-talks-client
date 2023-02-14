@@ -31,15 +31,15 @@ const MyProfile = () => {
   //     })
   // }
 
-  useEffect( () => {
+  useEffect(() => {
     fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      setData(data)
-      console.log(data);
-      setLoader(false)
-    })
-  },[user])
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+        console.log(data);
+        setLoader(false)
+      })
+  }, [user])
 
 
   const handleUpdateProfules = event => {
@@ -156,11 +156,11 @@ const MyProfile = () => {
            ======================================= */}
           <div className=''>
             {/* <p className='p-5 w-full text-2xl font-bold'>All Connected {data.sentRequest.length}</p> */}
-              <Friends></Friends>
-              {/* <SeeFriends></SeeFriends> */}
+            <Friends></Friends>
+            {/* <SeeFriends></SeeFriends> */}
           </div>
         </div>
-        
+
 
         {/* Rigth section code hare >>>> */}
         <div>
@@ -231,12 +231,12 @@ const MyProfile = () => {
                       Activity Notifications  
            ======================================= */}
           <div>
-            <h2 className='p-5 mt-10 font-bold text-3xl'>Notifications</h2>
+            <h1 className='p-5 mt-10 font-bold text-3xl'>Notifications</h1>
             {
-              user?
-              <Notifications></Notifications>
-              :
-              <></>
+              user ?
+                <Notifications></Notifications>
+                :
+                <></>
             }
           </div>
 

@@ -17,7 +17,7 @@ const RatingComponent = ({ rating, setRating }) => {
 	};
 	return (
 		<div>
-			<Typography component="legend">Give Your Rating</Typography>
+			<Typography component="legend">Rate us</Typography>
 			<div className="flex justify-center mt-2">
 				<Rating
 					name="customized-10"
