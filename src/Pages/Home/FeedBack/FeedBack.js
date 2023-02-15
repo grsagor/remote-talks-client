@@ -48,7 +48,7 @@ const FeedBack = ({ refetch }) => {
 	};
 	return (
 		<>
-			<div className="feedback__container w-[90%] pt-[15px] mx-auto">
+			<div className="feedback__container w-[90%] pt-[15px] mb-20 mx-auto">
 				<h1 className="px-5  text-2xl text-center font-semibold capitalize sm:px-0 sm:text-3xl text-white">
 					Share Your Feedback{" "}
 					{/* <br className="block sm:hidden feedback__break" /> Feedback */}
