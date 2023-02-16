@@ -109,8 +109,16 @@ const Navbar = () => {
                   </div>
                 </label>
                 <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                  <li><Link to='/profile'>Profile</Link></li>
-                  <li><a onClick={handleLogOut} href='/login'>Sign Out</a></li>
+                  {
+                      user ?
+                        <>
+                          <li><NavLink to='/profile'>Profile</NavLink></li>
+                          <li><a onClick={handleLogOut} href='/login'>Sign Out</a></li>
+                        </>
+                        :
+                        <>
+                          <li><Link to='/profile'>Profile</Link></li>                      </>
+                  }
                 </ul>
               </div>
             </div>
