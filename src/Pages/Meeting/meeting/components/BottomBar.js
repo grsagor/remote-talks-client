@@ -141,12 +141,12 @@ export function BottomBar({
           recordingState === Constants.recordingEvents.RECORDING_STARTED
             ? "Stop Recording"
             : recordingState === Constants.recordingEvents.RECORDING_STARTING
-            ? "Starting Recording"
-            : recordingState === Constants.recordingEvents.RECORDING_STOPPED
-            ? "Start Recording"
-            : recordingState === Constants.recordingEvents.RECORDING_STOPPING
-            ? "Stopping Recording"
-            : "Start Recording"
+              ? "Starting Recording"
+              : recordingState === Constants.recordingEvents.RECORDING_STOPPED
+                ? "Start Recording"
+                : recordingState === Constants.recordingEvents.RECORDING_STOPPING
+                  ? "Stopping Recording"
+                  : "Start Recording"
         }
         lottieOption={isRecording ? defaultOptions : null}
         isRequestProcessing={isRequestProcessing}
@@ -486,8 +486,8 @@ export function BottomBar({
               ? false
               : true
             : isMobile
-            ? true
-            : false
+              ? true
+              : false
         }
       />
     ) : (
@@ -704,10 +704,20 @@ export function BottomBar({
         <LeaveBTN />
       </div>
       <div className="flex items-center justify-center">
-        {/* <p>Sultan</p> */}
-        {/* <button className="btn btn-outline p-0"><span className="font-semibold text-2xl"><TfiClipboard></TfiClipboard></span></button> */}
-        <button className="btn btn-outline min-h-0 p-2 mr-2 white_board_btn"><span className="font-bold text-2xl"><TfiWrite></TfiWrite></span></button>
-        
+      
+       
+        {/* The button to open modal */}
+        <label htmlFor="my-modal-3" className="btn btn-outline min-h-0 p-2 mr-2 white_board_btn"><span className="font-bold text-2xl"><TfiWrite></TfiWrite></span></label>
+
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
+            <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
+            <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+          </div>
+        </div>
         <ChatBTN isMobile={isMobile} isTab={isTab} />
         <ParticipantsBTN isMobile={isMobile} isTab={isTab} />
       </div>
