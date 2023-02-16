@@ -43,7 +43,7 @@ import { sideBarModes } from "../../utils/common";
 import "./BottomBar.css";
 import { TfiWrite } from "react-icons/tfi";
 import { TfiClipboard } from "react-icons/tfi";
-import WhiteBoardModal from "../../../Shared/WhiteBoardModal/WhiteBoardModal";
+import WhiteBoard from "../../WhiteBoard/WhiteBoard";
 
 const useStyles = makeStyles({
 	popoverHoverDark: {
@@ -71,13 +71,6 @@ export function BottomBar({
 	selectMicDeviceId,
 	setSelectMicDeviceId,
 }) {
-	const [showModal, setShowModal] = useState(false);
-
-	const handleModal = () => {
-		console.log("modal");
-		setShowModal(!showModal);
-	};
-
 	const RaiseHandBTN = ({ isMobile, isTab }) => {
 		const { publish } = usePubSub("RAISE_HAND");
 		const RaiseHand = () => {
@@ -655,85 +648,90 @@ export function BottomBar({
 		{ icon: BottomBarButtonTypes.MEETING_ID_COPY },
 	];
 
-	return (
-		<>
-			{isMobile || isTab ? (
-				<div
-					className="flex items-center justify-center"
-					style={{ height: bottomBarHeight }}
+	return isMobile || isTab ? (
+		<div
+			className="flex items-center justify-center"
+			style={{ height: bottomBarHeight }}
+		>
+			<LeaveBTN />
+			<MicBTN />
+			<WebCamBTN />
+			<RecordingBTN />
+			<OutlinedButton Icon={MoreHorizIcon} onClick={handleClickFAB} />
+			<SwipeableDrawer
+				anchor={"bottom"}
+				open={Boolean(open)}
+				onClose={handleCloseFAB}
+				onOpen={handleClickFAB}
+				style={{ paddingBottom: "100px" }}
+			>
+				<Grid container className="bg-gray-800 py-6">
+					{otherFeatures.map(({ icon }) => {
+						return (
+							<Grid
+								className="flex items-center justify-center"
+								item
+								xs={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 7 : 4}
+								sm={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 5 : 3}
+								md={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 3 : 2}
+							>
+								{icon === BottomBarButtonTypes.RAISE_HAND ? (
+									<RaiseHandBTN isMobile={isMobile} isTab={isTab} />
+								) : icon === BottomBarButtonTypes.SCREEN_SHARE ? (
+									<ScreenShareBTN isMobile={isMobile} isTab={isTab} />
+								) : icon === BottomBarButtonTypes.CHAT ? (
+									<ChatBTN isMobile={isMobile} isTab={isTab} />
+								) : icon === BottomBarButtonTypes.PARTICIPANTS ? (
+									<ParticipantsBTN isMobile={isMobile} isTab={isTab} />
+								) : icon === BottomBarButtonTypes.MEETING_ID_COPY ? (
+									<MeetingIdCopyBTN isMobile={isMobile} isTab={isTab} />
+								) : null}
+							</Grid>
+						);
+					})}
+				</Grid>
+			</SwipeableDrawer>
+		</div>
+	) : (
+		<div className="md:flex lg:px-2 xl:px-6 pb-2 px-2 hidden">
+			<MeetingIdCopyBTN />
+
+			<div className="flex flex-1 items-center justify-center" ref={tollTipEl}>
+				<RecordingBTN />
+				<RaiseHandBTN isMobile={isMobile} isTab={isTab} />
+				<MicBTN />
+				<WebCamBTN />
+				<ScreenShareBTN isMobile={isMobile} isTab={isTab} />
+				<LeaveBTN />
+			</div>
+			<div className="flex items-center justify-center">
+				{/* The button to open modal */}
+				<label
+					htmlFor="my-modal-3"
+					className="btn btn-outline min-h-0 p-2 mr-2 white_board_btn"
 				>
-					<LeaveBTN />
-					<MicBTN />
-					<WebCamBTN />
-					<RecordingBTN />
-					<OutlinedButton Icon={MoreHorizIcon} onClick={handleClickFAB} />
-					<SwipeableDrawer
-						anchor={"bottom"}
-						open={Boolean(open)}
-						onClose={handleCloseFAB}
-						onOpen={handleClickFAB}
-						style={{ paddingBottom: "100px" }}
-					>
-						<Grid container className="bg-gray-800 py-6">
-							{otherFeatures.map(({ icon }) => {
-								return (
-									<Grid
-										className="flex items-center justify-center"
-										item
-										xs={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 7 : 4}
-										sm={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 5 : 3}
-										md={icon === BottomBarButtonTypes.MEETING_ID_COPY ? 3 : 2}
-									>
-										{icon === BottomBarButtonTypes.RAISE_HAND ? (
-											<RaiseHandBTN isMobile={isMobile} isTab={isTab} />
-										) : icon === BottomBarButtonTypes.SCREEN_SHARE ? (
-											<ScreenShareBTN isMobile={isMobile} isTab={isTab} />
-										) : icon === BottomBarButtonTypes.CHAT ? (
-											<ChatBTN isMobile={isMobile} isTab={isTab} />
-										) : icon === BottomBarButtonTypes.PARTICIPANTS ? (
-											<ParticipantsBTN isMobile={isMobile} isTab={isTab} />
-										) : icon === BottomBarButtonTypes.MEETING_ID_COPY ? (
-											<MeetingIdCopyBTN isMobile={isMobile} isTab={isTab} />
-										) : null}
-									</Grid>
-								);
-							})}
-						</Grid>
-					</SwipeableDrawer>
-				</div>
-			) : (
-				<>
-					<div className="md:flex lg:px-2 xl:px-6 pb-2 px-2 hidden">
-						<MeetingIdCopyBTN />
+					<span className="font-bold text-2xl">
+						<TfiWrite></TfiWrite>
+					</span>
+				</label>
 
-						<div
-							className="flex flex-1 items-center justify-center"
-							ref={tollTipEl}
+				{/* Put this part before </body> tag */}
+				<input type="checkbox" id="my-modal-3" className="modal-toggle" />
+				<div className="modal h-[100vh] w-full  bg-gray-900">
+					<div className="modal-box p-0 w-full h-[100vh] bg-[#fff]  max-w-full">
+						<label
+							htmlFor="my-modal-3"
+							className="btn btn-sm btn-circle absolute right-2 top-2"
 						>
-							<RecordingBTN />
-							<RaiseHandBTN isMobile={isMobile} isTab={isTab} />
-							<MicBTN />
-							<WebCamBTN />
-							<ScreenShareBTN isMobile={isMobile} isTab={isTab} />
-							<LeaveBTN />
-						</div>
-						<div className="flex items-center justify-center">
-							{/* <p>Sultan</p> */}
-							{/* <button className="btn btn-outline p-0"><span className="font-semibold text-2xl"><TfiClipboard></TfiClipboard></span></button> */}
+							✕
+						</label>
 
-							<button className="btn btn-outline min-h-0 p-2 mr-2 white_board_btn">
-								<span className="font-bold text-2xl">
-									<TfiWrite></TfiWrite>
-								</span>
-							</button>
-
-							<ChatBTN isMobile={isMobile} isTab={isTab} />
-
-							<ParticipantsBTN isMobile={isMobile} isTab={isTab} />
-						</div>
+						<WhiteBoard />
 					</div>
-				</>
-			)}
-		</>
+				</div>
+				<ChatBTN isMobile={isMobile} isTab={isTab} />
+				<ParticipantsBTN isMobile={isMobile} isTab={isTab} />
+			</div>
+		</div>
 	);
 }
