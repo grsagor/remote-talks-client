@@ -2,6 +2,9 @@
   width: 80%;
   margin: auto;
 }
+nav a.active{
+  color: rgba(217, 0, 255, 0.83);
+}
 .menu-hover a:hover{
 color: rgb(243, 15, 91);
 transition: 0.5s;

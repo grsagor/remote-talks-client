@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaSearch, FaUserCircle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../../assets/Logo/titleLogo/Title Logo.png';
 import { AuthContext } from '../../../context/AuthProvider';
 import '../../../CommonStyles/CommonStyle.css';
@@ -16,18 +16,18 @@ const Navbar = () => {
       })
   }
 
-  const menuItems = <>
-    <Link className='m-2 text-lg hover:text-primary' to='/'>Home</Link>
-    <Link className='m-2 text-lg hover:text-primary' to='/participants'>Participants</Link>
-    <Link className='m-2 text-lg hover:text-primary' to='/message'>Messages</Link>
-    <Link className='m-2 text-lg hover:text-primary' to='/about'>About Us</Link>
-    <Link className='m-2 text-lg hover:text-primary' to='/whiteboard'>Whiteboard</Link>
-    {user?.uid ?
-      // <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign out</Link>
-      <Link></Link>
-      : <Link className='m-2 text-lg hover:text-primary' to='/login'>Login</Link>
-    }
-  </>
+  const menuItems = <nav>
+  <NavLink className='m-2 text-lg hover:text-primary'  to='/'>Home</NavLink>
+  <NavLink className='m-2 text-lg hover:text-primary'  to='/participants'>Participants</NavLink>
+  <NavLink className='m-2 text-lg hover:text-primary'  to='/message'>Messages</NavLink>
+  <NavLink className='m-2 text-lg hover:text-primary'  to='/about'>About Us</NavLink>
+  {/* <NavLink className='m-2 text-lg hover:text-primary'  to='/whiteboard'>Whiteboard</NavLink> */}
+  {user?.uid ?
+    // <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign out</Link>
+    <Link></Link>
+    : <NavLink className='m-2 text-lg hover:text-primary'  to='/login'>Login</NavLink>
+  }
+</nav>
 
   const img = <>
     {
@@ -86,7 +86,7 @@ const Navbar = () => {
                     {img}
                   </div>
                 </label>
-                <Link className='m-2 text-lg hover:text-primary' to='/profile'>Profile</Link>
+                <NavLink className='m-2 text-lg hover:text-primary' to='/profile'>Profile</NavLink>
                 {menuItems}
                 <Link onClick={handleLogOut} className='m-2 text-lg hover:text-primary' to='/login'>Sign Out</Link>
 
@@ -109,8 +109,16 @@ const Navbar = () => {
                   </div>
                 </label>
                 <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                  <li><Link to='/profile'>Profile</Link></li>
-                  <li><a onClick={handleLogOut} href='/login'>Sign Out</a></li>
+                  {
+                      user ?
+                        <>
+                          <li><NavLink to='/profile'>Profile</NavLink></li>
+                          <li><a onClick={handleLogOut} href='/login'>Sign Out</a></li>
+                        </>
+                        :
+                        <>
+                          <li><Link to='/profile'>Profile</Link></li>                      </>
+                  }
                 </ul>
               </div>
             </div>
