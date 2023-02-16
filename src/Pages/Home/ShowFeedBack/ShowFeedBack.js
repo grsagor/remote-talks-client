@@ -17,7 +17,7 @@ function ShowFeedBack({ feedbacks }) {
 		initialSlide: 0,
 		responsive: [
 			{
-				breakpoint: 1024,
+				breakpoint: 1500,
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 3,
@@ -26,7 +26,7 @@ function ShowFeedBack({ feedbacks }) {
 				},
 			},
 			{
-				breakpoint: 600,
+				breakpoint: 1280,
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
@@ -34,7 +34,7 @@ function ShowFeedBack({ feedbacks }) {
 				},
 			},
 			{
-				breakpoint: 480,
+				breakpoint: 800,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
@@ -45,7 +45,7 @@ function ShowFeedBack({ feedbacks }) {
 	return (
 		<>
 			<h1 className="text-3xl text-center mb-3 font-semibold">Our Clients Reviews </h1>
-			<div className="pt-5 px-24  pb-20">
+			<div className="pt-5 px-10  lg:px-24  pb-20">
 				<Slider {...settings}>
 					{feedbacks &&
 						feedbacks.map((feedback) => (

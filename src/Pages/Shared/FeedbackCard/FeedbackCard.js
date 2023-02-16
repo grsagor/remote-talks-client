@@ -6,9 +6,8 @@ function FeedbackCard({ feedback }) {
 	const [messageDetails, setMessageDetails] = useState(false);
 	return (
 		<div
-			className={`p-5 break-all feedback__card mx-4 ${
-				messageDetails ? "h-auto" : "h-[200px]"
-			} rounded-md shadow-md relative`}
+			className={`p-5 break-all feedback__card mx-4 ${messageDetails ? "h-auto" : "h-[200px]"
+				} rounded-md shadow-md relative`}
 		>
 			<p className="font-bold">{name}</p>
 			<a
@@ -42,7 +41,7 @@ function FeedbackCard({ feedback }) {
 					</>
 				)}
 			</p>
-			<div className="absolute top-0 right-2">
+			<div className="absolute  top-0 right-2">
 				<RatingCard rating={Number(rating)} />
 			</div>
 		</div>
