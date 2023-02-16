@@ -2,6 +2,9 @@
   width: 80%;
   margin: auto;
 }
+nav a.active{
+  color: rgba(217, 0, 255, 0.83);
+}
 .menu-hover a:hover{
 color: rgb(243, 15, 91);
 transition: 0.5s;
@@ -16,9 +19,18 @@ transition: 0.5s;
   border-radius: 5px;
   
 }
+.meeting_user_hight{
+  max-height: 373px;
+}
 
 .meeting-bg{
   background: linear-gradient(rgba(80, 0, 199, 0.347), rgba(45, 6, 59, 0.5)), url(../assets/Meeitng-img//meeting-bg3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.participant-bg{
+  background: linear-gradient(rgba(80, 0, 199, 0.347), rgba(45, 6, 59, 0.5)), url(../assets/images/particepent-bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

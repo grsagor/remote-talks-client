@@ -318,7 +318,7 @@ export function ILSContainer({
               </div>
             )}
 
-            <div className={` flex flex-1 flex-row bg-black `}>
+            <div className={` flex flex-1 flex-row `}>
               {meetingMode === Constants.modes.CONFERENCE ? (
                 <div className={`flex flex-1 `}>
                   {isPresenting ? (

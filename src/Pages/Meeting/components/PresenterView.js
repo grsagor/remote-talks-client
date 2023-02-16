@@ -70,6 +70,7 @@ export function PresenterView({ height }) {
         height: height - padding,
         // width: "700px",
         width: "100%",
+        // backgroundColor:"red",
         backgroundColor: theme.palette.darkTheme.slightLighter,
         position: "relative",
         overflow: "hidden",

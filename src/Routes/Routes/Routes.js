@@ -13,6 +13,7 @@ import generateMuiTheme from "../../Pages/Meeting/mui/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import NewAboutSection from "../../Pages/NewAbout/NewAbout";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/about",
+				element: <NewAboutSection></NewAboutSection>,
+			},
+			{
+				path: "/teams",
 				element: <About></About>,
 			},
 			{
@@ -61,7 +66,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/profile",
-				element: <MyProfile></MyProfile>,
+				element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>,
 			},
 		],
 	},

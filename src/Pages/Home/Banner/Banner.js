@@ -19,11 +19,10 @@ const Banner = () => {
           <div className="max-w-xl mb-6">
 
             <h1 className="font-sans text-6xl capitalize text-white font-bold tracking-tight  sm:text-4xl sm:leading-none max-w-lg mb-6">
-              Remote talks is best <br /> for business meeting
+              STAY UP-TO-DATE<br />  WITH REMOTE TALKS
             </h1>
             <p className="text-white capitalize text-base md:text-lg">
-              You can operate quicker and more flexibly than ever before with
-              all of your employees, tools, and communication in one location.
+              Welcome to our web conferencing app! We're so excited to have you join us for online meetings, presentations, and collaborations. With our app, you'll be able to connect with anyone, anywhere, and anytime.
             </p>
           </div>
           <div className="flex items-center space-x-3">

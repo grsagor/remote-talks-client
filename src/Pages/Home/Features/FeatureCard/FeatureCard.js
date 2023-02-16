@@ -13,7 +13,7 @@ const FeatureCard = ({card}) => {
       {icon}
     </div>
     <div>
-      <h3 className='text-2xl font-semibold pb-3'>{name}</h3>
+      <h3 className='text-2xl font-medium pb-3'>{name}</h3>
       <p className='text-gray-400'>
       {description?.length > 160 ? description.substring(0, 160) : description}
 				{!descriptionDetails && description?.length > 160 && (

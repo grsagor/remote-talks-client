@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import SendRequest from './SendRequest/SendRequest';
 import ReceivedRequest from './ReceivedRequest/ReceivedRequest'
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import SeeFriends from './SeeFriends/SeeFriends';
 import '../../CommonStyles/CommonStyle.css';
 
@@ -31,12 +31,14 @@ const Participants = () => {
             <div className='common-width'>
                 
                 {
-                    user &&
+                    user ?
                     <>
                         <SendRequest users={users}></SendRequest>
                         {/* <ReceivedRequest></ReceivedRequest> */}
                         {/* <SeeFriends></SeeFriends> */}
                     </>
+                    :
+                    <p className='text-3xl text-gray-400 text-center py-48'>Please <span className='underline font-bold'><Link to='/login'>login</Link></span> first</p>
 
                 }
 
