@@ -14,6 +14,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NewAboutSection from "../../Pages/NewAbout/NewAbout";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -74,5 +75,9 @@ const router = createBrowserRouter([
 		path: "/meeting",
 		element: <ThemeProvider theme={generateMuiTheme()}><Meeting></Meeting></ThemeProvider>,
 	},
+	{
+		path: "/*",
+		element: <ErrorPage></ErrorPage>
+	}
 ]);
 export default router;
