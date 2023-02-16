@@ -40,6 +40,9 @@ import useIsTab from "../../hooks/useIsTab";
 import useIsMobile from "../../hooks/useIsMobile";
 import { MobileIconButton } from "../../components/buttons/MobileIconButton";
 import { sideBarModes } from "../../utils/common";
+import "./BottomBar.css";
+import { TfiWrite } from 'react-icons/tfi';
+import { TfiClipboard } from 'react-icons/tfi';
 
 const useStyles = makeStyles({
   popoverHoverDark: {
@@ -701,6 +704,10 @@ export function BottomBar({
         <LeaveBTN />
       </div>
       <div className="flex items-center justify-center">
+        {/* <p>Sultan</p> */}
+        {/* <button className="btn btn-outline p-0"><span className="font-semibold text-2xl"><TfiClipboard></TfiClipboard></span></button> */}
+        <button className="btn btn-outline min-h-0 p-2 mr-2 white_board_btn"><span className="font-bold text-2xl"><TfiWrite></TfiWrite></span></button>
+        
         <ChatBTN isMobile={isMobile} isTab={isTab} />
         <ParticipantsBTN isMobile={isMobile} isTab={isTab} />
       </div>
