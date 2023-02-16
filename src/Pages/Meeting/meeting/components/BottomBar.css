@@ -1,8 +1,12 @@
-.white_board_btn{
-  border: 2px solid #ffffff42;
+.white_board_btn {
+	border: 2px solid #ffffff42;
 }
-.white_board_btn:hover{
-  border: 2px solid #ffffff00;
-  background-color: rgba(255, 255, 255, 0);
-  color: white;
+.white_board_btn:hover {
+	border: 2px solid #ffffff00;
+	background-color: rgba(255, 255, 255, 0);
+	color: white;
+}
+
+.modal-box {
+	width: 100vw !important;
 }
