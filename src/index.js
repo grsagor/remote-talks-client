@@ -5,6 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './context/AuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arvo&family=Corben&family=EB+Garamond&family=Lato&family=Poppins:wght@500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Arvo&family=Corben&family=EB+Garamond&family=Lato&family=Noto+Serif:ital@1&family=Poppins:wght@500&display=swap');
+</style>
+
 
 const queryClient = new QueryClient()
 
@@ -12,9 +17,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-    <App />
-    </AuthProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

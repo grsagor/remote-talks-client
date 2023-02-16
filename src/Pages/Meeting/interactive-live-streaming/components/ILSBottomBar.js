@@ -518,7 +518,8 @@ export function ILSBottomBar({
     return (
       <OutlinedButton
         Icon={EndIcon}
-        bgColor="bg-red-150"
+        bgColor="bg-red-500"
+        // className='bg-red-500'
         onClick={() => {
           leave();
           setIsMeetingLeft(true);

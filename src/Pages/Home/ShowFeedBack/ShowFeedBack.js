@@ -44,7 +44,7 @@ function ShowFeedBack({ feedbacks }) {
 	};
 	return (
 		<>
-			<h1 className="text-2xl px-24   mb-5 font-semibold">Feedback </h1>
+			<h1 className="text-3xl text-center mb-3 font-semibold">Our Clients Reviews </h1>
 			<div className="pt-5 px-24  pb-20">
 				<Slider {...settings}>
 					{feedbacks &&
