@@ -717,8 +717,8 @@ export function BottomBar({
 
 				{/* Put this part before </body> tag */}
 				<input type="checkbox" id="my-modal-3" className="modal-toggle" />
-				<div className="modal h-[100vh] w-full  bg-gray-900">
-					<div className="modal-box p-0 w-full h-[100vh] bg-[#fff]  max-w-full">
+				<div className="modal  bg-gray-900">
+					<div className="modal-box p-0 w-full  max-w-full  bg-[#fff] ">
 						<label
 							htmlFor="my-modal-3"
 							className="btn btn-sm btn-circle absolute right-2 top-2"
