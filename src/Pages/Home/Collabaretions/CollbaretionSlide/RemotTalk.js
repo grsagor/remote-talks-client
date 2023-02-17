@@ -7,7 +7,7 @@ import { FiAperture } from "react-icons/fi";
 const RemotTalk = () => {
     return (
       <div className="px-4 my-16  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
-        <div className="flex flex-col items-center justify-between lg:flex-row">
+        <div className="flex flex-col-reverse  items-center justify-between  lg:flex-row ">
           <div className="mb-10 lg:max-w-lg lg:pr-5 lg:mb-0">
             <div className="max-w-xl ">
               <h2 className="max-w-lg mb-4 font-sans   tracking-tight text-yellow-50 capitalize leading-relaxed   text-2xl  sm:leading-none">
@@ -21,7 +21,7 @@ const RemotTalk = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 my-6 ">
+            <div className="grid lg:grid-cols-2  md:grid-cols-2 grid-cols-1 gap-5 my-6 ">
               <div className="flex items-center ">
                 <span className="text-xl  text-white-700 p-2 mr-2 bg-slate-900 rounded-full">
                   <AiTwotoneVideoCamera></AiTwotoneVideoCamera>
@@ -60,7 +60,7 @@ const RemotTalk = () => {
               </div>
             </div>
           </div>
-          <div className="relative lg:w-1/2">
+          <div className="relative lg:w-1/2 mb-7">
             <img
               className="object-cover w-full h-56 rounded shadow-lg sm:h-96"
               src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"

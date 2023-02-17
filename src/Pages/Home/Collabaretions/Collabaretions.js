@@ -49,6 +49,11 @@ const Collabaretions = () => {
             </Tab>
           </div>
         </Tab.List>
+
+        <span className="flex justify-center items-center my-2 mx-auto text-xl text-center  capitalize ">
+          Transform the way your team works with innovative collaboration tools
+        </span>
+
         <Tab.Panels>
           <Tab.Panel>
             <div className="justify-center flex w-full ">
