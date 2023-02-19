@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Shared/Navber/Navber";
 import { io } from "socket.io-client";
 import Chat from "./Chat/Chat";
 import "./Chat/Chat.css";
@@ -8,13 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../../context/AuthProvider";
 import { useEffect } from "react";
 import moment from "moment";
 import Emoji from "./Emoji/Emoji";
 import { AiOutlineLink, AiOutlineSend } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useRef } from "react";
+import Navbar from "../../Shared/Navber/Navber";
 
 const Massenger = () => {
   const { user } = useContext(AuthContext);
@@ -181,10 +181,9 @@ socket.current.on("senduser", (data) => {
   return (
     <div>
       <Navbar></Navbar>
-
       <>
         {/* Messenger Clone */}
-        <div className="h-screen w-full flex antialiased text-gray-200 shadow-2xl bg-gray-900 overflow-hidden">
+        <div style={{height: '570px'}} className="w-full flex antialiased text-gray-200 shadow-2xl bg-gray-900 overflow-hidden">
           <div className="flex-1 flex flex-col">
             <div className="border-b- shadow-xl border-gray-800 p-2 flex flex-row z-20">
               <div className="bg-red-600 w-3 h-3 rounded-full mr-2" />

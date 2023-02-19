@@ -1,6 +1,8 @@
 import { CheckIcon, ClipboardIcon } from "@heroicons/react/outline";
 import { Constants } from "@videosdk.live/react-sdk";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
 import useResponsiveSize from "../hooks/useResponsiveSize";
 import { meetingTypes } from "../utils/common";
 
@@ -17,6 +19,8 @@ export function MeetingDetailsScreen({
   setMeetingMode,
   meetingMode,
 }) {
+  const {user} = useContext(AuthContext);
+
   const [meetingId, setMeetingId] = useState("");
   const [meetingIdError, setMeetingIdError] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -90,7 +94,7 @@ export function MeetingDetailsScreen({
         <>
           <input
             value={participantName}
-            onChange={(e) => setParticipantName(e.target.value)}
+            onChange={(e) => setParticipantName(user? user.displayName : e.target.value)}
             placeholder="Enter your name"
             className="px-4 py-3 mt-5  rounded-xl text-white  text-center input input-bordered input-secondary w-full"
           />

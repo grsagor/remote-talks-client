@@ -9,7 +9,7 @@ import {
   useMediaQuery,
   IconButton,
 } from "@material-ui/core";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { VideocamOff, MicOff, Mic, Videocam } from "@material-ui/icons";
 import useResponsiveSize from "../../hooks/useResponsiveSize";
 import { red } from "@material-ui/core/colors";
@@ -21,6 +21,7 @@ import ConfirmBox from "../ConfirmBox";
 import { meetingTypes } from "../../utils/common";
 import { Constants } from "@videosdk.live/react-sdk";
 import "../../../../CommonStyles/CommonStyle.css";
+import { AuthContext } from "../../../../context/AuthProvider";
 
 const useStyles = makeStyles((theme) => ({
   video: {
@@ -63,6 +64,8 @@ export function JoiningScreen({
   setMeetingMode,
   meetingMode,
 }) {
+
+  const {user} = useContext(AuthContext);
   const theme = useTheme();
   const classes = useStyles();
 
@@ -614,7 +617,7 @@ export function JoiningScreen({
                         setVideoTrack(null);
                       }
                       onClickStartMeeting();
-                      setParticipantName("");
+                      setParticipantName(user? user.displayName : participantName);
                     } else alert("Invalid Meeting Id");
                   }}
                   _handleOnCreateMeeting={async () => {

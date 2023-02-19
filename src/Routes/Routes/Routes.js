@@ -15,6 +15,8 @@ import SharminDetails from "../../Pages/About/Details/SharminDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NewAboutSection from "../../Pages/NewAbout/NewAbout";
 import WhiteBoard from "../../Pages/Meeting/WhiteBoard/WhiteBoard";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+
 
 const router = createBrowserRouter([
 	{
@@ -53,10 +55,6 @@ const router = createBrowserRouter([
 				element: <SharminDetails></SharminDetails>,
 			},
 			{
-				path: "/message",
-				element: <Massenger></Massenger>,
-			},
-			{
 				path: "/login",
 				element: <Login></Login>,
 			},
@@ -90,5 +88,13 @@ const router = createBrowserRouter([
 			</div>
 		),
 	},
+	{
+		path: "/message",
+		element: <Massenger></Massenger>,
+	},
+	{
+		path: "/*",
+		element: <ErrorPage></ErrorPage>
+	}
 ]);
 export default router;
