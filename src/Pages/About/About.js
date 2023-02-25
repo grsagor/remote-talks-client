@@ -18,7 +18,7 @@ import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const About = () => {
     return (
-        <div className='text-center flex flex-col items-center my-4'>
+        <div className='text-center flex flex-col items-center my-6 mb-10'>
             <h1 className='font-bold text-4xl p-2 mb-4'>Meet Our Team_ </h1>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 gap-8'>

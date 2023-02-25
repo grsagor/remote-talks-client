@@ -63,6 +63,10 @@ const router = createBrowserRouter([
 				element: <SignUp></SignUp>,
 			},
 			{
+				path: "/review",
+				element: <FeedBack></FeedBack>,
+			},
+			{
 				path: "/profile",
 				element: (
 					<PrivateRoute>

@@ -5,11 +5,13 @@ import serviceimg from '../../assets/About us-img/service.jpg';
 import visionimg from '../../assets/About us-img/vision.png';
 import missionimg from '../../assets/About us-img/mission.png';
 import '../../CommonStyles/CommonStyle.css';
+import About from '../About/About';
 
 
 const NewAboutSection = () => {
     return (
-        <div className='common-width py-5' >
+       <div>
+         <div className='common-width py-5' >
             <div className='flex flex-col md:flex-row gap-5'>
                 <div class="w-full md:w-4/5 lg:w-8/12">
                     <img className='w-full' src={img} alt=''></img>
@@ -69,6 +71,8 @@ const NewAboutSection = () => {
 
 
         </div>
+        <About></About>
+       </div>
     );
 };
 
