@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Users = ({ user, setCurrentFriend, curentuser, onlineuser }) => {
+const Users = ({ user, setCurrentFriend, onlineuser, curentuser }) => {
   return (
     <div
       onClick={() => {
@@ -19,26 +19,33 @@ const Users = ({ user, setCurrentFriend, curentuser, onlineuser }) => {
               alt=""
             />
 
-            {/* {onlineuser?.some((usr) => usr.userId ===user._id) ? (
+            {/* {onlineuser?.map((usr) => usr.curentuserI === user._id) && (
               <div className="absolute bg-gray-900 p-1 rounded-full bottom-0 right-0">
                 <div className="bg-green-500 rounded-full w-3 h-3" />
               </div>
-            ) : (
-              <div className="absolute bg-gray-400 p-1 rounded-full bottom-0 right-0">
-                <div className="bg-gray-600-500 rounded-full w-3 h-3" />
-              </div>
             )} */}
+            {onlineuser?.map((usr) => usr.userId === user._id)? console.log("user conect"):alert("user  user disconet")}
           </div>
         </div>
       </div>
 
       <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
         <p>{user.name}</p>
-       
+        <div className="flex items-center text-sm text-gray-600">
+          <div className="min-w-0">
+            <p className="truncate">Happy birthday to you my friend!</p>
+          </div>
+          <p className="ml-2 whitespace-no-wrap">2 Oct</p>
+        </div>
       </div>
-
+      <div className="w-4 h-4 flex flex-shrink-0 hidden md:block group-hover:block">
+        <img
+          className="rounded-full w-full h-full object-cover"
+          alt="user2"
+          src="https://randomuser.me/api/portraits/men/32.jpg"
+        />
       </div>
-
+    </div>
   );
 };
 
