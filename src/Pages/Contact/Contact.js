@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { FaPhoneAlt, FaSearchLocation,FaMailBulk } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -16,6 +17,7 @@ const Contact = () => {
             .then((result) => {
                 console.log(result.text);
                 console.log('message sent')
+                toast.success('Your message has been sent. Thanks')
             }, (error) => {
                 console.log(error.text);
             });
