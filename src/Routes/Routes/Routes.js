@@ -16,6 +16,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NewAboutSection from "../../Pages/NewAbout/NewAbout";
 import WhiteBoard from "../../Pages/Meeting/WhiteBoard/WhiteBoard";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import Contact from "../../Pages/Contact/Contact";
 
 
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 			},
+			{
+				path: "/contact",
+				element: <Contact></Contact>
+			}
 		],
 	},
 	{
