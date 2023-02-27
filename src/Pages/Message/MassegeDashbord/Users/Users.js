@@ -1,49 +1,64 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Users = ({ user, setCurrentFriend, onlineuser, curentuser }) => {
+const Users = ({ user, setCurrentFriend, curentuser, }) => {
+   const { data: conversation = [] } = useQuery({
+     queryKey: ["conversation", curentuser._id, user._id],
+     queryFn: async () => {
+       const res = await fetch(
+         `https://remote-server-devsobuj910.vercel.app/getmsg/${curentuser._id}/${user._id}`
+       );
+       const data = await res.json();
+
+       return data;
+     }
+   });
+
+   const lastObject = conversation[conversation.length - 1];
+   const lastObjectValue = lastObject ? lastObject.massege : "";
+
+
+
+const [active, setActive] = useState(false);
+
   return (
-    <div
-      onClick={() => {
-        setCurrentFriend(user);
-      }}
-      className="flex justify-between items-center p-3 hover:bg-gray-800 rounded-lg relative"
-    >
-      <div className="text-sm text-center mr-4">
-        <div className="p-1 border-4 border-transparent rounded-full">
-          <div className="w-16 h-16 relative flex flex-shrink-0">
+    <div>
+      <div
+        onClick={() => {
+          setCurrentFriend(user);
+        }}
+        className="flex justify-between items-center p-3 hover:bg-gray-800 rounded-lg relative"
+      >
+        <div className="w-16 h-16 relative flex flex-shrink-0">
+          {user?.img ? (
             <img
               className="shadow-md rounded-full w-full h-full object-cover"
               src={user.img}
               alt=""
             />
-
-            {/* {onlineuser?.map((usr) => usr.curentuserI === user._id) && (
-              <div className="absolute bg-gray-900 p-1 rounded-full bottom-0 right-0">
-                <div className="bg-green-500 rounded-full w-3 h-3" />
+          ) : (
+            <img
+              className="shadow-md rounded-full w-full h-full object-cover"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyKpQUy8JP90MAZxFjU0P9bPqkUWL35fd8Ag&usqp=CAU"
+              alt=""
+            />
+          )}
+        </div>
+        <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
+          <p>{user.name}</p>
+          <div className="flex items-center text-sm text-gray-600">
+            {lastObjectValue ? (
+              <div className="min-w-0">
+                <p className="truncate text-cyan-50">last-msg: {lastObjectValue}</p>
               </div>
-            )} */}
-            {onlineuser?.map((usr) => usr.userId === user._id)? console.log("user conect"):alert("user  user disconet")}
+            ) : (
+              "no message send yet"
+            )}
           </div>
         </div>
-      </div>
-
-      <div className="flex-auto min-w-0 ml-4 mr-6 hidden md:block group-hover:block">
-        <p>{user.name}</p>
-        <div className="flex items-center text-sm text-gray-600">
-          <div className="min-w-0">
-            <p className="truncate">Happy birthday to you my friend!</p>
-          </div>
-          <p className="ml-2 whitespace-no-wrap">2 Oct</p>
-        </div>
-      </div>
-      <div className="w-4 h-4 flex flex-shrink-0 hidden md:block group-hover:block">
-        <img
-          className="rounded-full w-full h-full object-cover"
-          alt="user2"
-          src="https://randomuser.me/api/portraits/men/32.jpg"
-        />
       </div>
     </div>
   );
