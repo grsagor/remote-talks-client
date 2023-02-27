@@ -21,7 +21,7 @@ const Contact = () => {
             });
     };
     return (
-        <div className="hero p-5 bg-base-100">
+        <div className="hero p-5  mt-5 bg-base-100">
             <div className="hero-content grid md:grid-cols-2 gap-24 flex-col lg:flex-row mb-5">
 
                 <div className="card flex-shrink-0 w-full max-w-md shadow-2xl ml-3 bg-base-200">
@@ -36,11 +36,11 @@ const Contact = () => {
                             <input {...register("email", { required: "Email Address is required" })} name="user_email" type="text" placeholder="" className="input input-bordered w-full" />
                             {errors.email && <p className='text-error'>{errors.email?.message}</p>}
                         </div>
-                        <div>
+                        <div className='w-full'>
                             <label><span className="label-text">Message</span></label><br />
                             <textarea name="message" className="input input-bordered w-full " />
                         </div>
-                        <input className='btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white' value='SEND' type="submit" />
+                        <input className='btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white w-full' value='SEND' type="submit" />
                     </form>
                 </div>
                 <div className="text-center lg:text-left">

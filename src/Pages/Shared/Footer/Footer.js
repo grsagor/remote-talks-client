@@ -121,8 +121,8 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const handleConnect = () => {
-    toast.success("Waiting for response!!!")
-    navigate('/connect')
+    toast.success("Please, Contact Us!!!")
+    navigate('/contact')
   }
   return (
     <div className='main-footer '
@@ -154,7 +154,7 @@ const Footer = () => {
               <span className="footer-title">Company</span>
               <div className='flex md:flex-col  gap-3 md:gap-1'>
                 <Link to="/about" className="link link-hover">About us</Link>
-                <Link to="/connect" className="link link-hover">Contact</Link>
+                <Link to="/contact" className="link link-hover">Contact</Link>
                 <Link to="/review" className="link link-hover">Review</Link>
                 <Link className="link link-hover">Collaboration</Link>
                 <Link to="/" className="link link-hover">Return home</Link>
