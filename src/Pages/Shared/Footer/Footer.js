@@ -145,7 +145,7 @@ const Footer = () => {
               <span className="footer-title">Company</span>
               <div className='flex md:flex-col  gap-3 md:gap-1'>
                 <Link className="link link-hover">About us</Link>
-                <Link className="link link-hover">Contact</Link>
+                <Link to='/contact' className="link link-hover">Contact</Link>
                 <Link className="link link-hover">Jobs</Link>
                 <Link className="link link-hover">Press kit</Link>
               </div>

@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@emailjs/browser": "^3.10.0",
 		"@emoji-mart/data": "^1.1.2",
 		"@emoji-mart/react": "^1.1.1",
 		"@emotion/styled": "^11.10.5",
