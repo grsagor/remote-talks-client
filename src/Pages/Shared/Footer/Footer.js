@@ -106,7 +106,7 @@
 
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../CommonStyles/CommonStyle.css';
 import './Footer.css'
 // import footer from '../../../assets/Footer-img/footer-img.png';
@@ -114,9 +114,16 @@ import logo from '../../../assets/Logo/logo.png'
 import footer from '../../../assets/Footer-img/water-backgroundps-10468862-removebg-preview.png';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaCode } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
 
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleConnect = () => {
+    toast.success("Waiting for response!!!")
+    navigate('/connect')
+  }
   return (
     <div className='main-footer '
     //   style={{
@@ -135,19 +142,22 @@ const Footer = () => {
             <div className='flex md:items-start items-center w-full flex-col gap-2'>
               <span className="footer-title">Services</span>
               <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-1 gap-x-2 md:gap-1'>
-                <Link className="link link-hover">Video Call</Link>
-                <Link className="link link-hover">Live Chat</Link>
-                <Link className="link link-hover">Photo Post</Link>
-                <Link className="link link-hover">Advertisement</Link>
+                <Link to="/meeting" className="link link-hover">Video Call</Link>
+                <Link to="/meeting" className="link link-hover">Audio Call</Link>
+                <Link to="/message" className="link link-hover">Live Chat</Link>
+                <Link to="/participants" className="link link-hover">Add Friend</Link>
+                <Link to="/message" className="link link-hover">Live Streaming</Link>
+                {/* <Link className="link link-hover">Advertisement</Link> */}
               </div>
             </div>
             <div className='flex md:items-start items-center  w-full flex-col gap-2'>
               <span className="footer-title">Company</span>
               <div className='flex md:flex-col  gap-3 md:gap-1'>
-                <Link className="link link-hover">About us</Link>
-                <Link to='/contact' className="link link-hover">Contact</Link>
-                <Link className="link link-hover">Jobs</Link>
-                <Link className="link link-hover">Press kit</Link>
+                <Link to="/about" className="link link-hover">About us</Link>
+                <Link to="/connect" className="link link-hover">Contact</Link>
+                <Link to="/review" className="link link-hover">Review</Link>
+                <Link className="link link-hover">Collaboration</Link>
+                <Link to="/" className="link link-hover">Return home</Link>
               </div>
             </div>
             <div className='flex md:items-start items-center w-full flex-col gap-1'>
@@ -155,23 +165,27 @@ const Footer = () => {
               <div className=''>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-400'><FaCode></FaCode></span>
-                  <Link to="/teams" className="link link-hover">G.R. Sagor</Link>
+                  <a href="https://grsagor-portfolio.web.app/" target="blank" className="link link-hover">G.R. Sagor</a>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-500'><FaCode></FaCode></span>
-                  <Link to="/teams" className="link link-hover">Nusrat Nova</Link>
+                  <a href="https://portfolio-88a84.web.app/" target="blank" className="link link-hover">Nusrat Nova</a>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-500'><FaCode></FaCode></span>
-                  <Link to="/teams" className="link link-hover">Sharmin Akter</Link>
+                  <a href="https://transcendent-syrniki-78a004.netlify.app/" target="blank" className="link link-hover">Sharmin Akter</a>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-600'><FaCode></FaCode></span>
-                  <Link to="/teams" className="link link-hover">Md Anis Molla</Link>
+                  <a href="https://sina-porfolio.web.app/" target="blank" className="link link-hover">Md Anis Molla</a>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-700'><FaCode></FaCode></span>
-                  <Link to="/teams" className="link link-hover">Ft Sobuj Hasan</Link>
+                  <a href="https://mahmudul-protfolio.netlify.app/" target="blank" className="link link-hover">Ft Sobuj Hasan</a>
+                </div>
+                <div className='flex items-center gap-1'>
+                  <span className='text-lg text-blue-800'><FaCode></FaCode></span>
+                  <a href="https://md-shimul-molla-07.netlify.app/" target="blank" className="link link-hover">Md Shimul Molla</a>
                 </div>
                 {/* <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-800'><FaCode></FaCode></span>
@@ -188,8 +202,8 @@ const Footer = () => {
                     <span className="label-text">Enter your email address</span>
                   </label>
                   <div className="relative">
-                    <input type="text" placeholder="username@site.com" className="input input-bordered w-full pr-16" />
-                    <button className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white absolute top-0 right-0 rounded-l-none">Send</button>
+                    <input type="text" placeholder="username@site.com" className="input input-bordered w-full pr-16" required />
+                    <button onClick={handleConnect} className="btn btn-primary bg-gradient-to-r from-primary to-blue-800 text-white absolute top-0 right-0 rounded-l-none">Send</button>
                   </div>
                 </div>
                 <div className="grid grid-flow-col w-full pt-4 gap-4">
