@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../Shared/Navber/Navber";
 import { io } from "socket.io-client";
 import Chat from "./Chat/Chat";
 import "./Chat/Chat.css";
@@ -7,18 +8,16 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { useContext } from "react";
-// import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 import { useEffect } from "react";
 import moment from "moment";
 import Emoji from "./Emoji/Emoji";
 import { AiOutlineLink, AiOutlineSend } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useRef } from "react";
-import { AuthContext } from "../../../context/AuthProvider";
 
 const Massenger = () => {
   const { user } = useContext(AuthContext);
-
 
   //emoji open and close
   const [ispickervidevle, setIspickervisible] = useState(false);
@@ -33,11 +32,13 @@ const Massenger = () => {
     setmsg((msg) => [msg + newemoji]);
   };
 
-  const [curentFriend, setCurrentFriend] = useState("")
+  const [curentFriend, setCurrentFriend] = useState("");
   const [curentuser, setCurrentuser] = useState({});
- 
+
   useEffect(() => {
-    fetch(`https://remote-server-devsobuj910.vercel.app/curentuser?email=${user?.email}`)
+    fetch(
+      `https://remote-server-devsobuj910.vercel.app/curentuser?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCurrentuser(data);
@@ -45,16 +46,32 @@ const Massenger = () => {
   }, [user?.email]);
 
   const [allUsers, setAlluser] = useState([]);
+  const [searchName, setSearchName] = useState("");
 
+  //get all users
   useEffect(() => {
-    fetch(`https://remote-server-devsobuj910.vercel.app/allusers?email=${user?.email}`)
+    fetch("https://remote-server-devsobuj910.vercel.app/allUsers")
       .then((res) => res.json())
       .then((data) => {
-   
-        setAlluser(data);
-      });
-  }, [user?.email]);
+        const filteruser = data.filter(
+          (user) => user.email !== curentuser.email
+        );
 
+        setAlluser(filteruser);
+      });
+  }, [curentuser?.email]);
+
+  // Filter the users array based on the search name
+  const filteredUsers = allUsers.filter((user) =>
+    user.name.toLowerCase().includes(searchName.toLowerCase())
+  );
+
+  // Handle changes to the search input field
+  const handleSearchInputChange = (event) => {
+    setSearchName(event.target.value);
+  };
+
+  //handleimage
   const handleimg = (e) => {
     const img = e.target.files[0];
     const formData = new FormData();
@@ -82,9 +99,9 @@ const Massenger = () => {
     const from = event.target;
     const massege = msg;
     const createMassge = {
-      massege: massege,
-      img:img,
-      time:moment().format('LT'),
+      massege: massege ? massege : "👍",
+      img: img,
+      time: moment().format("LT"),
       senderId: curentuser._id,
       reciberId: curentFriend._id,
       msg: curentFriend._id
@@ -102,10 +119,9 @@ const Massenger = () => {
         console.log(data);
         if (data.acknowledged) {
           from.reset();
-          // refetch()
+          refetch();
           setmsg("");
           setImg("");
-          refetch()
         }
       });
   };
@@ -115,108 +131,76 @@ const Massenger = () => {
   const { data: conversation = [], refetch } = useQuery({
     queryKey: ["conversation", curentuser._id, curentFriend._id],
     queryFn: async () => {
-      const res = await  fetch(`https://remote-server-devsobuj910.vercel.app/getmsg/${curentuser._id}/${curentFriend._id}`)
+      const res = await fetch(
+        `https://remote-server-devsobuj910.vercel.app/getmsg/${curentuser._id}/${curentFriend._id}`
+      );
       const data = await res.json();
 
       return data;
     }
   });
- 
 
-  //socekt io is  connect  here
-
-  const socket = useRef();
-  useEffect(()=>{
-socket.current=io("ws://localhost:8000")
-
-  },[])
-
-
-useEffect(()=>{
-  socket.current.emit("addUser", curentuser, curentuser._id);
-},[curentuser])
-
-
-const [onlineuser,setOnlineuser]=useState([])
-useEffect(()=>{
-  socket.current.on("getUser",(users)=>{
-    const fileterwithouturentusr = users.filter((usr) => usr.userId !==curentuser._id);
-    setOnlineuser(fileterwithouturentusr)
-
-  })
-},[curentuser])
-
-
-console.log(onlineuser.length + "curen frd")
   return (
     <div>
+      <Navbar></Navbar>
+
       <>
         {/* Messenger Clone */}
-        <div className="h-screen w-full flex antialiased text-gray-200 bg-gray-900 overflow-hidden">
+        <div className="h-screen w-full flex antialiased text-gray-200 shadow-2xl  overflow-hidden">
           <div className="flex-1 flex flex-col">
-            <div className="border-b-2 border-gray-800 p-2 flex flex-row z-20">
-              <div className="bg-red-600 w-3 h-3 rounded-full mr-2" />
-              <div className="bg-yellow-500 w-3 h-3 rounded-full mr-2" />
-              <div className="bg-green-500 w-3 h-3 rounded-full mr-2" />
-            </div>
             <main className="flex-grow flex flex-row min-h-0">
               <section className="flex flex-col flex-none overflow-auto w-24 hover:w-64 group lg:max-w-sm md:w-2/5 transition-all duration-300 ease-in-out">
-                <div className="header p-4 flex flex-row justify-between items-center flex-none">
-                  <div className="w-16 h-16 relative flex flex-shrink-0">
-                    <img
-                      className="rounded-full w-full h-full object-cover"
-                      alt="ravisankarchinnam"
-                      src={curentuser.img}
-                    />
-                  </div>
-                  <p className="text-md font-bold hidden md:block group-hover:block">
-                    Messenger
-                  </p>
-                  <a
-                    href="#"
-                    className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2 hidden md:block group-hover:block"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-full h-full fill-current"
-                    >
-                      <path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
-                    </svg>
-                  </a>
-                </div>
-                <div className="search-box p-4 flex-none">
-                  <form onSubmit={(event) => {}}>
-                    <div className="relative">
-                      <label>
-                        <input
-                          className="rounded-full py-2 pr-6 pl-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
-                          type="text"
-                          value={"serch bar"}
-                          placeholder="Search Messenger"
-                        />
-                        <span className="absolute top-0 left-0 mt-2 ml-3 inline-block">
-                          <svg viewBox="0 0 24 24" className="w-6 h-6">
-                            <path
-                              fill="#bbb"
-                              d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"
-                            />
-                          </svg>
-                        </span>
-                      </label>
+                <>
+                  <div className="header p-4 flex flex-row justify-between items-center flex-none">
+                    <div className="w-16 h-16 relative flex flex-shrink-0">
+                      <img
+                        className="rounded-full w-full h-full object-cover"
+                        alt=""
+                        src={curentuser.img}
+                      />
                     </div>
-                  </form>
-                </div>
+                    <p className="text-md pr-3 font-bold hidden md:block group-hover:block">
+                      Messenger
+                    </p>
+                  </div>
+                  <div className="search-box p-4 flex-none">
+                    <form>
+                      <div className="relative">
+                        <label>
+                          <input
+                            type="text"
+                            value={searchName}
+                            onChange={handleSearchInputChange}
+                            className="rounded-full py-2 pr-6 pl-10 w-full border border-white  only: only:focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in bg-transparent"
+                            placeholder="Search friend"
+                          />
 
-                <div className="contacts p-2 flex-1 overflow-y-scroll">
-                  {allUsers?.map((user) => (
+                          
+                          <span className="absolute top-0 left-0 mt-2 ml-3 inline-block">
+                            <svg viewBox="0 0 24 24" className="w-6 h-6">
+                              <path
+                                fill="#bbb"
+                                d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"
+                              />
+                            </svg>
+                          </span>
+                        </label>
+                      </div>
+                    </form>
+                  </div>
+                </>
+
+                <div className="contacts relative p-2 flex-1 overflow-y-scroll">
+                  {filteredUsers?.map((user) => (
                     <Users
-                      onlineuser={onlineuser}
                       curentuser={curentuser}
                       setCurrentFriend={setCurrentFriend}
                       key={user._id}
                       user={user}
                     ></Users>
                   ))}
+
+               
                 </div>
               </section>
 
@@ -231,54 +215,15 @@ console.log(onlineuser.length + "curen frd")
                           alt=""
                         />
                       </div>
-                      <div className="text-sm">
+                      <div className="text-sm flex items-center">
                         <p className="font-bold">{curentFriend.name}</p>
-                        <p>Active 1h ago</p>
                       </div>
-                    </div>
-
-                    <div className="flex">
-                      <a
-                        href="#"
-                        className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2"
-                      >
-                        <svg
-                          viewBox="0 0 20 20"
-                          className="w-full h-full fill-current text-blue-500"
-                        >
-                          <path d="M11.1735916,16.8264084 C7.57463481,15.3079672 4.69203285,12.4253652 3.17359164,8.82640836 L5.29408795,6.70591205 C5.68612671,6.31387329 6,5.55641359 6,5.00922203 L6,0.990777969 C6,0.45097518 5.55237094,3.33066907e-16 5.00019251,3.33066907e-16 L1.65110039,3.33066907e-16 L1.00214643,8.96910337e-16 C0.448676237,1.13735153e-15 -1.05725384e-09,0.445916468 -7.33736e-10,1.00108627 C-7.33736e-10,1.00108627 -3.44283713e-14,1.97634814 -3.44283713e-14,3 C-3.44283713e-14,12.3888407 7.61115925,20 17,20 C18.0236519,20 18.9989137,20 18.9989137,20 C19.5517984,20 20,19.5565264 20,18.9978536 L20,18.3488996 L20,14.9998075 C20,14.4476291 19.5490248,14 19.009222,14 L14.990778,14 C14.4435864,14 13.6861267,14.3138733 13.2940879,14.7059121 L11.1735916,16.8264084 Z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2 ml-4"
-                      >
-                        <svg
-                          viewBox="0 0 20 20"
-                          className="w-full h-full fill-current text-blue-500"
-                        >
-                          <path d="M0,3.99406028 C0,2.8927712 0.894513756,2 1.99406028,2 L14.0059397,2 C15.1072288,2 16,2.89451376 16,3.99406028 L16,16.0059397 C16,17.1072288 15.1054862,18 14.0059397,18 L1.99406028,18 C0.892771196,18 0,17.1054862 0,16.0059397 L0,3.99406028 Z M8,14 C10.209139,14 12,12.209139 12,10 C12,7.790861 10.209139,6 8,6 C5.790861,6 4,7.790861 4,10 C4,12.209139 5.790861,14 8,14 Z M8,12 C9.1045695,12 10,11.1045695 10,10 C10,8.8954305 9.1045695,8 8,8 C6.8954305,8 6,8.8954305 6,10 C6,11.1045695 6.8954305,12 8,12 Z M16,7 L20,3 L20,17 L16,13 L16,7 Z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="#"
-                        className="block rounded-full hover:bg-gray-700 bg-gray-800 w-10 h-10 p-2 ml-4"
-                      >
-                        <svg
-                          viewBox="0 0 20 20"
-                          className="w-full h-full fill-current text-blue-500"
-                        >
-                          <path d="M2.92893219,17.0710678 C6.83417511,20.9763107 13.1658249,20.9763107 17.0710678,17.0710678 C20.9763107,13.1658249 20.9763107,6.83417511 17.0710678,2.92893219 C13.1658249,-0.976310729 6.83417511,-0.976310729 2.92893219,2.92893219 C-0.976310729,6.83417511 -0.976310729,13.1658249 2.92893219,17.0710678 Z M9,11 L9,10.5 L9,9 L11,9 L11,15 L9,15 L9,11 Z M9,5 L11,5 L11,7 L9,7 L9,5 Z" />
-                        </svg>
-                      </a>
                     </div>
                   </div>
 
                   <div className="chat-body p-4 flex-1 overflow-y-scroll">
                     {curentFriend || curentFriend.length > 0 ? (
                       <Chat
-                        onlineuser={onlineuser}
-
                         conversation={conversation}
                         curentuser={curentuser}
                         curentFriend={curentFriend}
@@ -286,7 +231,7 @@ console.log(onlineuser.length + "curen frd")
                     ) : (
                       <div>
                         <h2 className="text-4xl justify-center items-center">
-                          plsease select a friend
+                          please select a friend
                         </h2>
                       </div>
                     )}
@@ -325,19 +270,11 @@ console.log(onlineuser.length + "curen frd")
                         </label>
                       </button>
 
-                      <button
-                        type="button"
-                        className="flex flex-shrink-0 focus:outline-none mx-2 block text-blue-600 hover:text-blue-700 w-6 h-6"
-                      >
-                        <span className="text-xl">
-                          <AiOutlineLink></AiOutlineLink>
-                        </span>
-                      </button>
                       <div className="relative flex-grow">
                         <label>
                           <input
                             onChange={(e) => setmsg(e.target.value)}
-                            className="rounded-full py-2 pl-3 pr-10 w-full border border-gray-800 focus:border-gray-700 bg-gray-800 focus:bg-gray-900 focus:outline-none text-gray-200 focus:shadow-md transition duration-300 ease-in"
+                            className="rounded-full py-2 pl-3 pr-10 w-full border border-white    focus:outline-none text-gray-200 focus:shadow-md  bg-transparent transition duration-300 ease-in"
                             type="text"
                             Value={msg}
                             placeholder="Aa"
@@ -393,7 +330,7 @@ console.log(onlineuser.length + "curen frd")
                 </section>
               ) : (
                 <h2 className="text-4xl flex justify-center items-center m-auto capitalize ">
-                  pls select friend{" "}
+                  please select friend{" "}
                 </h2>
               )}
             </main>
