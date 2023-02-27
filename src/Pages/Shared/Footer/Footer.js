@@ -121,7 +121,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const handleConnect = () => {
-    toast.success("Working on!!!")
+    toast.success("Waiting for response!!!")
     navigate('/connect')
   }
   return (
@@ -177,7 +177,7 @@ const Footer = () => {
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-600'><FaCode></FaCode></span>
-                  <a href="#" target="blank" className="link link-hover">Md Anis Molla</a>
+                  <a href="https://sina-porfolio.web.app/" target="blank" className="link link-hover">Md Anis Molla</a>
                 </div>
                 <div className='flex items-center gap-1'>
                   <span className='text-lg text-blue-700'><FaCode></FaCode></span>
